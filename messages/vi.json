@@ -7,8 +7,20 @@
     "brand": "Global AI Job",
     "brandFull": "Global AI Job Board",
     "loading": "Đang tải...",
-    "error": "Có lỗi xảy ra",
-    "tagline": "Intelligence at Work"
+    "error": {
+      "title": "Có lỗi xảy ra",
+      "description": "Chúng tôi đang gặp sự cố khi tải trang này. Vui lòng thử lại sau.",
+      "tryAgain": "Thử lại"
+    },
+    "tagline": "Intelligence at Work",
+    "backToList": "Quay lại danh sách",
+    "actions": "Thao tác",
+    "export": "Xuất báo cáo",
+    "filter": "Bộ lọc",
+    "reset": "Đặt lại",
+    "save": "Lưu",
+    "allPositions": "Tất cả vị trí",
+    "noApplicants": "Chưa có ứng viên"
   },
   "Errors": {
     "invalidEmail": "Địa chỉ email không hợp lệ",
@@ -127,6 +139,178 @@
       "newPassword": "Mật khẩu mới",
       "confirmPassword": "Xác nhận mật khẩu",
       "submit": "Cập nhật mật khẩu"
+    }
+  },
+  "Dashboard": {
+    "headerTitle": "Bảng điều khiển Nhà tuyển dụng",
+    "sidebar": {
+      "overview": "Tổng quan",
+      "jobs": "Tin tuyển dụng",
+      "applicants": "Ứng viên",
+      "talentSearch": "Tìm ứng viên",
+      "settings": "Cài đặt"
+    },
+    "recruiter": {
+      "overview": {
+        "title": "Tổng quan tuyển dụng",
+        "welcome": "Chào mừng nhà tuyển dụng trở lại. Đây là tóm tắt công việc của bạn.",
+        "postJob": "Đăng tin mới",
+        "jobsCount": "Việc làm đang tuyển",
+        "applicantsCount": "Ứng viên mới",
+        "avgFitScore": "Điểm phù hợp AI",
+        "activeJobsDesc": "Tin tuyển dụng đang hoạt động",
+        "newApplicantsDesc": "Ứng viên mới trong tuần",
+        "matchRateDesc": "Tỷ lệ phù hợp cho ứng viên hàng đầu",
+        "activityFeed": "Hoạt động gần đây",
+        "noActivity": "Chưa có hoạt động mới",
+        "noActivityDesc": "Khi ứng viên nộp đơn hoặc AI phân tích xong, dữ liệu sẽ hiện ở đây.",
+        "optimizeTitle": "Tối ưu JD với AI",
+        "optimizeDesc": "Các bài đăng có yêu cầu kỹ năng rõ ràng thường nhận được nhiều ứng viên phù hợp hơn 40%. Hãy sử dụng AI JD Assistant để bắt đầu.",
+        "tryNow": "Thử ngay"
+      },
+      "jobs": {
+        "title": "Quản lý tin đăng",
+        "description": "Quản lý và theo dõi hiệu quả các tin tuyển dụng của bạn.",
+        "postJob": "Đăng tin mới",
+        "active": "Đang hoạt động",
+        "draft": "Bản nháp",
+        "closed": "Đã đóng",
+        "searchPlaceholder": "Tìm kiếm tin đăng...",
+        "filter": "Bộ lọc",
+        "applicants": "Ứng viên",
+        "views": "Lượt xem",
+        "noJobs": "Chưa có tin đăng",
+        "noResults": "Không tìm thấy tin tuyển dụng nào khớp với tìm kiếm của bạn.",
+        "actions": {
+          "edit": "Chỉnh sửa",
+          "viewApplicants": "Xem ứng viên",
+          "close": "Đóng tin",
+          "reopen": "Mở lại tin"
+        },
+        "aiAssistant": {
+          "title": "Trợ lý AI JD",
+          "description": "AI sẽ giúp bạn viết mô tả công việc hấp dẫn hơn. Dựa trên tiêu đề bạn nhập, tôi sẽ đề xuất nội dung JD chuyên nghiệp.",
+          "generate": "Tạo gợi ý với AI",
+          "useThis": "Dùng bản này",
+          "cancel": "Hủy",
+          "suggestion": {
+            "title": "Mô tả công việc: {title}",
+            "requirements": "Yêu cầu ứng viên",
+            "benefits": "Phúc lợi",
+            "req1": "Ít nhất 3 năm kinh nghiệm làm việc với các công nghệ liên quan.",
+            "req2": "Khả năng giải quyết vấn đề tốt và làm việc nhóm hiệu quả.",
+            "req3": "Tư duy sáng tạo và không ngừng học hỏi công nghệ mới.",
+            "ben1": "Mức lương cạnh tranh và thưởng theo kết quả công việc.",
+            "ben2": "Môi trường làm việc năng động, hiện đại.",
+            "ben3": "Bảo hiểm và các chế độ đãi ngộ hấp dẫn."
+          }
+        },
+        "form": {
+          "title": "Đăng tin tuyển dụng mới",
+          "titleEdit": "Chỉnh sửa tin tuyển dụng",
+          "subtitle": "Cung cấp chi tiết công việc để bắt đầu tìm kiếm ứng viên.",
+          "subtitleEdit": "Cập nhật thông tin chi tiết cho tin tuyển dụng của bạn.",
+          "labels": {
+            "jobTitle": "Tiêu đề công việc",
+            "location": "Địa điểm",
+            "jobType": "Loại hình công việc",
+            "jobTypes": {
+              "fullTime": "Toàn thời gian",
+              "partTime": "Bán thời gian",
+              "contract": "Hợp đồng",
+              "freelance": "Tự do"
+            },
+            "description": "Mô tả công việc",
+            "salaryRange": "Mức lương",
+            "requirements": "Yêu cầu công việc"
+          },
+          "placeholders": {
+            "jobTitle": "Ví dụ: Senior AI Engineer",
+            "location": "Ví dụ: Hà Nội, Toàn quốc hoặc Remote",
+            "salaryRange": "Ví dụ: 20tr - 40tr hoặc Thỏa thuận",
+            "description": "Nhập mô tả công việc hoặc sử dụng AI để hỗ trợ...",
+            "requirements": "Nhập yêu cầu và nhấn Enter"
+          },
+          "submit": "Đăng tin ngay",
+          "saveDraft": "Lưu bản nháp",
+          "cancel": "Hủy bỏ",
+
+          "validation": {
+            "titleMin": "Tiêu đề phải có ít nhất {count} ký tự",
+            "locationRequired": "Địa điểm là bắt buộc",
+            "jobTypeRequired": "Loại hình công việc là bắt buộc",
+            "descriptionMin": "Mô tả phải có ít nhất {count} ký tự"
+          },
+          "notifications": {
+            "success": "Đăng tin thành công!",
+            "successUpdate": "Cập nhật tin tuyển dụng thành công!",
+            "error": "Đăng tin thất bại. Vui lòng thử lại.",
+            "errorUpdate": "Cập nhật thất bại. Vui lòng thử lại.",
+            "aiApplied": "Đã áp dụng nội dung gợi ý từ AI!"
+          }
+        }
+      },
+      "applicants": {
+        "title": "Quản lý ứng viên",
+        "subtitle": "Theo dõi tiến độ và đánh giá ứng viên qua các vòng.",
+        "searchPlaceholder": "Tìm tên ứng viên...",
+        "noApplicants": "Không có ứng viên",
+        "stages": {
+          "sourcing": "Nguồn",
+          "screening": "Sàng lọc",
+          "interview": "Phỏng vấn",
+          "offer": "Đề nghị",
+          "hired": "Đã tuyển"
+        },
+        "kanban": {
+          "totalCount": "{count} ứng viên"
+        },
+        "aiInsight": "Phân tích AI",
+        "fitScore": "Điểm phù hợp",
+        "summary": "Tóm tắt ứng viên",
+        "viewCv": "Xem CV gốc",
+        "details": {
+          "title": "Chi tiết ứng viên",
+          "backToList": "Danh sách ứng viên",
+          "highFit": "Phù hợp cao",
+          "appliedAt": "Ứng tuyển",
+          "reject": "Từ chối",
+          "moveToInterview": "Chuyển sang phỏng vấn",
+          "fitScoreMatch": "{score}% Match",
+          "aiMatchScore": "AI Match Score",
+          "contact": "Liên lạc",
+          "currentStage": "Vòng hiện tại",
+          "cv": "CV",
+          "experience": "Kinh nghiệm",
+          "education": "Học vấn",
+          "loadingCv": "Đang tải bản xem trước CV...",
+          "expDetails": "Chi tiết kinh nghiệm làm việc sẽ được hiển thị ở đây.",
+          "eduDetails": "Chi tiết học vấn sẽ được hiển thị ở đây.",
+          "strengths": "Điểm mạnh",
+          "weaknesses": "Cần lưu ý",
+          "aiInterview": "Phỏng vấn thử với AI",
+          "notes": "Ghi chú tuyển dụng",
+          "addNotes": "Thêm ghi chú cá nhân về ứng viên này...",
+          "saveNotes": "Lưu ghi chú"
+        }
+      },
+      "search": {
+        "title": "Tìm kiếm tài năng AI",
+        "subtitle": "Sử dụng ngôn ngữ tự nhiên để tìm kiếm những ứng viên phù hợp nhất từ kho dữ liệu.",
+        "aiPowered": "AI Powered Search",
+        "trySearching": "Gợi ý thử",
+        "advancedFilters": "Bộ lọc nâng cao",
+        "experience": "Kinh nghiệm",
+        "fitScore": "Điểm phù hợp AI",
+        "minScore": "MIN",
+        "foundCount": "Tìm thấy {count} ứng viên phù hợp với mô tả của bạn",
+        "match": "Match",
+        "aiReasoning": "AI Reasoning",
+        "viewDetails": "Xem chi tiết",
+        "invite": "Mời ứng tuyển",
+        "placeholder": "Tìm kiếm ứng viên bằng AI (Ví dụ: Tìm kĩ sư React có 3 năm kinh nghiệm...)",
+        "submit": "Tìm kiếm"
+      }
     }
   }
 }

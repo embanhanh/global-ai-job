@@ -8,7 +8,19 @@
     "brandFull": "Global AI Job Board",
     "tagline": "Intelligence at Work",
     "loading": "Loading...",
-    "error": "An error occurred"
+    "error": {
+      "title": "An error occurred",
+      "description": "We are having trouble loading this page. Please try again later.",
+      "tryAgain": "Try again"
+    },
+    "backToList": "Back to list",
+    "actions": "Actions",
+    "export": "Export report",
+    "filter": "Filter",
+    "reset": "Reset",
+    "save": "Save",
+    "allPositions": "All positions",
+    "noApplicants": "No applicants"
   },
   "Errors": {
     "invalidEmail": "Invalid email address",
@@ -127,6 +139,177 @@
       "newPassword": "New Password",
       "confirmPassword": "Confirm Password",
       "submit": "Update Password"
+    }
+  },
+  "Dashboard": {
+    "headerTitle": "Recruiter Dashboard",
+    "sidebar": {
+      "overview": "Overview",
+      "jobs": "Job Postings",
+      "applicants": "Applicants",
+      "talentSearch": "Talent Search",
+      "settings": "Settings"
+    },
+    "recruiter": {
+      "overview": {
+        "title": "Recruitment Overview",
+        "welcome": "Welcome back, recruiter. Here is your job summary.",
+        "postJob": "Post new job",
+        "jobsCount": "Active Jobs",
+        "applicantsCount": "New Applicants",
+        "avgFitScore": "Avg. Fit Score",
+        "activeJobsDesc": "Active job postings",
+        "newApplicantsDesc": "New applicants this week",
+        "matchRateDesc": "Match rate for top candidates",
+        "activityFeed": "Recent Activity",
+        "noActivity": "No recent activity",
+        "noActivityDesc": "When candidates apply or AI analysis is done, data will appear here.",
+        "optimizeTitle": "Optimize JD with AI",
+        "optimizeDesc": "Job postings with clear skill requirements often receive 40% more compatible candidates. Use AI JD Assistant to start.",
+        "tryNow": "Try now"
+      },
+      "jobs": {
+        "title": "Manage Postings",
+        "description": "Manage and track your job postings effectively.",
+        "postJob": "Post a Job",
+        "active": "Active",
+        "draft": "Draft",
+        "closed": "Closed",
+        "searchPlaceholder": "Search jobs...",
+        "filter": "Filter",
+        "applicants": "Applicants",
+        "views": "Views",
+        "noJobs": "No jobs found",
+        "noResults": "No jobs found matching your search.",
+        "actions": {
+          "edit": "Edit",
+          "viewApplicants": "View Applicants",
+          "close": "Close Job",
+          "reopen": "Reopen Job"
+        },
+        "aiAssistant": {
+          "title": "AI JD Assistant",
+          "description": "AI helps you write more engaging job descriptions. Based on your title, I will suggest a professional JD content.",
+          "generate": "Generate with AI",
+          "useThis": "Use this",
+          "cancel": "Cancel",
+          "suggestion": {
+            "title": "Job Description: {title}",
+            "requirements": "Candidate Requirements",
+            "benefits": "Benefits",
+            "req1": "At least 3 years of experience in related technologies.",
+            "req2": "Good problem-solving skills and effective teamwork.",
+            "req3": "Creative thinking and constant learning of new technologies.",
+            "ben1": "Competitive salary and performance-based bonuses.",
+            "ben2": "Dynamic, modern working environment.",
+            "ben3": "Attractive insurance and welfare regimes."
+          }
+        },
+        "form": {
+          "title": "Post New Job",
+          "titleEdit": "Edit Job Posting",
+          "subtitle": "Provide job details to start finding the best candidates.",
+          "subtitleEdit": "Update the details of your job posting.",
+          "labels": {
+            "jobTitle": "Job Title",
+            "location": "Location",
+            "jobType": "Job Type",
+            "jobTypes": {
+              "fullTime": "Full-time",
+              "partTime": "Part-time",
+              "contract": "Contract",
+              "freelance": "Freelance"
+            },
+            "description": "Job Description",
+            "salaryRange": "Salary Range",
+            "requirements": "Job Requirements"
+          },
+          "placeholders": {
+            "jobTitle": "e.g. Senior AI Engineer",
+            "location": "e.g. Hanoi, Nationwide or Remote",
+            "salaryRange": "e.g. $2000 - $4000 or Competitive",
+            "description": "Enter job description or use AI assistant...",
+            "requirements": "Add a requirement and press Enter"
+          },
+          "submit": "Post Job",
+          "saveDraft": "Save Draft",
+          "cancel": "Cancel",
+          "validation": {
+            "titleMin": "Job title must be at least {count} characters",
+            "locationRequired": "Location is required",
+            "jobTypeRequired": "Job type is required",
+            "descriptionMin": "Description must be at least {count} characters"
+          },
+          "notifications": {
+            "success": "Job posted successfully!",
+            "successUpdate": "Job updated successfully!",
+            "error": "Failed to post job. Please try again.",
+            "errorUpdate": "Failed to update job. Please try again.",
+            "aiApplied": "AI suggested content applied!"
+          }
+        }
+      },
+      "applicants": {
+        "title": "Applicant Management",
+        "subtitle": "Track progress and evaluate candidates through pipeline stages.",
+        "searchPlaceholder": "Search applicant name...",
+        "noApplicants": "No applicants found.",
+        "stages": {
+          "sourcing": "Sourcing",
+          "screening": "Screening",
+          "interview": "Interview",
+          "offer": "Offer",
+          "hired": "Hired"
+        },
+        "kanban": {
+          "totalCount": "{count} applicants"
+        },
+        "aiInsight": "AI Insight",
+        "fitScore": "Fit Score",
+        "summary": "Candidate Summary",
+        "viewCv": "View original CV",
+        "details": {
+          "title": "Applicant Details",
+          "backToList": "Back to applicants",
+          "highFit": "High Match",
+          "appliedAt": "Applied",
+          "reject": "Reject",
+          "moveToInterview": "Move to interview",
+          "fitScoreMatch": "{score}% Match",
+          "aiMatchScore": "AI Match Score",
+          "contact": "Contact",
+          "currentStage": "Current Stage",
+          "cv": "CV",
+          "experience": "Experience",
+          "education": "Education",
+          "loadingCv": "Loading CV preview...",
+          "expDetails": "Experience details will be displayed here.",
+          "eduDetails": "Education details will be displayed here.",
+          "strengths": "Strengths",
+          "weaknesses": "Potential points to note",
+          "aiInterview": "Try AI Interview",
+          "notes": "Recruitment Notes",
+          "addNotes": "Add a personal note about this candidate...",
+          "saveNotes": "Save Note"
+        }
+      },
+      "search": {
+        "title": "Talent Search AI",
+        "subtitle": "Use natural language to find the best candidates from the database.",
+        "aiPowered": "AI Powered Search",
+        "trySearching": "Try searching",
+        "advancedFilters": "Advanced Filters",
+        "experience": "Experience",
+        "fitScore": "AI Fit Score",
+        "minScore": "MIN",
+        "foundCount": "Found {count} candidates matching your description",
+        "match": "Match",
+        "aiReasoning": "AI Reasoning",
+        "viewDetails": "View details",
+        "invite": "Invite to apply",
+        "placeholder": "Search candidates with AI (e.g., Find React engineers with 3 years experience...)",
+        "submit": "Search"
+      }
     }
   }
 }
