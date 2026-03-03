@@ -1,14 +1,16 @@
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
+import { updateSession } from "@/lib/supabase/middleware";
+import { type NextRequest } from "next/server";
 
 // Next.js 16: This file replaces middleware.ts
 // Named export 'proxy' is required for the new proxy convention
 const intlProxy = createMiddleware(routing);
 
-export function proxy(request: Request): Response | undefined {
-  return intlProxy(request as Parameters<typeof intlProxy>[0]) as
-    | Response
-    | undefined;
+export async function proxy(request: NextRequest) {
+  // Update session before intl handles the request
+  await updateSession(request);
+  return intlProxy(request);
 }
 
 // Alternatively, use default export (both work during transition period)

@@ -4,14 +4,20 @@
     "description": "Connect talented candidates with top employers powered by AI. Find jobs and analyze CVs intelligently."
   },
   "Common": {
-    "brand": "Global AI Jobs",
+    "brand": "Global AI Job",
     "brandFull": "Global AI Job Board",
-    "tagline": "Intelligence at Work"
+    "tagline": "Intelligence at Work",
+    "loading": "Loading...",
+    "error": "An error occurred"
   },
   "Errors": {
     "invalidEmail": "Invalid email address",
     "passwordMin": "Password must be at least {count} characters",
-    "passwordsMatch": "Passwords don't match"
+    "passwordsMatch": "Passwords do not match",
+    "loginFailed": "Login failed. Please check your credentials.",
+    "registerFailed": "Registration failed. Please try again later.",
+    "emailNotConfirmed": "Your email is not confirmed. Please check your inbox to activate your account.",
+    "logoutError": "Failed to log out"
   },
   "Landing": {
     "hero": {
@@ -58,29 +64,40 @@
     "forRecruiters": "For Recruiters",
     "about": "About",
     "login": "Login",
-    "register": "Register"
+    "register": "Register",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "logout": "Log out",
+    "loggingOut": "Logging out...",
+    "logoutSuccess": "Logged out successfully"
   },
   "Auth": {
     "login": {
       "title": "Welcome Back",
-      "subtitle": "Sign in to manage your career or job postings",
-      "email": "Email Address",
-      "password": "Password",
-      "submit": "Sign In",
+      "subtitle": "Log in to your account to continue",
+      "emailLabel": "Email Address",
+      "passwordLabel": "Password",
+      "submit": "Login",
       "forgotPassword": "Forgot password?",
       "noAccount": "Don't have an account?",
-      "register": "Sign up now",
+      "register": "Register now",
       "google": "Continue with Google",
-      "github": "Continue with Github",
-      "divider": "Or continue with email"
+      "github": "Continue with GitHub",
+      "divider": "Or continue with email",
+      "successTitle": "Welcome back!",
+      "successDescription": "You have successfully logged in."
     },
     "register": {
       "title": "Join Global AI Jobs",
       "subtitle": "Create an account to unlock AI coding power for recruitment",
-      "confirmPassword": "Confirm Password",
+      "emailLabel": "Email Address",
+      "passwordLabel": "Password",
+      "confirmPasswordLabel": "Confirm Password",
       "submit": "Create Account",
       "haveAccount": "Already have an account?",
-      "login": "Sign In"
+      "login": "Sign In",
+      "successTitle": "Registration Successful!",
+      "successMessage": "Please check your email to verify your account."
     },
     "role": {
       "title": "Select Your Role",

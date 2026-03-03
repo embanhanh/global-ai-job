@@ -2,21 +2,21 @@
 
 ## Current Focus
 
-Dự án vừa hoàn thành giai đoạn khởi tạo cơ bản và thiết kế luồng Auth UI. Trọng tâm hiện tại là đảm bảo hệ thống đa ngôn ngữ hoạt động ổn định và nhất quán về thương hiệu.
+Dự án đã hoàn tất việc tích hợp Supabase Auth (SSR) và xử lý tốt luồng xác nhận Email. Trọng tâm tiếp theo là triển khai User Profile và Dashboard.
 
 ## Recent Changes
 
-- **Auth UI Implementation**: Hoàn thành giao diện cho Login, Register, Role Selection, Forgot Password và Reset Password.
-- **i18n Standardization**: Chuyển đổi toàn bộ branding hardcode và thông báo lỗi/thành công sang hệ thống `next-intl`.
-- **Tailwind v4 Optimization**: Fix các lỗi hiển thị do cú pháp v4 (vd: gradient, opacity).
-- **Project Structure**: Thiết lập xong `[locale]` routing với `proxy.ts`.
+- **Supabase Auth Integration**: Triển khai xong SSR client (server, client, middleware), Auth actions (`signIn`, `signUp`, `signOut`) và tích hợp vào form UI.
+- **User Navigation**: Thêm component `UserNav` và `dropdown-menu` để hiển thị trạng thái người dùng trên Header.
+- **i18n & Branding**: Hoàn thiện bộ dịch (VI/EN) cho các thông báo và nhãn nhãn trong Auth flows.
+- **Session Management**: Xử lý logic cập nhật session trong `proxy.ts` tương thích với `next-intl`.
 
 ## Next Steps
 
-1.  **Supabase Auth Integration**: Hiện thực hóa logic đăng nhập/đăng ký bằng Supabase thay vì chỉ console log placeholder.
-2.  **Role-based Redirect**: Sau khi Auth thành công, điều hướng người dùng về đúng dashboard (Candidate hoặc Recruiter).
-3.  **UI Feedback**: Thêm Toast notifications cho các hành động gửi form.
-4.  **Dashboard Setup**: Khởi tạo cấu trúc giao diện cho bảng điều khiển.
+1.  **User Profile setup**: Xây dựng bảng `profiles` và logic đồng bộ người dùng.
+2.  **Dashboard Development**: Thiết kế và triển khai trang dashboard cho Candidate và Recruiter.
+3.  **Role-based Redirect**: Hoàn thiện logic điều hướng về dashboard sau đăng nhập dựa trên role.
+4.  **Social Login**: Tích hợp Google và Github OAuth.
 
 ## Active Decisions & Considerations
 

@@ -14,9 +14,11 @@
 
 ### Phase 2: Core Auth & Logic
 
-- [ ] Tích hợp Supabase Auth (Sign in / Sign up).
-- [ ] Logout functionality.
-- [ ] User Profile setup.
+- [x] Tích hợp Supabase Auth (Sign in / Sign up).
+- [x] Logout functionality (Server Action).
+- [x] Session management (SSR compatible / middleware).
+- [x] Xử lý xác nhận Email và lỗi i18n ("Email not confirmed").
+- [ ] User Profile setup (Database Table & Sync).
 
 ### Phase 3: Dashboard & AI Features
 
@@ -27,9 +29,9 @@
 
 ## Current Status
 
-- **Hệ thống**: Stable (Bản thiết kế & UI).
-- **Tính năng xác thực**: UI-only (Cần tích hợp backend).
-- **Backend**: Supabase client đã init, chưa có logic thực thi.
+- **Hệ thống**: Stable (Auth & UI).
+- **Tính năng xác thực**: Đã hoạt động (Sử dụng Supabase Auth).
+- **Backend**: Supabase client đã config, Auth actions đã tích hợp.
 
 ## Known Issues
 
