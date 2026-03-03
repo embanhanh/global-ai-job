@@ -4,14 +4,20 @@
     "description": "Kết nối ứng viên tài năng với nhà tuyển dụng hàng đầu bằng sức mạnh AI. Tìm kiếm việc làm, phân tích CV thông minh."
   },
   "Common": {
-    "brand": "Global AI Jobs",
+    "brand": "Global AI Job",
     "brandFull": "Global AI Job Board",
+    "loading": "Đang tải...",
+    "error": "Có lỗi xảy ra",
     "tagline": "Intelligence at Work"
   },
   "Errors": {
     "invalidEmail": "Địa chỉ email không hợp lệ",
     "passwordMin": "Mật khẩu phải có ít nhất {count} ký tự",
-    "passwordsMatch": "Mật khẩu không khớp"
+    "passwordsMatch": "Mật khẩu không khớp",
+    "loginFailed": "Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.",
+    "registerFailed": "Đăng ký thất bại. Vui lòng thử lại sau.",
+    "emailNotConfirmed": "Email của bạn chưa được xác nhận. Vui lòng kiểm tra hộp thư để kích hoạt tài khoản.",
+    "logoutError": "Có lỗi khi đăng xuất"
   },
   "Landing": {
     "hero": {
@@ -57,30 +63,41 @@
     "findJobs": "Tìm Việc Làm",
     "forRecruiters": "Nhà Tuyển Dụng",
     "about": "Giới Thiệu",
-    "login": "Đăng Nhập",
-    "register": "Đăng Ký"
+    "login": "Đăng nhập",
+    "register": "Đăng ký",
+    "dashboard": "Bảng điều khiển",
+    "profile": "Hồ sơ",
+    "logout": "Đăng xuất",
+    "loggingOut": "Đang đăng xuất...",
+    "logoutSuccess": "Đăng xuất thành công"
   },
   "Auth": {
     "login": {
       "title": "Chào mừng trở lại",
-      "subtitle": "Đăng nhập để quản lý sự nghiệp hoặc tin tuyển dụng của bạn",
-      "email": "Email",
-      "password": "Mật khẩu",
-      "submit": "Đăng nhập",
+      "subtitle": "Đăng nhập vào tài khoản của bạn để tiếp tục",
+      "emailLabel": "Địa chỉ Email",
+      "passwordLabel": "Mật khẩu",
       "forgotPassword": "Quên mật khẩu?",
+      "submit": "Đăng nhập",
       "noAccount": "Chưa có tài khoản?",
       "register": "Đăng ký ngay",
       "google": "Tiếp tục với Google",
       "github": "Tiếp tục với Github",
-      "divider": "Hoặc chuyển qua email"
+      "divider": "Hoặc chuyển qua email",
+      "successTitle": "Chào mừng trở lại!",
+      "successDescription": "Bạn đã đăng nhập thành công."
     },
     "register": {
-      "title": "Bắt đầu sự nghiệp",
-      "subtitle": "Tạo tài khoản để mở khóa thế mạnh AI trong tuyển dụng",
-      "confirmPassword": "Xác nhận mật khẩu",
-      "submit": "Tạo tài khoản",
-      "haveAccount": "Đã có tài khoản?",
-      "login": "Đăng nhập"
+      "title": "Tạo tài khoản",
+      "subtitle": "Bắt đầu hành trình sự nghiệp AI của bạn",
+      "emailLabel": "Địa chỉ Email",
+      "passwordLabel": "Mật khẩu",
+      "confirmPasswordLabel": "Xác nhận mật khẩu",
+      "submit": "Đăng ký",
+      "hasAccount": "Đã có tài khoản?",
+      "login": "Đăng nhập",
+      "successTitle": "Đăng ký thành công!",
+      "successMessage": "Vui lòng kiểm tra email để xác thực tài khoản."
     },
     "role": {
       "title": "Chọn Vai Trò Của Bạn",

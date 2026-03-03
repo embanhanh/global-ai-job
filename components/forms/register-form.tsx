@@ -7,14 +7,25 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "@/i18n/navigation";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { SocialAuth } from "@/components/shared/social-auth";
+import { signUp } from "@/actions/auth";
+import { useSearchParams } from "next/navigation";
+import { toast } from "sonner";
+import { useLocale } from "next-intl";
+import { motion, AnimatePresence } from "framer-motion";
+import { AlertCircle } from "lucide-react";
 
 export function RegisterForm() {
   const t = useTranslations("Auth.register");
   const tLogin = useTranslations("Auth.login");
   const tError = useTranslations("Errors");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isPending, startTransition] = useTransition();
+  const [serverError, setServerError] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const locale = useLocale();
+  const role =
+    (searchParams.get("role") as "candidate" | "recruiter") || "candidate";
 
   const registerSchema = z
     .object({
@@ -41,20 +52,37 @@ export function RegisterForm() {
   });
 
   async function onSubmit(values: RegisterValues) {
-    setIsLoading(true);
-    console.log(values);
-    // TODO: Implement Supabase sign-up logic here
-    setTimeout(() => setIsLoading(false), 2000);
+    setServerError(null);
+    startTransition(async () => {
+      const result = await signUp({ ...values, role, locale });
+      if (result?.success) {
+        toast.success(t("successTitle"), {
+          description: t("successMessage"),
+        });
+        form.reset();
+      } else if (result?.error) {
+        console.log(result.error);
+        setServerError(result.error);
+        toast.error(tError("registerFailed") || "Registration failed");
+      }
+    });
   }
 
   return (
-    <div className="space-y-6">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      className="space-y-6"
+    >
       <div className="text-center space-y-2">
         <h1 className="text-2xl font-bold text-white">{t("title")}</h1>
         <p className="text-white/50 text-sm">{t("subtitle")}</p>
       </div>
 
-      <SocialAuth isLoading={isLoading} />
+      <div className="grid grid-cols-1 gap-4">
+        <SocialAuth disabled={isPending} />
+      </div>
 
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
@@ -67,17 +95,34 @@ export function RegisterForm() {
         </div>
       </div>
 
+      <AnimatePresence mode="wait">
+        {serverError && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-center gap-2"
+          >
+            <AlertCircle className="w-4 h-4 shrink-0" />
+            <p>{serverError}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <div className="space-y-2">
           <label className="text-sm font-medium text-white/70" htmlFor="email">
-            {tLogin("email")}
+            {tLogin("emailLabel")}
           </label>
           <Input
             id="email"
             placeholder="name@example.com"
             type="email"
-            disabled={isLoading}
-            className="bg-white/5 border-white/10 text-white placeholder:text-white/20"
+            autoCapitalize="none"
+            autoComplete="email"
+            autoCorrect="off"
+            disabled={isPending}
+            className="bg-white/5 border-white/10 text-white placeholder:text-white/30 h-11 focus:border-violet-500/50 focus:ring-violet-500/20"
             {...form.register("email")}
           />
           {form.formState.errors.email && (
@@ -86,19 +131,19 @@ export function RegisterForm() {
             </p>
           )}
         </div>
-
         <div className="space-y-2">
           <label
             className="text-sm font-medium text-white/70"
             htmlFor="password"
           >
-            {tLogin("password")}
+            {t("passwordLabel")}
           </label>
           <Input
             id="password"
             type="password"
-            disabled={isLoading}
-            className="bg-white/5 border-white/10 text-white placeholder:text-white/20"
+            autoComplete="new-password"
+            disabled={isPending}
+            className="bg-white/5 border-white/10 text-white h-11 focus:border-violet-500/50 focus:ring-violet-500/20"
             {...form.register("password")}
           />
           {form.formState.errors.password && (
@@ -107,19 +152,19 @@ export function RegisterForm() {
             </p>
           )}
         </div>
-
         <div className="space-y-2">
           <label
             className="text-sm font-medium text-white/70"
             htmlFor="confirmPassword"
           >
-            {t("confirmPassword")}
+            {t("confirmPasswordLabel")}
           </label>
           <Input
             id="confirmPassword"
             type="password"
-            disabled={isLoading}
-            className="bg-white/5 border-white/10 text-white placeholder:text-white/20"
+            autoComplete="new-password"
+            disabled={isPending}
+            className="bg-white/5 border-white/10 text-white h-11 focus:border-violet-500/50 focus:ring-violet-500/20"
             {...form.register("confirmPassword")}
           />
           {form.formState.errors.confirmPassword && (
@@ -132,9 +177,9 @@ export function RegisterForm() {
         <Button
           type="submit"
           className="w-full bg-violet-600 hover:bg-violet-500 text-white h-11"
-          disabled={isLoading}
+          disabled={isPending}
         >
-          {isLoading ? (
+          {isPending ? (
             <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
           ) : (
             t("submit")
@@ -143,7 +188,7 @@ export function RegisterForm() {
       </form>
 
       <div className="text-center text-sm text-white/40">
-        {t("haveAccount")}{" "}
+        {t("hasAccount")}{" "}
         <Link
           href="/login"
           className="text-violet-400 hover:text-violet-300 font-semibold transition-colors"
@@ -151,6 +196,6 @@ export function RegisterForm() {
           {t("login")}
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -10,14 +10,24 @@ import {
   TrendingUp,
   CheckCircle2,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "@/i18n/navigation";
+import { createClient } from "@/lib/supabase/server";
+import { UserNav } from "@/components/shared/user-nav";
 
-export default async function HomePage() {
+export default async function HomePage({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  const { locale } = await params;
   const t = await getTranslations("Landing");
-  const tNav = await getTranslations("Nav");
   const tCommon = await getTranslations("Common");
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   return (
     <div className="min-h-screen bg-[#050816] text-white overflow-x-hidden">
@@ -40,20 +50,7 @@ export default async function HomePage() {
             >
               {t("hero.ctaSecondary")}
             </a>
-            <Link
-              href="/login"
-              className="text-sm text-white/60 hover:text-white transition-colors"
-            >
-              {tNav("login")}
-            </Link>
-            <Link href="/register">
-              <Button
-                size="sm"
-                className="bg-violet-600 hover:bg-violet-500 text-white border-0 rounded-full px-5"
-              >
-                {tNav("register")}
-              </Button>
-            </Link>
+            <UserNav user={user} locale={locale} />
           </div>
         </div>
       </nav>
@@ -112,7 +109,7 @@ export default async function HomePage() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-20">
-            <Link href="/register">
+            <Link href="/role-selection">
               <button className="group relative inline-flex h-12 items-center justify-center gap-2 rounded-full bg-violet-600 px-8 text-sm font-semibold text-white transition-all duration-300 hover:bg-violet-500 hover:shadow-[0_0_30px_rgba(139,92,246,0.4)]">
                 {t("hero.ctaPrimary")}
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -250,7 +247,7 @@ export default async function HomePage() {
               <p className="text-lg text-white/50 mb-10 max-w-xl mx-auto">
                 {t("cta.description")}
               </p>
-              <Link href="/register">
+              <Link href="/role-selection">
                 <button className="group inline-flex h-14 items-center justify-center gap-3 rounded-full bg-linear-to-r from-violet-600 to-indigo-600 px-10 text-base font-semibold text-white transition-all duration-300 hover:shadow-[0_0_40px_rgba(139,92,246,0.5)] hover:scale-105">
                   <Sparkles className="w-5 h-5" />
                   {t("cta.button")}
@@ -274,7 +271,7 @@ export default async function HomePage() {
             </span>
           </div>
           <p className="text-xs text-white/20">
-            © 2026 {tCommon("brandFull")}. Built with Next.js 16 + AI.
+            © 2026 {tCommon("brandFull")}. Built with Next.js 15 + AI.
           </p>
         </div>
       </footer>

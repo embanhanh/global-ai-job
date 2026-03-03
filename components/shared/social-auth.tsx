@@ -3,13 +3,20 @@
 import { Button } from "@/components/ui/button";
 import { Github } from "lucide-react";
 
-export function SocialAuth({ isLoading }: { isLoading?: boolean }) {
+export function SocialAuth({
+  isLoading,
+  disabled,
+}: {
+  isLoading?: boolean;
+  disabled?: boolean;
+}) {
+  const isInactive = isLoading || disabled;
   return (
     <div className="grid grid-cols-2 gap-4">
       <Button
         variant="outline"
         className="border-white/10 bg-white/5 hover:bg-white/10 text-white"
-        disabled={isLoading}
+        disabled={isInactive}
       >
         <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
           <path
@@ -34,7 +41,7 @@ export function SocialAuth({ isLoading }: { isLoading?: boolean }) {
       <Button
         variant="outline"
         className="border-white/10 bg-white/5 hover:bg-white/10 text-white"
-        disabled={isLoading}
+        disabled={isInactive}
       >
         <Github className="mr-2 h-4 w-4" />
         Github
