@@ -2,23 +2,25 @@
 
 ## Current Focus
 
-Dự án đã hoàn tất việc tích hợp Supabase Auth (SSR) và xử lý tốt luồng xác nhận Email. Trọng tâm tiếp theo là triển khai User Profile và Dashboard.
+Dự án đã hoàn thành thiết kế và triển khai database schema cho **Recruiter Dashboard** trên Supabase. Trọng tâm tiếp theo là kết nối dữ liệu thực tế giữa FE và BE, sau đó là triển khai **Candidate Dashboard** và hệ thống **AI Resume Parser**.
 
 ## Recent Changes
 
-- **Supabase Auth Integration**: Triển khai xong SSR client (server, client, middleware), Auth actions (`signIn`, `signUp`, `signOut`) và tích hợp vào form UI.
-- **User Navigation**: Thêm component `UserNav` và `dropdown-menu` để hiển thị trạng thái người dùng trên Header.
-- **i18n & Branding**: Hoàn thiện bộ dịch (VI/EN) cho các thông báo và nhãn nhãn trong Auth flows.
-- **Session Management**: Xử lý logic cập nhật session trong `proxy.ts` tương thích với `next-intl`.
+- **Recruiter Dashboard Enhancements**:
+  - **Job Search & Pagination**: Triển khai hệ thống tìm kiếm mượt mà với `SearchInput` (debounced) và component `Pagination` tái sử dụng, đồng bộ trạng thái qua URL.
+  - **Job Editing**: Hoàn thiện tính năng chỉnh sửa tin tuyển dụng, sử dụng chung `JobForm` với thêm mới để tối ưu mã nguồn.
+- **Form Improvements**: Cập nhật `JobRequirementsField` để hỗ trợ danh sách yêu cầu linh hoạt hơn (array of objects), đảm bảo type safety hoàn tuyệt đối với Zod.
+- **i18n**: Bổ sung đầy đủ các keys cho trạng thái tìm kiếm (`noResults`) và các thông báo thành công/lỗi khi cập nhật dữ liệu.
+- **Database Schema**: Cập nhật bảng `applications` và `profiles` với cột `created_at`, đồng bộ types.
 
 ## Next Steps
 
-1.  **User Profile setup**: Xây dựng bảng `profiles` và logic đồng bộ người dùng.
-2.  **Dashboard Development**: Thiết kế và triển khai trang dashboard cho Candidate và Recruiter.
-3.  **Role-based Redirect**: Hoàn thiện logic điều hướng về dashboard sau đăng nhập dựa trên role.
-4.  **Social Login**: Tích hợp Google và Github OAuth.
+1.  **Candidate Dashboard**: Thiết kế và triển khai dashboard cho ứng viên (Tìm việc, Quản lý CV).
+2.  **AI Resume Parser**: Xây dựng logic phân tích CV sang Markdown và trích xuất dữ liệu bằng Vercel AI SDK.
+3.  **Social Login**: Tích hợp Google và Github OAuth.
 
 ## Active Decisions & Considerations
 
-- **Branding**: Sử dụng `Global AI Jobs` cho tên hiển thị ngắn và `Global AI Job Board` cho tên đầy đủ.
-- **Zod Localization**: Giữ schema bên trong component để tận dụng hook `useTranslations` cho thông báo lỗi.
+- **Server-First Pagination**: Sử dụng URL search parameters để quản lý trạng thái trang, giúp hỗ trợ SEO và chia sẻ liên kết tốt hơn.
+- **Reusable Components**: Tách `Pagination` và `SearchInput` ra làm các component dùng chung (`components/shared` và `components/dashboard`) để tái sử dụng cho các module khác (như Talent Search).
+- **Zod Schema Evolution**: Chuyển đổi mảng chuỗi đơn thuần sang mảng đối tượng trong `useFieldArray` để quản lý ID và giá trị tốt hơn trong form React.

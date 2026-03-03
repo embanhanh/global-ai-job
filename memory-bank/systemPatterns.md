@@ -17,7 +17,15 @@
 
 - **Shared Components**: Tách biệt các logic UI chung như `AuthCard`, `SocialAuth` để tái sử dụng trên nhiều trang Auth.
 - **Form Patterns**: Sử dụng `react-hook-form` kết hợp với `zod` để validate dữ liệu ở phía Client, đồng bộ với translations message từ i18n.
+- **Pagination & Search Pattern**:
+  - **Server-driven**: Trạng thái tìm kiếm và trang hiện tại được lưu trên URL (searchParams).
+  - **Shared UI**: Thành phần `Pagination` được thiết kế linh hoạt cho nhiều bảng dữ liệu. `SearchInput` sử dụng debouncing (500ms) để giảm tải cho server.
+  - **Server Actions**: `getJobs` hỗ trợ range-query trong Supabase để lấy dữ liệu theo trang hiệu quả.
 - **AI Interaction**: Toàn bộ CV được parse sang Markdown giúp AI (Vercel AI SDK) xử lý context tốt hơn.
+- **Database Architecture**:
+  - Sử dụng Supabase làm DB chính với PostgreSQL.
+  - Áp dụng Row Level Security (RLS) triệt để để phân quyền dữ liệu giữa Recruiter và Candidate.
+  - Sử dụng bảng trung gian `recruiter_companies` để quản lý quyền truy cập của nhà tuyển dụng vào dữ liệu công ty.
 
 ## Folder Structure Highlights
 

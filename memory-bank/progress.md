@@ -18,22 +18,25 @@
 - [x] Logout functionality (Server Action).
 - [x] Session management (SSR compatible / middleware).
 - [x] Xử lý xác nhận Email và lỗi i18n ("Email not confirmed").
-- [ ] User Profile setup (Database Table & Sync).
+- [x] User Profile setup (Database Table & Sync).
+- [x] Khởi tạo Database Schema cho Recruiter Dashboard (Jobs, Companies, Applications).
 
 ### Phase 3: Dashboard & AI Features
 
-- [ ] Candidate Dashboard.
-- [ ] Recruiter Dashboard.
+- [x] Candidate Dashboard UI Layout.
+- [x] Recruiter Dashboard (Overview, Jobs, Applicants, Search) - UI & Database.
 - [ ] Resume Upload & AI Markdown Parser.
-- [ ] Job Posting Logic.
+- [x] Job Posting & Editing Logic (UI & AI Assistant).
+- [x] Search & Pagination for Jobs.
 
 ## Current Status
 
 - **Hệ thống**: Stable (Auth & UI).
+- **Recruiter Dashboard**: Đã hoàn thiện chức năng CRUD Job cơ bản, tìm kiếm và phân trang.
 - **Tính năng xác thực**: Đã hoạt động (Sử dụng Supabase Auth).
-- **Backend**: Supabase client đã config, Auth actions đã tích hợp.
+- **Backend**: Supabase client đã config, Auth actions đã tích hợp, Schema đồng bộ.
 
 ## Known Issues
 
-- Zod validation message cần chuyển schema vào trong React Component để dịch trực tiếp (Đã xử lý cho các form chính).
-- Cần dọn dẹp thêm các file legacy nếu còn sót lại từ `create-next-app`.
+- Cần đảm bảo `SearchInput` render đồng quán giữa Server và Client khi có default value phức tạp.
+- Tiếp tục rà soát xóa các file legacy từ `create-next-app` nếu còn.
