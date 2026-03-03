@@ -1,0 +1,115 @@
+{
+  "Metadata": {
+    "title": "Global AI Job Board - Smart Recruitment Platform",
+    "description": "Connect talented candidates with top employers powered by AI. Find jobs and analyze CVs intelligently."
+  },
+  "Common": {
+    "brand": "Global AI Jobs",
+    "brandFull": "Global AI Job Board",
+    "tagline": "Intelligence at Work"
+  },
+  "Errors": {
+    "invalidEmail": "Invalid email address",
+    "passwordMin": "Password must be at least {count} characters",
+    "passwordsMatch": "Passwords don't match"
+  },
+  "Landing": {
+    "hero": {
+      "badge": "Next-gen AI Integration",
+      "title": "Find Jobs",
+      "titleHighlight": "Smarter",
+      "titleSuffix": "With AI",
+      "description": "A multilingual AI-powered recruitment platform connecting talented candidates with top employers. Automatic CV analysis, intelligent job recommendations.",
+      "ctaPrimary": "Find Jobs Now",
+      "ctaSecondary": "Post a Job",
+      "trustedBy": "Trusted by"
+    },
+    "stats": {
+      "jobs": "Jobs",
+      "companies": "Companies",
+      "candidates": "Candidates",
+      "hiredMonthly": "Hired/month"
+    },
+    "features": {
+      "title": "Why Choose Us?",
+      "subtitle": "Recruitment experience redefined by AI technology",
+      "ai": {
+        "title": "AI CV Analysis",
+        "description": "AI automatically analyzes and summarizes CVs, helping recruiters find the right candidates quickly."
+      },
+      "multilingual": {
+        "title": "Multilingual",
+        "description": "Full support for Vietnamese and English, expanding international job opportunities."
+      },
+      "smart": {
+        "title": "Smart Recommendations",
+        "description": "AI system recommends relevant jobs based on candidate skills and experience."
+      },
+      "ready": "Ready to use"
+    },
+    "cta": {
+      "title": "Ready to Get Started?",
+      "description": "Join thousands of candidates and recruiters who trust Global AI Job Board.",
+      "button": "Register for Free"
+    }
+  },
+  "Nav": {
+    "findJobs": "Find Jobs",
+    "forRecruiters": "For Recruiters",
+    "about": "About",
+    "login": "Login",
+    "register": "Register"
+  },
+  "Auth": {
+    "login": {
+      "title": "Welcome Back",
+      "subtitle": "Sign in to manage your career or job postings",
+      "email": "Email Address",
+      "password": "Password",
+      "submit": "Sign In",
+      "forgotPassword": "Forgot password?",
+      "noAccount": "Don't have an account?",
+      "register": "Sign up now",
+      "google": "Continue with Google",
+      "github": "Continue with Github",
+      "divider": "Or continue with email"
+    },
+    "register": {
+      "title": "Join Global AI Jobs",
+      "subtitle": "Create an account to unlock AI coding power for recruitment",
+      "confirmPassword": "Confirm Password",
+      "submit": "Create Account",
+      "haveAccount": "Already have an account?",
+      "login": "Sign In"
+    },
+    "role": {
+      "title": "Select Your Role",
+      "subtitle": "We will customize your experience based on your needs",
+      "candidate": {
+        "title": "I'm a Candidate",
+        "description": "Browse jobs, AI CV analysis, and get smart recommendations."
+      },
+      "recruiter": {
+        "title": "I'm a Recruiter",
+        "description": "Post jobs, smart talent filtering, and manage candidates."
+      },
+      "cta": "Continue",
+      "footer": "Intelligence at Work"
+    },
+    "forgotPassword": {
+      "title": "Forgot Password",
+      "subtitle": "Enter your email to receive a password reset link",
+      "submit": "Send Request",
+      "backToLogin": "Back to log in",
+      "successTitle": "Check your email",
+      "successMessage": "We've sent a password reset link to your email address."
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "subtitle": "Enter a new password for your account",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm Password",
+      "submit": "Update Password"
+    }
+  }
+}
