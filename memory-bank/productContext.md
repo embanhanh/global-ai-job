@@ -13,7 +13,7 @@ Thị trường tuyển dụng hiện nay đang quá tải với số lượng h
 ## How it should work?
 
 - **Ứng viên**: Tải lên CV, hệ thống AI sẽ phân tích các kỹ năng cốt lõi và gợi ý việc làm phù hợp nhất.
-- **Nhà tuyển dụng**: Đăng tin tuyển dụng và nhận về danh sách ứng viên đã được AI xếp hạng theo độ phù hợp.
+- **Nhà tuyển dụng**: Đăng tin tuyển dụng và quản lý ứng viên thông qua **Job Detail Command Center**. Sử dụng Kanban để kéo thả trạng thái và DataTable để lọc/tìm kiếm ứng viên hiệu quả.
 - **AI Engine**: Đóng vai trò là "người môi giới thông minh", xử lý dữ liệu CV dưới dạng Markdown để đạt độ chính xác cao nhất.
 
 ## User Experience Goals

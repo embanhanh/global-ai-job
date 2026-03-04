@@ -10,11 +10,17 @@ import { JobBasicInfo } from "./form/job-basic-info";
 import { JobDescriptionField } from "./form/job-description-field";
 import { JobRequirementsField } from "./form/job-requirements-field";
 import { JobFormActions } from "./form/job-form-actions";
+import { JobHiringStepsField } from "./form/job-hiring-steps-field";
 import { useRouter } from "@/i18n/navigation";
 import { useEffect, useState } from "react";
 import { getRecruiterCompany } from "@/actions/companies.actions";
 import { createJob, updateJob } from "@/actions/jobs.actions";
-import { Company, JobFormValues, jobSchema } from "@/types/jobs";
+import {
+  Company,
+  JobFormValues,
+  jobSchema,
+  DEFAULT_HIRING_STEPS,
+} from "@/types/jobs";
 
 interface JobFormProps {
   initialData?: JobFormValues;
@@ -46,6 +52,7 @@ export function JobForm({ initialData, jobId }: JobFormProps) {
       salary_range: "",
       requirements: [],
       status: "active",
+      hiring_steps: DEFAULT_HIRING_STEPS,
     },
   });
 
@@ -119,6 +126,7 @@ export function JobForm({ initialData, jobId }: JobFormProps) {
             <JobBasicInfo register={register} errors={errors} t={t} />
             <JobDescriptionField register={register} errors={errors} t={t} />
             <JobRequirementsField control={control} t={t} />
+            <JobHiringStepsField control={control} t={t} />
           </Card>
         </div>
 

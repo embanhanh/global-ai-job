@@ -2,7 +2,13 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
-import { Job, JobInsert, JobUpdate } from "@/types/jobs";
+import {
+  Job,
+  JobInsert,
+  JobUpdate,
+  HiringStep,
+  DEFAULT_HIRING_STEPS,
+} from "@/types/jobs";
 import { Database } from "@/types/database";
 
 export async function getJobs(params?: {
@@ -20,7 +26,6 @@ export async function getJobs(params?: {
     return { success: false, error: "Not authenticated" };
   }
 
-  // First, get total count for pagination
   let countQuery = supabase
     .from("jobs")
     .select("*", { count: "exact", head: true })
@@ -36,7 +41,6 @@ export async function getJobs(params?: {
     return { success: false, error: countError.message };
   }
 
-  // Then, fetch the page of data
   let dataQuery = supabase
     .from("jobs")
     .select(
@@ -72,6 +76,9 @@ export async function getJobs(params?: {
   ).map((job) => ({
     ...job,
     applicants_count: job.applications?.length || 0,
+    hiring_steps: job.hiring_steps
+      ? (job.hiring_steps as unknown as HiringStep[])
+      : DEFAULT_HIRING_STEPS,
   }));
 
   return {
@@ -102,7 +109,11 @@ export async function getJobById(id: string) {
       `
       *,
       companies (name, logo_url),
-      applications (id)
+      applications (
+        id, stage, fit_score, ai_insight, ai_summary, resume_url,
+        applied_date, created_at, updated_at,
+        profiles (full_name, avatar_url, email)
+      )
     `,
     )
     .eq("id", id)
@@ -113,12 +124,19 @@ export async function getJobById(id: string) {
     return { success: false, error: error.message };
   }
 
-  const jobWithCount = {
+  const jobWithDetails: Job = {
     ...data,
-    applicants_count: data.applications?.length || 0,
-  } as Job;
+    applicants_count: (data.applications as unknown[])?.length || 0,
+    hiring_steps: data.hiring_steps
+      ? (data.hiring_steps as unknown as HiringStep[])
+      : DEFAULT_HIRING_STEPS,
+  };
 
-  return { success: true, data: jobWithCount };
+  return {
+    success: true,
+    data: jobWithDetails,
+    applications: data.applications,
+  };
 }
 
 export async function createJob(jobData: Omit<JobInsert, "recruiter_id">) {
@@ -168,6 +186,37 @@ export async function updateJob(id: string, jobData: JobUpdate) {
   }
 
   revalidatePath("/[locale]/recruiter/jobs", "page");
+  revalidatePath(`/[locale]/recruiter/jobs/${id}`, "page");
+  return { success: true, data };
+}
+
+export async function updateJobStatus(
+  id: string,
+  status: "active" | "draft" | "closed",
+) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { success: false, error: "Not authenticated" };
+  }
+
+  const { data, error } = await supabase
+    .from("jobs")
+    .update({ status, updated_at: new Date().toISOString() })
+    .eq("id", id)
+    .eq("recruiter_id", user.id)
+    .select()
+    .single();
+
+  if (error) {
+    return { success: false, error: error.message };
+  }
+
+  revalidatePath("/[locale]/recruiter/jobs", "page");
+  revalidatePath(`/[locale]/recruiter/jobs/${id}`, "page");
   return { success: true, data };
 }
 

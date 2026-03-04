@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Link, usePathname } from "@/i18n/navigation";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import {
   LayoutDashboard,
@@ -24,6 +24,7 @@ export function Sidebar({}: SidebarProps) {
   const t = useTranslations("Dashboard.sidebar");
   const t_common = useTranslations("Common");
   const pathname = usePathname();
+  const router = useRouter();
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const navItems = [
@@ -65,6 +66,7 @@ export function Sidebar({}: SidebarProps) {
     >
       {/* Logo Area */}
       <div
+        onClick={() => router.push("/")}
         className={cn(
           "p-6 flex items-center gap-3",
           isCollapsed ? "justify-center" : "",

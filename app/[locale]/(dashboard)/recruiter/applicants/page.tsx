@@ -40,6 +40,7 @@ export default async function ApplicantsPage({
       ? new Date(app.applied_date).toLocaleDateString()
       : "-",
     avatar: app.profiles?.avatar_url ?? undefined,
+    fullData: app,
   }));
 
   return (

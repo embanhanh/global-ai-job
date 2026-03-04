@@ -16,6 +16,7 @@ Nền tảng tuyển dụng thông minh (Global AI Job Board) hỗ trợ đa ng�
 - **Auth Flow**: Đăng ký/Đăng nhập đa phương thức, chọn vai trò (Candidate/Recruiter).
 - **AI CV Sorting**: Nhà tuyển dụng có thể lọc hồ sơ bằng các câu lệnh ngôn ngữ tự nhiên hoặc tiêu chí AI.
 - **Smart Dashboard**: Bảng điều khiển tùy chỉnh cho từng vai trò người dùng.
+- **Job Detail Command Center**: Quản lý tập trung từng tin tuyển dụng với các tab: Ứng viên (DataTable), Nội dung (AI Scoring), Workflow (Kanban), và Analytics.
 - **CV to Markdown**: Chuyển đổi hồ sơ ứng viên sang định dạng Markdown để AI xử lý hiệu quả nhất.
 
 ## Scope
@@ -24,3 +25,4 @@ Nền tảng tuyển dụng thông minh (Global AI Job Board) hỗ trợ đa ng�
 - Giai đoạn 2: Tích hợp Supabase Auth & DB (Sắp tới).
 - Giai đoạn 3: Xây dựng AI CV phân tích và Jobs matching.
 - Giai đoạn 4: Quản lý Profile và Dashboard.
+- Giai đoạn 5: Nâng cấp Job Management & Applicant Tracking (Đang thực hiện - Hoàn thành phần Core).
