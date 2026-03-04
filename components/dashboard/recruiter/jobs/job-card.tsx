@@ -58,9 +58,12 @@ export function JobCard({ job, t }: JobCardProps) {
           </div>
           <div className="space-y-1">
             <div className="flex items-center gap-3">
-              <h3 className="font-semibold text-white group-hover:text-violet-400 transition-colors">
+              <button
+                onClick={() => router.push(`/recruiter/jobs/${job.id}`)}
+                className="font-semibold text-white group-hover:text-violet-400 transition-colors hover:underline text-left"
+              >
                 {job.title}
-              </h3>
+              </button>
               <Badge
                 variant="outline"
                 className={
@@ -124,7 +127,10 @@ export function JobCard({ job, t }: JobCardProps) {
                 <Pencil className="w-4 h-4 mr-2" />
                 {t("actions.edit")}
               </DropdownMenuItem>
-              <DropdownMenuItem className="focus:bg-white/5 focus:text-white cursor-pointer">
+              <DropdownMenuItem
+                onClick={() => router.push(`/recruiter/jobs/${job.id}`)}
+                className="focus:bg-white/5 focus:text-white cursor-pointer"
+              >
                 {t("actions.viewApplicants")}
               </DropdownMenuItem>
               <DropdownMenuSeparator className="bg-white/5" />

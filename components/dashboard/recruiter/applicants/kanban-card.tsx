@@ -6,6 +6,8 @@ import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { MoreHorizontal, Star } from "lucide-react";
 
+import { Application } from "@/types/jobs";
+
 export interface Applicant {
   id: string;
   name: string;
@@ -14,13 +16,15 @@ export interface Applicant {
   fitScore: number;
   stage: string;
   appliedDate: string;
+  fullData?: Application;
 }
 
 interface KanbanCardProps {
   applicant: Applicant;
+  onClick?: (applicant: Applicant) => void;
 }
 
-export function KanbanCard({ applicant }: KanbanCardProps) {
+export function KanbanCard({ applicant, onClick }: KanbanCardProps) {
   const {
     attributes,
     listeners,
@@ -57,6 +61,7 @@ export function KanbanCard({ applicant }: KanbanCardProps) {
       style={style}
       {...attributes}
       {...listeners}
+      onClick={() => onClick?.(applicant)}
       className="bg-[#12121e] border-white/5 p-4 mb-3 hover:border-violet-500/30 transition-all cursor-grab active:cursor-grabbing group shadow-lg"
     >
       <div className="flex justify-between items-start mb-3">

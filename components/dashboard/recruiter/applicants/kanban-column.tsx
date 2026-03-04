@@ -15,9 +15,14 @@ interface KanbanColumnProps {
     title: string;
   };
   applicants: Applicant[];
+  onCardClick?: (applicant: Applicant) => void;
 }
 
-export function KanbanColumn({ stage, applicants }: KanbanColumnProps) {
+export function KanbanColumn({
+  stage,
+  applicants,
+  onCardClick,
+}: KanbanColumnProps) {
   const t = useTranslations("Common");
   const { setNodeRef } = useDroppable({
     id: stage.id,
@@ -59,7 +64,11 @@ export function KanbanColumn({ stage, applicants }: KanbanColumnProps) {
         >
           <div className="space-y-3">
             {applicants.map((applicant) => (
-              <KanbanCard key={applicant.id} applicant={applicant} />
+              <KanbanCard
+                key={applicant.id}
+                applicant={applicant}
+                onClick={onCardClick}
+              />
             ))}
           </div>
         </SortableContext>

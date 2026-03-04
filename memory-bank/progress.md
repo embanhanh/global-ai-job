@@ -28,11 +28,13 @@
 - [ ] Resume Upload & AI Markdown Parser.
 - [x] Job Posting & Editing Logic (UI & AI Assistant).
 - [x] Search & Pagination for Jobs.
+- [x] **Job Detail Command Center** (Applicants, Content, Workflow).
+- [ ] Job Analytics & Reporting.
 
 ## Current Status
 
 - **Hệ thống**: Stable (Auth & UI).
-- **Recruiter Dashboard**: Đã hoàn thiện chức năng CRUD Job cơ bản, tìm kiếm và phân trang.
+- **Recruiter Dashboard**: Đã hoàn thiện chức năng CRUD Job và **Job Detail Command Center** (với Applicants Table & Kanban Board).
 - **Tính năng xác thực**: Đã hoạt động (Sử dụng Supabase Auth).
 - **Backend**: Supabase client đã config, Auth actions đã tích hợp, Schema đồng bộ.
 

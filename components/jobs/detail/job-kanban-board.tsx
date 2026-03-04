@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   DndContext,
   DragOverlay,
@@ -13,56 +13,56 @@ import {
   defaultDropAnimationSideEffects,
 } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
-import { useTranslations } from "next-intl";
-import { KanbanColumn } from "./kanban-column";
-import { KanbanCard, Applicant } from "./kanban-card";
 import { createPortal } from "react-dom";
+import { KanbanColumn } from "@/components/dashboard/recruiter/applicants/kanban-column";
+import { KanbanCard } from "@/components/dashboard/recruiter/applicants/kanban-card";
+import type { Applicant } from "@/components/dashboard/recruiter/applicants/kanban-card";
 import { updateApplicationStage } from "@/actions/applications.actions";
-import { QuickViewSheet } from "@/components/jobs/detail/quick-view-sheet";
+import { Application, HiringStep } from "@/types/jobs";
 
-interface KanbanBoardProps {
-  initialApplicants: Applicant[];
+interface JobKanbanBoardProps {
+  initialApplications: Application[];
+  stages: HiringStep[];
 }
 
-export function KanbanBoard({ initialApplicants }: KanbanBoardProps) {
-  const t = useTranslations("Dashboard.recruiter.applicants.stages");
-  const [applicants, setApplicants] = useState<Applicant[]>(initialApplicants);
+function toApplicant(app: Application): Applicant {
+  return {
+    id: app.id,
+    name: app.profiles?.full_name ?? "Unknown",
+    avatar: app.profiles?.avatar_url ?? undefined,
+    role: app.profiles?.email ?? "",
+    fitScore: app.fit_score ?? 0,
+    stage: app.stage ?? "sourcing",
+    appliedDate: app.applied_date
+      ? new Date(app.applied_date).toLocaleDateString("vi-VN")
+      : "",
+  };
+}
+
+export function JobKanbanBoard({
+  initialApplications,
+  stages,
+}: JobKanbanBoardProps) {
+  const [applicants, setApplicants] = useState<Applicant[]>(
+    initialApplications.map(toApplicant),
+  );
   const [activeApplicant, setActiveApplicant] = useState<Applicant | null>(
     null,
   );
-  const [selectedApplicant, setSelectedApplicant] = useState<Applicant | null>(
-    null,
-  );
-  const [isDetailOpen, setIsDetailOpen] = useState(false);
-
-  const handleViewDetail = (applicant: Applicant) => {
-    setSelectedApplicant(applicant);
-    setIsDetailOpen(true);
-  };
-
-  const stages = [
-    { id: "sourcing", title: t("sourcing") },
-    { id: "screening", title: t("screening") },
-    { id: "interview", title: t("interview") },
-    { id: "offer", title: t("offer") },
-    { id: "hired", title: t("hired") },
-  ];
+  const dragItemInitialStage = useRef<string | null>(null);
 
   const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: {
-        distance: 8,
-      },
-    }),
+    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
   );
 
-  const getApplicantsByStage = (stageId: string) => {
-    return applicants.filter((a) => a.stage === stageId);
-  };
+  const getApplicantsByStage = (stageId: string) =>
+    applicants.filter((a) => a.stage === stageId);
 
   const handleDragStart = (event: DragStartEvent) => {
     if (event.active.data.current?.type === "Applicant") {
-      setActiveApplicant(event.active.data.current.applicant);
+      const applicant = event.active.data.current.applicant;
+      setActiveApplicant(applicant);
+      dragItemInitialStage.current = applicant.stage;
     }
   };
 
@@ -72,7 +72,6 @@ export function KanbanBoard({ initialApplicants }: KanbanBoardProps) {
 
     const activeId = active.id;
     const overId = over.id;
-
     if (activeId === overId) return;
 
     const isActiveAnApplicant = active.data.current?.type === "Applicant";
@@ -80,37 +79,29 @@ export function KanbanBoard({ initialApplicants }: KanbanBoardProps) {
 
     if (!isActiveAnApplicant) return;
 
-    // Dropping an Applicant over another Applicant
     if (isActiveAnApplicant && isOverAnApplicant) {
       setApplicants((prev) => {
         const activeIndex = prev.findIndex((a) => a.id === activeId);
         const overIndex = prev.findIndex((a) => a.id === overId);
-
         if (prev[activeIndex].stage !== prev[overIndex].stage) {
-          const newApplicants = [...prev];
-          newApplicants[activeIndex] = {
-            ...newApplicants[activeIndex],
+          const next = [...prev];
+          next[activeIndex] = {
+            ...next[activeIndex],
             stage: prev[overIndex].stage,
           };
-          return arrayMove(newApplicants, activeIndex, overIndex - 1);
+          return arrayMove(next, activeIndex, overIndex - 1);
         }
-
         return arrayMove(prev, activeIndex, overIndex);
       });
     }
 
     const isOverAColumn = over.data.current?.type === "Column";
-
-    // Dropping an Applicant over a Column
     if (isActiveAnApplicant && isOverAColumn) {
       setApplicants((prev) => {
         const activeIndex = prev.findIndex((a) => a.id === activeId);
-        const newApplicants = [...prev];
-        newApplicants[activeIndex] = {
-          ...newApplicants[activeIndex],
-          stage: overId as string,
-        };
-        return arrayMove(newApplicants, activeIndex, activeIndex);
+        const next = [...prev];
+        next[activeIndex] = { ...next[activeIndex], stage: overId as string };
+        return arrayMove(next, activeIndex, activeIndex);
       });
     }
   };
@@ -118,7 +109,10 @@ export function KanbanBoard({ initialApplicants }: KanbanBoardProps) {
   const handleDragEnd = async (event: DragEndEvent) => {
     setActiveApplicant(null);
     const { active, over } = event;
-    if (!over) return;
+    if (!over) {
+      dragItemInitialStage.current = null;
+      return;
+    }
 
     const isActiveAnApplicant = active.data.current?.type === "Applicant";
     const isOverAColumn = over.data.current?.type === "Column";
@@ -131,18 +125,16 @@ export function KanbanBoard({ initialApplicants }: KanbanBoardProps) {
       newStage = over.data.current?.applicant.stage;
     }
 
-    const activeApplicantData = active.data.current?.applicant as Applicant;
-
-    if (newStage && activeApplicantData.stage !== newStage) {
-      await updateStage(active.id as string, newStage);
+    if (newStage && dragItemInitialStage.current !== newStage) {
+      const { error } = await updateApplicationStage(
+        active.id as string,
+        newStage,
+      );
+      if (error) {
+        console.error("Failed to update stage:", error);
+      }
     }
-  };
-
-  const updateStage = async (id: string, newStage: string) => {
-    const { success, error } = await updateApplicationStage(id, newStage);
-    if (!success) {
-      console.error("Failed to update stage:", error);
-    }
+    dragItemInitialStage.current = null;
   };
 
   return (
@@ -156,29 +148,18 @@ export function KanbanBoard({ initialApplicants }: KanbanBoardProps) {
         {stages.map((stage) => (
           <KanbanColumn
             key={stage.id}
-            stage={stage}
+            stage={{ id: stage.id, title: stage.label }}
             applicants={getApplicantsByStage(stage.id)}
-            onCardClick={handleViewDetail}
           />
         ))}
       </div>
-
-      <QuickViewSheet
-        application={selectedApplicant?.fullData ?? null}
-        open={isDetailOpen}
-        onOpenChange={setIsDetailOpen}
-      />
 
       {typeof document !== "undefined" &&
         createPortal(
           <DragOverlay
             dropAnimation={{
               sideEffects: defaultDropAnimationSideEffects({
-                styles: {
-                  active: {
-                    opacity: "0.5",
-                  },
-                },
+                styles: { active: { opacity: "0.5" } },
               }),
             }}
           >

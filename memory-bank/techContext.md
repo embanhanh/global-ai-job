@@ -8,6 +8,7 @@
 - **Backend/Auth**: Supabase (@supabase/supabase-js).
 - **AI**: Vercel AI SDK (@ai-sdk/google).
 - **Forms & Validation**: `react-hook-form`, `zod`, `@hookform/resolvers`.
+- **Drag & Drop**: `@dnd-kit/core`, `@dnd-kit/sortable`.
 
 ## Development Setup
 

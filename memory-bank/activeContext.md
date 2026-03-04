@@ -6,18 +6,18 @@ Dự án đã hoàn thành thiết kế và triển khai database schema cho **R
 
 ## Recent Changes
 
-- **Recruiter Dashboard Enhancements**:
-  - **Job Search & Pagination**: Triển khai hệ thống tìm kiếm mượt mà với `SearchInput` (debounced) và component `Pagination` tái sử dụng, đồng bộ trạng thái qua URL.
-  - **Job Editing**: Hoàn thiện tính năng chỉnh sửa tin tuyển dụng, sử dụng chung `JobForm` với thêm mới để tối ưu mã nguồn.
-- **Form Improvements**: Cập nhật `JobRequirementsField` để hỗ trợ danh sách yêu cầu linh hoạt hơn (array of objects), đảm bảo type safety hoàn tuyệt đối với Zod.
-- **i18n**: Bổ sung đầy đủ các keys cho trạng thái tìm kiếm (`noResults`) và các thông báo thành công/lỗi khi cập nhật dữ liệu.
-- **Database Schema**: Cập nhật bảng `applications` và `profiles` với cột `created_at`, đồng bộ types.
+- **Job Detail Command Center**:
+  - **Applicants Tab**: Bảng ứng viên chuyên sâu với tìm kiếm (debounced 500ms), lọc theo vòng (Hiring Stages), và phân trang Server-First.
+  - **Job Content Tab**: Hiển thị đầy đủ thông tin: Job Type, Location, Salary, Requirements và AI Scoring/Suggestions.
+  - **Hiring Workflow**: Kanban Board cho phép kéo thả ứng viên giữa các bước. Cơ chế DND sử dụng `useRef` để theo dõi `initialStage`, đảm bảo cập nhật DB chính xác.
+- **Database & Sync**: Đồng bộ hóa `stage` ứng viên qua Server Actions, trigger `revalidatePath` để giữ dữ liệu FE luôn mới.
 
 ## Next Steps
 
-1.  **Candidate Dashboard**: Thiết kế và triển khai dashboard cho ứng viên (Tìm việc, Quản lý CV).
-2.  **AI Resume Parser**: Xây dựng logic phân tích CV sang Markdown và trích xuất dữ liệu bằng Vercel AI SDK.
-3.  **Social Login**: Tích hợp Google và Github OAuth.
+1.  **AI Resume Parser**: Xây dựng logic phân tích CV sang Markdown và trích xuất dữ liệu bằng Vercel AI SDK.
+2.  **Job Analytics Tab**: Triển khai biểu đồ và báo cáo hiệu quả tuyển dụng cho từng job.
+3.  **Candidate Dashboard**: Thiết kế và triển khai dashboard cho ứng viên (Tìm việc, Quản lý CV).
+4.  **Social Login**: Tích hợp Google và Github OAuth.
 
 ## Active Decisions & Considerations
 

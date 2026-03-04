@@ -1,17 +1,37 @@
 import { z } from "zod";
 import { Database } from "./database";
 
+// ─── HiringStep ────────────────────────────────────────────────────────────
+export const hiringStepSchema = z.object({
+  id: z.string().min(1),
+  label: z.string().min(1),
+  color: z.string().min(1),
+});
+
+export type HiringStep = z.infer<typeof hiringStepSchema>;
+
+export const DEFAULT_HIRING_STEPS: HiringStep[] = [
+  { id: "sourcing", label: "Sourcing", color: "slate" },
+  { id: "screening", label: "Screening", color: "blue" },
+  { id: "interview", label: "Interview", color: "violet" },
+  { id: "offer", label: "Offer", color: "amber" },
+  { id: "hired", label: "Hired", color: "emerald" },
+];
+
+// ─── Job ────────────────────────────────────────────────────────────────────
 export type Job = Database["public"]["Tables"]["jobs"]["Row"] & {
   applicants_count?: number;
   companies?: {
     name: string;
     logo_url: string | null;
   } | null;
+  hiring_steps?: HiringStep[] | null;
 };
 
 export type JobInsert = Database["public"]["Tables"]["jobs"]["Insert"];
 export type JobUpdate = Database["public"]["Tables"]["jobs"]["Update"];
 
+// ─── Application ────────────────────────────────────────────────────────────
 export type Application =
   Database["public"]["Tables"]["applications"]["Row"] & {
     profiles?: {
@@ -29,8 +49,10 @@ export type ApplicationInsert =
 export type ApplicationUpdate =
   Database["public"]["Tables"]["applications"]["Update"];
 
+// ─── Company ────────────────────────────────────────────────────────────────
 export type Company = Database["public"]["Tables"]["companies"]["Row"];
 
+// ─── Zod Schemas ────────────────────────────────────────────────────────────
 export const jobSchema = z.object({
   title: z.string().min(5),
   location: z.string().min(2),
@@ -39,6 +61,7 @@ export const jobSchema = z.object({
   salary_range: z.string().optional(),
   requirements: z.array(z.object({ value: z.string() })),
   status: z.enum(["active", "draft", "closed"]),
+  hiring_steps: z.array(hiringStepSchema).optional(),
 });
 
 export type JobFormValues = z.infer<typeof jobSchema>;

@@ -222,14 +222,21 @@
             },
             "description": "Job Description",
             "salaryRange": "Salary Range",
-            "requirements": "Job Requirements"
+            "requirements": "Job Requirements",
+            "hiringSteps": "Hiring Workflow"
           },
           "placeholders": {
             "jobTitle": "e.g. Senior AI Engineer",
             "location": "e.g. Hanoi, Nationwide or Remote",
             "salaryRange": "e.g. $2000 - $4000 or Competitive",
             "description": "Enter job description or use AI assistant...",
-            "requirements": "Add a requirement and press Enter"
+            "requirements": "Add a requirement and press Enter",
+            "hiringSteps": "e.g. Technical Interview"
+          },
+          "hiringSteps": {
+            "add": "Add Step",
+            "empty": "No custom steps defined. Default workflow will be used.",
+            "placeholder": "Step name (e.g. Preliminary Screening)"
           },
           "submit": "Post Job",
           "saveDraft": "Save Draft",
@@ -247,6 +254,65 @@
             "errorUpdate": "Failed to update job. Please try again.",
             "aiApplied": "AI suggested content applied!"
           }
+        },
+        "detail": {
+          "tabs": {
+            "applicants": "Applicants",
+            "content": "Job Content",
+            "workflow": "Hiring Workflow",
+            "analytics": "Analytics"
+          },
+          "header": {
+            "edit": "Edit Job",
+            "closeJob": "Close Job",
+            "reopenJob": "Reopen Job",
+            "applicantsCount": "{count} Applicants"
+          },
+          "applicantTable": {
+            "name": "Candidate",
+            "appliedDate": "Applied Date",
+            "stage": "Stage",
+            "matchScore": "AI Match",
+            "empty": "No applicants yet",
+            "search": "Search candidates...",
+            "allStages": "All Stages"
+          },
+          "quickView": {
+            "title": "Candidate Quick View",
+            "aiSummary": "AI Summary",
+            "aiInsight": "AI Analysis",
+            "viewCv": "View CV"
+          },
+          "jobContent": {
+            "jobDescription": "Job Description",
+            "noDescription": "No description provided yet.",
+            "requirements": "Key Requirements",
+            "jobType": "Project Type",
+            "location": "Location",
+            "salary": "Salary Range",
+            "jdScore": "JD Quality Score",
+            "jdScoreDesc": "Based on clarity, completeness & structure",
+            "aiSuggestions": "AI Suggestions",
+            "suggestion1": "Add a salary range to increase applicant conversion rate by ~40%.",
+            "suggestion2": "Break requirements into \"Must-have\" and \"Nice-to-have\" sections.",
+            "suggestion3": "Add clear information about remote/hybrid work policy."
+          },
+          "workflow": {
+            "description": "Drag and drop candidates between stages to update their progress.",
+            "customizeSteps": "Customize Steps",
+            "addStep": "Add Step",
+            "stepLabel": "Step name (e.g. Technical Test)",
+            "cancel": "Cancel",
+            "save": "Save Changes",
+            "saving": "Saving..."
+          },
+          "status": {
+            "active": "Active",
+            "draft": "Draft",
+            "closed": "Closed"
+          },
+          "notFound": "Job not found",
+          "errorBack": "Back to Jobs"
         }
       },
       "applicants": {

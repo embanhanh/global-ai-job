@@ -222,14 +222,21 @@
             },
             "description": "Mô tả công việc",
             "salaryRange": "Mức lương",
-            "requirements": "Yêu cầu công việc"
+            "requirements": "Yêu cầu công việc",
+            "hiringSteps": "Quy trình tuyển dụng"
           },
           "placeholders": {
             "jobTitle": "Ví dụ: Senior AI Engineer",
             "location": "Ví dụ: Hà Nội, Toàn quốc hoặc Remote",
             "salaryRange": "Ví dụ: 20tr - 40tr hoặc Thỏa thuận",
             "description": "Nhập mô tả công việc hoặc sử dụng AI để hỗ trợ...",
-            "requirements": "Nhập yêu cầu và nhấn Enter"
+            "requirements": "Nhập yêu cầu và nhấn Enter",
+            "hiringSteps": "Ví dụ: Phỏng vấn kỹ thuật"
+          },
+          "hiringSteps": {
+            "add": "Thêm vòng",
+            "empty": "Chưa có vòng tùy chỉnh nào. Quy trình mặc định sẽ được sử dụng.",
+            "placeholder": "Tên vòng (VD: Sơ loại hồ sơ)"
           },
           "submit": "Đăng tin ngay",
           "saveDraft": "Lưu bản nháp",
@@ -248,6 +255,65 @@
             "errorUpdate": "Cập nhật thất bại. Vui lòng thử lại.",
             "aiApplied": "Đã áp dụng nội dung gợi ý từ AI!"
           }
+        },
+        "detail": {
+          "tabs": {
+            "applicants": "Ứng viên",
+            "content": "Nội dung tin đăng",
+            "workflow": "Quy trình tuyển dụng",
+            "analytics": "Phân tích"
+          },
+          "header": {
+            "edit": "Chỉnh sửa",
+            "closeJob": "Đóng tin",
+            "reopenJob": "Mở lại tin",
+            "applicantsCount": "{count} Ứng viên"
+          },
+          "applicantTable": {
+            "name": "Ứng viên",
+            "appliedDate": "Ngày ứng tuyển",
+            "stage": "Vòng",
+            "matchScore": "Điểm AI",
+            "empty": "Chưa có ứng viên",
+            "search": "Tìm kiếm ứng viên...",
+            "allStages": "Tất cả các vòng"
+          },
+          "quickView": {
+            "title": "Xem nhanh ứng viên",
+            "aiSummary": "Tóm tắt AI",
+            "aiInsight": "Phân tích AI",
+            "viewCv": "Xem CV"
+          },
+          "jobContent": {
+            "jobDescription": "Mô tả công việc",
+            "noDescription": "Chưa có mô tả công việc.",
+            "requirements": "Yêu cầu chính",
+            "jobType": "Hình thức",
+            "location": "Địa điểm",
+            "salary": "Mức lương",
+            "jdScore": "Điểm chất lượng JD",
+            "jdScoreDesc": "Đánh giá theo độ rõ ràng, đầy đủ & cấu trúc",
+            "aiSuggestions": "Gợi ý của AI",
+            "suggestion1": "Thêm mức lương cụ thể để tăng tỷ lệ chuyển đổi ~40%.",
+            "suggestion2": "Phân tách yêu cầu thành \"Bắt buộc\" và \"Ưu tiên\".",
+            "suggestion3": "Bổ sung thông tin về hình thức làm việc (remote/hybrid/onsite)."
+          },
+          "workflow": {
+            "description": "Kéo thả ứng viên giữa các vòng để cập nhật tiến độ.",
+            "customizeSteps": "Tuỳ chỉnh vòng tuyển dụng",
+            "addStep": "Thêm vòng",
+            "stepLabel": "Tên vòng (VD: Kiểm tra kỹ thuật)",
+            "cancel": "Hủy",
+            "save": "Lưu thay đổi",
+            "saving": "Đang lưu..."
+          },
+          "status": {
+            "active": "Đang tuyển",
+            "draft": "Bản nháp",
+            "closed": "Đã đóng"
+          },
+          "notFound": "Không tìm thấy tin tuyển dụng",
+          "errorBack": "Quay lại danh sách"
         }
       },
       "applicants": {

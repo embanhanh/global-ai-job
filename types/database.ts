@@ -90,6 +90,7 @@ export type Database = {
           status: string;
           views_count: number;
           requirements: string[] | null;
+          hiring_steps: Json | null;
           created_at: string;
           updated_at: string;
         };
@@ -105,6 +106,7 @@ export type Database = {
           status?: string;
           views_count?: number;
           requirements?: string[] | null;
+          hiring_steps?: Json | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -120,6 +122,7 @@ export type Database = {
           status?: string;
           views_count?: number;
           requirements?: string[] | null;
+          hiring_steps?: Json | null;
           created_at?: string;
           updated_at?: string;
         };
