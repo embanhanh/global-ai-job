@@ -3,7 +3,7 @@ import { JobList } from "@/components/dashboard/recruiter/jobs/job-list";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { Plus, Filter } from "lucide-react";
-import { getJobs } from "@/actions/jobs.actions";
+import { getRecruiterJobs } from "@/services/jobs.service";
 import { SearchInput } from "@/components/dashboard/recruiter/jobs/search-input";
 import { Pagination } from "@/components/shared/pagination";
 
@@ -27,7 +27,7 @@ export default async function JobsPage({
     data: jobs = [],
     error,
     pagination,
-  } = await getJobs({
+  } = await getRecruiterJobs({
     query,
     page: currentPage,
     pageSize: 10,

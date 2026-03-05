@@ -37,7 +37,10 @@ export default async function JobListingPage({
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-fuchsia-600/10 blur-[120px] rounded-full" />
 
       <div className="container mx-auto px-4 relative z-10">
-        <JobSearchHeader initialParams={resolvedSearchParams} />
+        <JobSearchHeader
+          key={JSON.stringify(resolvedSearchParams)}
+          initialParams={resolvedSearchParams}
+        />
 
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Filters Sidebar */}

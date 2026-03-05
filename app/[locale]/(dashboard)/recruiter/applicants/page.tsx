@@ -4,7 +4,8 @@ import { Applicant } from "@/components/dashboard/recruiter/applicants/kanban-ca
 import { Search, Filter, Download } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { getApplicationsByRecruiter } from "@/actions/applications.actions";
+import { getApplicationsByRecruiter } from "@/services/applications.service";
+import { Application } from "@/types/jobs";
 
 export default async function ApplicantsPage({
   params,
@@ -30,18 +31,20 @@ export default async function ApplicantsPage({
   }
 
   // Map database applications to UI format for KanbanBoard
-  const mappedApplicants: Applicant[] = (applications || []).map((app) => ({
-    id: app.id,
-    name: app.profiles?.full_name || "Anonymous",
-    role: app.jobs?.title || "Unknown position",
-    fitScore: app.fit_score || 0,
-    stage: app.stage,
-    appliedDate: app.applied_date
-      ? new Date(app.applied_date).toLocaleDateString()
-      : "-",
-    avatar: app.profiles?.avatar_url ?? undefined,
-    fullData: app,
-  }));
+  const mappedApplicants: Applicant[] = (applications || []).map(
+    (app: Application) => ({
+      id: app.id,
+      name: app.profiles?.full_name || "Anonymous",
+      role: app.jobs?.title || "Unknown position",
+      fitScore: app.fit_score || 0,
+      stage: app.stage,
+      appliedDate: app.applied_date
+        ? new Date(app.applied_date).toLocaleDateString()
+        : "-",
+      avatar: app.profiles?.avatar_url ?? undefined,
+      fullData: app,
+    }),
+  );
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">

@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { JobForm } from "@/components/dashboard/recruiter/jobs/job-form";
 import { ChevronLeft } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { getRecruiterCompany } from "@/services/companies.service";
 
 export default async function NewJobPage({
   params,
@@ -17,6 +18,8 @@ export default async function NewJobPage({
     locale,
     namespace: "Common",
   });
+
+  const companyResult = await getRecruiterCompany();
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -36,7 +39,7 @@ export default async function NewJobPage({
         </div>
       </div>
 
-      <JobForm />
+      <JobForm company={companyResult.data} />
     </div>
   );
 }

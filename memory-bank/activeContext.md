@@ -27,7 +27,17 @@ Dự án đã hoàn thành việc refactor toàn diện các trang công khai (H
   - **Applicants Tab**: Bảng ứng viên chuyên sâu với tìm kiếm (debounced 500ms), lọc theo vòng (Hiring Stages), và phân trang Server-First.
   - **Job Content Tab**: Hiển thị đầy đủ thông tin: Job Type, Location, Salary, Requirements và AI Scoring/Suggestions.
   - **Hiring Workflow**: Kanban Board cho phép kéo thả ứng viên giữa các bước. Cơ chế DND sử dụng `useRef` để theo dõi `initialStage`, đảm bảo cập nhật DB chính xác.
-- **Database & Sync**: Đồng bộ hóa `stage` ứng viên qua Server Actions, trigger `revalidatePath` để giữ dữ liệu FE luôn mới.
+- **Job Application System Refactor**:
+  - **Modular UI**: Split `ApplyJobDialog` into `ApplyForm` to adhere to line-count limits and improve maintainability.
+  - **Clean Architecture**: Moved data fetching from `ApplyJobDialog` (client `useEffect`) to `JobDetailPage` (Server Component) to comply with Server-First rules.
+  - **Independent Storage Model**: Personal information (`full_name`, `email`, `phone`) is now stored directly in the `applications` record during submission.
+  - **Type Management**: Centrally located application schemas and interfaces in `types/applications.ts`.
+  - **i18n & UX**: 100% translated validation/UI strings. Profile data is now pre-fetched on the server for instant dialog population.
+
+- **Auth & Security Simplification (RLS-First)**:
+  - **RLS Reliance**: Removed redundant server-side `auth.getUser()` and manual `user.id` filtering in Server Actions. The system now trusts database-level security boundaries.
+  - **Database Defaults**: Implemented `DEFAULT auth.uid()` for critical foreign keys (`candidate_id` in applications, `recruiter_id` in jobs, `profile_id` in recruiter_companies) to automate ownership assignment.
+  - **Minimal Server Logic**: Server Actions are now more concise, focusing on business logic while Postgres/RLS handles the "who can do what".
 
 ## Next Steps
 
@@ -36,8 +46,6 @@ Dự án đã hoàn thành việc refactor toàn diện các trang công khai (H
 3.  **Real Data Integration**: Kết nối Candidate Dashboard với real database (Applications, Saved Jobs).
 4.  **Social Login**: Tích hợp Google và Github OAuth.
 
-## Active Decisions & Considerations
-
-- **Server-First Pagination**: Sử dụng URL search parameters để quản lý trạng thái trang, giúp hỗ trợ SEO và chia sẻ liên kết tốt hơn.
-- **Reusable Components**: Tách `Pagination` và `SearchInput` ra làm các component dùng chung (`components/shared` và `components/dashboard`) để tái sử dụng cho các module khác (như Talent Search).
-- **Zod Schema Evolution**: Chuyển đổi mảng chuỗi đơn thuần sang mảng đối tượng trong `useFieldArray` để quản lý ID và giá trị tốt hơn trong form React.
+- **RLS-First Security**: Chuyển từ việc kiểm tra Auth thủ công trong code sang tin cậy hoàn toàn vào Row Level Security (RLS) và Database Defaults. Điều này giúp giảm độ phức tạp của Server Actions và đảm bảo bảo mật ở tầng sâu nhất.
+- **Application Info Snapshoting**: Lưu thông tin cá nhân trực tiếp vào bản ghi ứng tuyển (`applications`) thay vì đồng bộ ngược lại Profile. Quyết định này giúp giữ Profile nguyên bản và tăng tính linh hoạt cho ứng viên khi nộp đơn.
+- **Form Schema Centralization**: Di chuyển toàn bộ Zod Schemas liên quan đến form ứng tuyển vào thư mục `types/` để đảm bảo tính tái sử dụng và sạch sẽ cho component UI.

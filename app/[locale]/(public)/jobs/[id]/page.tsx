@@ -4,8 +4,10 @@ import { CompanyCard } from "@/components/jobs/company-card";
 import { JobDetailContent } from "@/components/jobs/detail-content";
 import { getJobById } from "@/services/jobs.service";
 import { notFound } from "next/navigation";
+import { hasAppliedToJob } from "@/services/applications.service";
 import { formatDistanceToNow } from "date-fns";
 import { vi, enUS } from "date-fns/locale";
+import { getProfile } from "@/services/profiles.service";
 
 interface JobDetailPageProps {
   params: Promise<{
@@ -31,6 +33,17 @@ export async function generateMetadata({
 export default async function JobDetailPage({ params }: JobDetailPageProps) {
   const { id, locale } = await params;
   const job = await getJobById(id);
+  const hasApplied = await hasAppliedToJob(id);
+  const profileResult = await getProfile();
+  const profileData =
+    profileResult.success && profileResult.data
+      ? {
+          fullName: profileResult.data.full_name || "",
+          email: profileResult.data.email || "",
+          phone: profileResult.data.phone || "",
+          resumeUrl: profileResult.data.resume_url || null,
+        }
+      : null;
 
   if (!job) {
     notFound();
@@ -55,10 +68,16 @@ export default async function JobDetailPage({ params }: JobDetailPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-background pb-20">
+    <div className="min-h-screen bg-background pb-20 pt-20 space-y-4">
       <JobDetailHeader
-        title={formattedJob.title}
-        company={formattedJob.company}
+        jobId={id}
+        title={job.title}
+        company={{
+          name: job.company.name,
+          logo_url: job.company.logo_url,
+        }}
+        hasApplied={hasApplied}
+        profileData={profileData}
       />
 
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-12">

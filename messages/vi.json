@@ -93,6 +93,7 @@
         "placeholder": "Tìm kiếm công việc...",
         "location": "Địa điểm...",
         "button": "Tìm kiếm",
+        "popular": "Phổ biến:",
         "noResults": "Không tìm thấy công việc nào phù hợp với tiêu chí của bạn."
       },
       "sort": {
@@ -103,9 +104,46 @@
       },
       "stats": "Đang hiển thị {count} công việc",
       "detail": {
+        "backToList": "Quay lại danh sách",
+        "location": "Hồ Chí Minh, Việt Nam",
         "share": "Chia sẻ",
         "applyNow": "Ứng tuyển ngay",
+        "applied": "Đã ứng tuyển",
         "viewDetails": "Xem chi tiết",
+        "notifications": {
+          "success": "Ứng tuyển thành công!",
+          "error": "Có lỗi xảy ra khi ứng tuyển. Vui lòng thử lại.",
+          "alreadyApplied": "Bạn đã ứng tuyển công việc này rồi.",
+          "candidateOnly": "Chỉ ứng viên mới có thể ứng tuyển.",
+          "loginRequired": "Vui lòng đăng nhập để ứng tuyển."
+        },
+        "applyDialog": {
+          "title": "Ứng tuyển: {title}",
+          "description": "Vui lòng điền thông tin bên dưới để gửi hồ sơ của bạn cho nhà tuyển dụng.",
+          "fullName": "Họ và tên",
+          "fullNamePlaceholder": "Nhập họ và tên của bạn",
+          "fullNameError": "Tên phải có ít nhất 2 ký tự",
+          "email": "Email",
+          "emailPlaceholder": "Nhập địa chỉ email của bạn",
+          "emailError": "Địa chỉ email không hợp lệ",
+          "phone": "Số điện thoại",
+          "phonePlaceholder": "Nhập số điện thoại của bạn",
+          "phoneError": "Số điện thoại phải có ít nhất 10 số",
+          "validation": {
+            "fullNameMin": "Tên phải có ít nhất 2 ký tự",
+            "emailInvalid": "Địa chỉ email không hợp lệ",
+            "phoneMin": "Số điện thoại phải có ít nhất 10 số"
+          },
+          "resume": "Hồ sơ ứng tuyển (CV)",
+          "useCurrentResume": "Sử dụng CV hiện tại",
+          "uploadNewResume": "Tải lên CV mới",
+          "coverLetter": "Cover Letter / Trả lời (Tùy chọn)",
+          "coverLetterPlaceholder": "Giới thiệu ngắn gọn về bản thân và lý do bạn phù hợp với vị trí này...",
+          "submit": "Nộp đơn ứng tuyển",
+          "cancel": "Hủy",
+          "uploading": "Đang tải CV lên...",
+          "applying": "Đang gửi đơn..."
+        },
         "description": "Mô tả công việc",
         "requirements": "Yêu cầu công việc",
         "benefits": "Phúc lợi",

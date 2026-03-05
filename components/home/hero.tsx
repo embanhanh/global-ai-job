@@ -5,9 +5,29 @@ import { Search, MapPin, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { useRouter } from "@/i18n/navigation";
 
 export function HomeHero() {
   const t = useTranslations("Landing.hero");
+  const router = useRouter();
+  const [q, setQ] = useState("");
+  const [location, setLocation] = useState("");
+
+  const handleSearch = () => {
+    const params = new URLSearchParams();
+    if (q) params.set("q", q);
+    if (location) params.set("location", location);
+
+    const queryString = params.toString();
+    router.push(`/jobs${queryString ? `?${queryString}` : ""}`);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
 
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center pt-32 pb-20 px-6">
@@ -52,6 +72,9 @@ export function HomeHero() {
               <div className="relative flex-1 w-full flex items-center px-4">
                 <Search className="w-5 h-5 text-white/40 absolute left-4" />
                 <Input
+                  value={q}
+                  onChange={(e) => setQ(e.target.value)}
+                  onKeyDown={handleKeyDown}
                   placeholder={t("searchPlaceholder")}
                   className="bg-transparent border-none text-white placeholder:text-white/30 h-12 pl-10 focus-visible:ring-0"
                 />
@@ -60,11 +83,17 @@ export function HomeHero() {
               <div className="relative flex-1 w-full flex items-center px-4">
                 <MapPin className="w-5 h-5 text-white/40 absolute left-4" />
                 <Input
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  onKeyDown={handleKeyDown}
                   placeholder={t("locationPlaceholder")}
                   className="bg-transparent border-none text-white placeholder:text-white/30 h-12 pl-10 focus-visible:ring-0"
                 />
               </div>
-              <Button className="w-full md:w-auto h-12 px-8 rounded-full bg-violet-600 hover:bg-violet-500 text-white font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(139,92,246,0.3)]">
+              <Button
+                onClick={handleSearch}
+                className="w-full md:w-auto h-12 px-8 rounded-full bg-violet-600 hover:bg-violet-500 text-white font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(139,92,246,0.3)]"
+              >
                 {t("searchButton")}
               </Button>
             </div>
@@ -77,6 +106,7 @@ export function HomeHero() {
               (tag) => (
                 <button
                   key={tag}
+                  onClick={() => router.push(`/jobs?q=${tag}`)}
                   className="px-3 py-1 rounded-full border border-white/5 bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all text-white/60 hover:text-white"
                 >
                   {tag}

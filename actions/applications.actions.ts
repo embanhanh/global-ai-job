@@ -1,99 +1,9 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
-import { revalidatePath } from "next/cache";
-import { Application } from "@/types/jobs";
-
-export async function getApplicationsByRecruiter() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return { success: false, error: "Not authenticated" };
-  }
-
-  const { data, error } = await supabase
-    .from("applications")
-    .select(
-      `
-      *,
-      profiles (full_name, avatar_url, email),
-      jobs!inner (title, recruiter_id)
-    `,
-    )
-    .eq("jobs.recruiter_id", user.id)
-    .order("created_at", { ascending: false });
-
-  if (error) {
-    return { success: false, error: error.message };
-  }
-
-  return { success: true, data: data as Application[] };
-}
-
-export async function getApplicationsByJobId(
-  jobId: string,
-  options: {
-    query?: string;
-    stage?: string;
-    page?: number;
-    pageSize?: number;
-  } = {},
-) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return { success: false, error: "Not authenticated" };
-  }
-
-  const { query = "", stage = "all", page = 1, pageSize = 10 } = options;
-
-  let dbQuery = supabase
-    .from("applications")
-    .select(
-      `
-      *,
-      profiles!inner (full_name, avatar_url, email),
-      jobs!inner (title, recruiter_id)
-    `,
-      { count: "exact" },
-    )
-    .eq("job_id", jobId)
-    .eq("jobs.recruiter_id", user.id);
-
-  // Apply filters
-  if (query) {
-    dbQuery = dbQuery.ilike("profiles.full_name", `%${query}%`);
-  }
-
-  if (stage && stage !== "all") {
-    dbQuery = dbQuery.eq("stage", stage);
-  }
-
-  // Handle pagination
-  const from = (page - 1) * pageSize;
-  const to = from + pageSize - 1;
-
-  const { data, error, count } = await dbQuery
-    .order("created_at", { ascending: false })
-    .range(from, to);
-
-  if (error) {
-    return { success: false, error: error.message };
-  }
-
-  return {
-    success: true,
-    data: data as Application[],
-    totalCount: count ?? 0,
-    totalPages: Math.ceil((count ?? 0) / pageSize),
-  };
-}
+import { UserRole } from "@/types/enums";
+import { getProfile } from "@/services/profiles.service";
+import { hasAppliedToJob } from "@/services/applications.service";
 
 export async function updateApplicationStage(id: string, stage: string) {
   const supabase = await createClient();
@@ -116,7 +26,66 @@ export async function updateApplicationStage(id: string, stage: string) {
     return { success: false, error: error.message };
   }
 
-  revalidatePath("/[locale]/recruiter/applicants", "page");
-  revalidatePath("/[locale]/recruiter/jobs/[id]", "page");
   return { success: true, data };
+}
+
+export async function applyToJob(
+  jobId: string,
+  data?: {
+    fullName?: string;
+    email?: string;
+    phone?: string;
+    resumeUrl?: string;
+    coverLetter?: string;
+  },
+) {
+  try {
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      return { success: false, error: "loginRequired" };
+    }
+
+    // Check if user is a candidate using service
+    const profileResult = await getProfile();
+    if (!profileResult.success || !profileResult.data) {
+      return { success: false, error: "candidateOnly" };
+    }
+
+    const profile = profileResult.data;
+
+    if (profile.role !== UserRole.CANDIDATE) {
+      return { success: false, error: "candidateOnly" };
+    }
+
+    const resumeUrl = data?.resumeUrl || profile.resume_url || "";
+
+    // Check if already applied using service
+    const alreadyApplied = await hasAppliedToJob(jobId);
+    if (alreadyApplied) {
+      return { success: false, error: "alreadyApplied" };
+    }
+
+    // Create application with specific personal info for this submission
+    const { error: insertError } = await supabase.from("applications").insert({
+      job_id: jobId,
+      resume_url: resumeUrl,
+      cover_letter: data?.coverLetter || null,
+      full_name: data?.fullName || profile.full_name || "",
+      email: data?.email || user.email || "",
+      phone: data?.phone || profile.phone || "",
+      stage: "sourcing",
+      ai_status: "pending",
+    });
+
+    if (insertError) throw insertError;
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error applying to job:", error);
+    return { success: false, error: "error" };
+  }
 }

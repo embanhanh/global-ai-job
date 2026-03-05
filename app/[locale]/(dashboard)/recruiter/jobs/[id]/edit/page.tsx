@@ -1,8 +1,9 @@
 import { getTranslations } from "next-intl/server";
-import { getJobById } from "@/actions/jobs.actions";
+import { getJobById } from "@/services/jobs.service";
 import { JobForm } from "@/components/dashboard/recruiter/jobs/job-form";
 import { JobFormValues } from "@/types/jobs";
 import { notFound } from "next/navigation";
+import { getRecruiterCompany } from "@/services/companies.service";
 
 interface EditJobPageProps {
   params: Promise<{
@@ -15,9 +16,12 @@ export default async function EditJobPage({ params }: EditJobPageProps) {
   const { id } = await params;
   const t = await getTranslations("Dashboard.recruiter.jobs.form");
 
-  const { data: job, success } = await getJobById(id);
+  const [job, companyResult] = await Promise.all([
+    getJobById(id),
+    getRecruiterCompany(),
+  ]);
 
-  if (!success || !job) {
+  if (!job) {
     notFound();
   }
 
@@ -42,7 +46,11 @@ export default async function EditJobPage({ params }: EditJobPageProps) {
         </p>
       </div>
 
-      <JobForm initialData={initialData} jobId={id} />
+      <JobForm
+        initialData={initialData}
+        jobId={id}
+        company={companyResult.data}
+      />
     </div>
   );
 }

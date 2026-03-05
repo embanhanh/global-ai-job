@@ -27,11 +27,12 @@
 - [x] Recruiter Dashboard (Overview, Jobs, Applicants, Search) - UI & Database.
 - [x] RBAC System (RoleGuard, Role-aware Layouts).
 - [x] i18n Completion for Dashboard modules.
-- [ ] Resume Upload & AI Markdown Parser (Real implementation).
+- [x] Resume Upload & AI Markdown Parser (Real implementation).
 - [x] Job Posting & Editing Logic (UI & AI Assistant).
 - [x] Search & Pagination for Jobs (Server-First & Modular).
 - [x] Refactor Public Components (`LanguageSwitcher`, `Hero`, `JobCard`) for Rule Compliance.
 - [x] **Job Detail Command Center** (Applicants, Content, Workflow).
+- [x] **Job Application Flow**: Hoàn thiện form ứng tuyển, lưu trữ thông tin độc lập và gán quyền tự động qua RLS.
 - [ ] Job Analytics & Reporting (Next Focus).
 
 ## Current Status
@@ -40,7 +41,7 @@
 - **Public Jobs**: Đã hoàn thiện refactor theo chuẩn code sạch, i18n và type-safe.
 - **Recruiter Dashboard**: Đã hoàn thiện chức năng CRUD Job và **Job Detail Command Center** (với Applicants Table & Kanban Board).
 - **Tính năng xác thực**: Đã hoạt động (Sử dụng Supabase Auth).
-- **Backend**: Supabase client đã config, Auth actions đã tích hợp, Schema đồng bộ.
+- **Backend**: Supabase client đã config, Auth actions đã tích hợp, Schema đồng bộ với RLS policies và database defaults.
 
 ## Known Issues
 

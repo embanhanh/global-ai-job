@@ -12,8 +12,6 @@ import { JobRequirementsField } from "./form/job-requirements-field";
 import { JobFormActions } from "./form/job-form-actions";
 import { JobHiringStepsField } from "./form/job-hiring-steps-field";
 import { useRouter } from "@/i18n/navigation";
-import { useEffect, useState } from "react";
-import { getRecruiterCompany } from "@/actions/companies.actions";
 import { createJob, updateJob } from "@/actions/jobs.actions";
 import {
   Company,
@@ -25,22 +23,12 @@ import {
 interface JobFormProps {
   initialData?: JobFormValues;
   jobId?: string;
+  company: Company | null;
 }
 
-export function JobForm({ initialData, jobId }: JobFormProps) {
+export function JobForm({ initialData, jobId, company }: JobFormProps) {
   const t = useTranslations("Dashboard.recruiter.jobs.form");
   const router = useRouter();
-  const [company, setCompany] = useState<Company | null>(null);
-
-  useEffect(() => {
-    async function loadCompany() {
-      const { data, success } = await getRecruiterCompany();
-      if (success && data) {
-        setCompany(data);
-      }
-    }
-    loadCompany();
-  }, []);
 
   const form = useForm<JobFormValues>({
     resolver: zodResolver(jobFormSchema),

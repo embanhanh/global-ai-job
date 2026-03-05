@@ -29,12 +29,13 @@
 - **AI Interaction**: Toàn bộ CV được parse sang Markdown giúp AI (Vercel AI SDK) xử lý context tốt hơn.
 - **Database Architecture**:
   - Sử dụng Supabase làm DB chính với PostgreSQL.
-  - Áp dụng Row Level Security (RLS) triệt để để phân quyền dữ liệu giữa Recruiter và Candidate.
+  - **RLS-First Strategy**: Áp dụng Row Level Security (RLS) triệt để. Các quan hệ sở hữu được xác thực trực tiếp tại tầng database thông qua các chính sách (Policies), giúp tối giản hóa logic trong Server Actions.
+  - **Automated Ownership**: Sử dụng `DEFAULT auth.uid()` cho các trường `candidate_id`, `recruiter_id`, và `profile_id` để tự động hóa việc gán quyền sở hữu khi tạo bản ghi mới.
+  - **Application Snapshotting**: Hệ thống lưu bản sao thông tin cá nhân (`full_name`, `email`, `phone`) tại thời điểm ứng tuyển vào bảng `applications`. Điều này tách biệt hồ sơ ứng tuyển với Profile người dùng, cho phép thay đổi thông tin liên lạc mà không ảnh hưởng đến hồ sơ chính.
   - Sử dụng bảng trung gian `recruiter_companies` để quản lý quyền truy cập của nhà tuyển dụng vào dữ liệu công ty.
 - **Role-Based Access Control (RBAC) Pattern**:
   - **UserRole Enum**: Định nghĩa tập trung các quyền (`ADMIN`, `RECRUITER`, `CANDIDATE`) trong `types/enums.ts`.
   - **RoleGuard Component**: Server Component (`components/shared/role-guard.tsx`) dùng để bảo vệ các phân đoạn UI nhạy cảm dựa trên role của session hiện tại.
-  - **Server-Side Verification**: Luôn kiểm tra lại role trong Server Actions trước khi thực hiện mutation database.
 - **Layout Isolation Pattern**:
   - **Route Group Layouts**: Tách biệt hoàn toàn layout cho từng role (ví dụ: `app/[locale]/(dashboard)/recruiter/layout.tsx` và `app/[locale]/(dashboard)/candidate/layout.tsx`).
   - **Clean Shared Layout**: Layout gốc `(dashboard)/layout.tsx` chỉ đóng vai trò là một pass-through wrapper, tránh rò rỉ UI (như header của nhà tuyển dụng hiện trên trang của ứng viên).
