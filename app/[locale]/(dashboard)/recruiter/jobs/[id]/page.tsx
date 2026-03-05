@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { getJobById } from "@/actions/jobs.actions";
-import { getApplicationsByJobId } from "@/actions/applications.actions";
+import { getRecruiterJobById } from "@/services/jobs.service";
+import { getApplicationsByJobId } from "@/services/applications.service";
 import { DEFAULT_HIRING_STEPS, HiringStep, Application } from "@/types/jobs";
 import { JobDetailHeader } from "@/components/jobs/detail/job-detail-header";
 import { JobContentTab } from "@/components/jobs/detail/job-content-tab";
@@ -35,7 +35,7 @@ export default async function JobDetailPage({
   });
 
   const [jobResult, appsResult] = await Promise.all([
-    getJobById(id),
+    getRecruiterJobById(id),
     getApplicationsByJobId(id, {
       query,
       stage,

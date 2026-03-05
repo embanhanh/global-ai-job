@@ -122,7 +122,7 @@ export default async function ApplicationsPage() {
             {mockApplications.map((app) => (
               <TableRow
                 key={app.id}
-                className="border-white/5 hover:bg-white/[0.02] transition-colors group"
+                className="border-white/5 hover:bg-white/2 transition-colors group"
               >
                 <TableCell className="font-medium text-white">
                   {app.job_title}

@@ -1,4 +1,4 @@
-import { getCurrentRole } from "@/actions/auth";
+import { getCurrentRole } from "@/services/profiles.service";
 import { UserRole } from "@/types/enums";
 import React from "react";
 

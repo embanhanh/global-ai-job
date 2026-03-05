@@ -93,6 +93,7 @@
         "placeholder": "Search jobs...",
         "location": "Location...",
         "button": "Search",
+        "popular": "Popular:",
         "noResults": "No jobs found matching your criteria."
       },
       "sort": {
@@ -103,19 +104,49 @@
       },
       "stats": "Showing {count} jobs",
       "detail": {
+        "backToList": "Back to listing",
+        "location": "Ho Chi Minh City, Vietnam",
         "share": "Share",
         "applyNow": "Apply Now",
+        "applied": "Applied",
         "viewDetails": "View Details",
         "description": "Description",
         "requirements": "Requirements",
         "benefits": "Benefits",
         "seniorLevel": "Senior Level",
-        "company": {
-          "title": "Company Info",
-          "website": "Website",
-          "employees": "Employees",
-          "viewProfile": "View Company Profile",
-          "visitSite": "Visit site"
+        "notifications": {
+          "success": "Application successful!",
+          "error": "An error occurred during application. Please try again.",
+          "alreadyApplied": "You have already applied for this job.",
+          "candidateOnly": "Only candidates can apply.",
+          "loginRequired": "Please login to apply."
+        },
+        "applyDialog": {
+          "title": "Apply for: {title}",
+          "description": "Please fill in the information below to send your profile to the employer.",
+          "fullName": "Full Name",
+          "fullNamePlaceholder": "Enter your full name",
+          "fullNameError": "Full name must be at least 2 characters",
+          "email": "Email",
+          "emailPlaceholder": "Enter your email address",
+          "emailError": "Invalid email address",
+          "phone": "Phone Number",
+          "phonePlaceholder": "Enter your phone number",
+          "phoneError": "Phone number must be at least 10 characters",
+          "resume": "Resume (CV)",
+          "validation": {
+            "fullNameMin": "Full name must be at least 2 characters",
+            "emailInvalid": "Invalid email address",
+            "phoneMin": "Phone number must be at least 10 characters"
+          },
+          "useCurrentResume": "Use current resume",
+          "uploadNewResume": "Upload new resume",
+          "coverLetter": "Cover Letter / Answer (Optional)",
+          "coverLetterPlaceholder": "Briefly introduce yourself and why you're a good fit...",
+          "submit": "Submit Application",
+          "cancel": "Cancel",
+          "uploading": "Uploading resume...",
+          "applying": "Applying..."
         }
       }
     }

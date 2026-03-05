@@ -23,6 +23,10 @@ export type Database = {
           role: string;
           created_at: string;
           updated_at: string | null;
+          phone: string | null;
+          resume_url: string | null;
+          bio: string | null;
+          job_title: string | null;
         };
         Insert: {
           avatar_url?: string | null;
@@ -32,6 +36,10 @@ export type Database = {
           role: string;
           created_at?: string;
           updated_at?: string | null;
+          phone?: string | null;
+          resume_url?: string | null;
+          bio?: string | null;
+          job_title?: string | null;
         };
         Update: {
           avatar_url?: string | null;
@@ -41,6 +49,10 @@ export type Database = {
           role?: string;
           created_at?: string;
           updated_at?: string | null;
+          phone?: string | null;
+          resume_url?: string | null;
+          bio?: string | null;
+          job_title?: string | null;
         };
         Relationships: [];
       };
@@ -167,6 +179,10 @@ export type Database = {
           created_at: string;
           applied_date: string;
           updated_at: string;
+          full_name: string | null;
+          email: string | null;
+          phone: string | null;
+          cover_letter: string | null;
         };
         Insert: {
           id?: string;
@@ -182,6 +198,10 @@ export type Database = {
           created_at?: string;
           applied_date?: string;
           updated_at?: string;
+          full_name?: string | null;
+          email?: string | null;
+          phone?: string | null;
+          cover_letter?: string | null;
         };
         Update: {
           id?: string;

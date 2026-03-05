@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { UserNav } from "@/components/shared/user-nav";
 import { getTranslations } from "next-intl/server";
-import { getCurrentRole } from "@/actions/auth";
+import { getCurrentRole } from "@/services/profiles.service";
 import { UserRole } from "@/types/enums";
 
 interface DashboardHeaderProps {
