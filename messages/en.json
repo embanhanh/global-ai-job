@@ -20,7 +20,12 @@
     "reset": "Reset",
     "save": "Save",
     "allPositions": "All positions",
-    "noApplicants": "No applicants"
+    "noApplicants": "No applicants",
+    "language": {
+      "toggle": "Toggle language",
+      "vi": "Vietnamese",
+      "en": "English"
+    }
   },
   "Errors": {
     "invalidEmail": "Invalid email address",
@@ -33,17 +38,21 @@
   },
   "Landing": {
     "hero": {
-      "badge": "Next-gen AI Integration",
-      "title": "Find Jobs",
-      "titleHighlight": "Smarter",
-      "titleSuffix": "With AI",
-      "description": "A multilingual AI-powered recruitment platform connecting talented candidates with top employers. Automatic CV analysis, intelligent job recommendations.",
+      "badge": "The AI-Powered Career Revolution",
+      "title": "Find your next",
+      "titleHighlight": "AI-Powered",
+      "titleSuffix": "career",
+      "description": "Connect with the world's leading AI companies. Elevate your career with the most cutting-edge technical, design, and product opportunities.",
       "ctaPrimary": "Find Jobs Now",
       "ctaSecondary": "Post a Job",
-      "trustedBy": "Trusted by"
+      "trustedBy": "Trusted by",
+      "searchPlaceholder": "Job title, keywords, or company...",
+      "locationPlaceholder": "Location or Remote",
+      "searchButton": "Search",
+      "popular": "Popular:"
     },
     "stats": {
-      "jobs": "Jobs",
+      "jobs": "AI Jobs",
       "companies": "Companies",
       "candidates": "Candidates",
       "hiredMonthly": "Hired/month"
@@ -69,10 +78,52 @@
       "title": "Ready to Get Started?",
       "description": "Join thousands of candidates and recruiters who trust Global AI Job Board.",
       "button": "Register for Free"
+    },
+    "jobs": {
+      "title": "Search AI Jobs",
+      "subtitle": "Discover thousands of opportunities in Artificial Intelligence",
+      "filters": {
+        "title": "Filters",
+        "reset": "Reset All",
+        "type": "Job Type",
+        "level": "Level",
+        "category": "Category"
+      },
+      "search": {
+        "placeholder": "Search jobs...",
+        "location": "Location...",
+        "button": "Search",
+        "noResults": "No jobs found matching your criteria."
+      },
+      "sort": {
+        "label": "Sort by",
+        "newest": "Newest first",
+        "salary": "Salary: High to Low",
+        "relevant": "Most relevant"
+      },
+      "stats": "Showing {count} jobs",
+      "detail": {
+        "share": "Share",
+        "applyNow": "Apply Now",
+        "viewDetails": "View Details",
+        "description": "Description",
+        "requirements": "Requirements",
+        "benefits": "Benefits",
+        "seniorLevel": "Senior Level",
+        "company": {
+          "title": "Company Info",
+          "website": "Website",
+          "employees": "Employees",
+          "viewProfile": "View Company Profile",
+          "visitSite": "Visit site"
+        }
+      }
     }
   },
   "Nav": {
     "findJobs": "Find Jobs",
+    "companies": "Companies",
+    "pricing": "Pricing",
     "forRecruiters": "For Recruiters",
     "about": "About",
     "login": "Login",
@@ -82,6 +133,13 @@
     "logout": "Log out",
     "loggingOut": "Logging out...",
     "logoutSuccess": "Logged out successfully"
+  },
+  "Footer": {
+    "description": "The world's leading AI recruitment platform, connecting talent with the future.",
+    "product": "Product",
+    "company": "Company",
+    "legal": "Legal",
+    "rights": "All rights reserved by Global AI Job Board."
   },
   "Auth": {
     "login": {
@@ -142,7 +200,8 @@
     }
   },
   "Dashboard": {
-    "headerTitle": "Recruiter Dashboard",
+    "headerTitleCandidate": "Candidate Dashboard",
+    "headerTitleRecruiter": "Recruiter Dashboard",
     "sidebar": {
       "overview": "Overview",
       "jobs": "Job Postings",
@@ -375,6 +434,117 @@
         "invite": "Invite to apply",
         "placeholder": "Search candidates with AI (e.g., Find React engineers with 3 years experience...)",
         "submit": "Search"
+      }
+    },
+    "candidate": {
+      "sidebar": {
+        "overview": "Overview",
+        "myApplications": "My Applications",
+        "profile": "My Profile",
+        "savedJobs": "Saved Jobs",
+        "settings": "Settings",
+        "profileCompletion": "Profile Completion"
+      },
+      "overview": {
+        "title": "Candidate Overview",
+        "welcome": "Ready for your next AI challenge?",
+        "stats": {
+          "totalApplications": "Total Applications",
+          "activeInterviews": "Active Interviews",
+          "avgMatchScore": "Avg. AI Match"
+        },
+        "recommendations": {
+          "title": "Recommended for You",
+          "viewAll": "View all",
+          "match": "{score}% Match"
+        },
+        "activity": {
+          "title": "Recent Activity",
+          "applied": "Applied to {job} at {company}",
+          "interview": "Interview scheduled for {job}",
+          "statusChange": "Application status for {job} updated to {status}"
+        }
+      },
+      "profile": {
+        "title": "Smart Profile",
+        "cvParser": {
+          "title": "AI CV Parser",
+          "description": "Drop your PDF CV here to auto-fill your profile with AI.",
+          "scanning": "Scanning with AI...",
+          "extracting": "Our AI is extracting your data...",
+          "dropActive": "Release to drop",
+          "success": "CV Parsed Successfully!",
+          "error": "Failed to parse CV. Please try again."
+        },
+        "aiInfo": {
+          "title": "AI Matching Power",
+          "description": "Our AI analyzes your CV to match your skills with top-tier AI and tech roles. Keep your profile updated to increase your visibility to recruiters."
+        },
+        "form": {
+          "personalInfo": "Personal Information",
+          "experience": "Work Experience",
+          "education": "Education",
+          "skills": "Key Skills",
+          "labels": {
+            "fullName": "Full Name",
+            "email": "Email Address",
+            "phone": "Phone Number",
+            "bio": "Professional Bio",
+            "jobTitle": "Target Job Title",
+            "company": "Company",
+            "period": "Period",
+            "school": "School/University",
+            "degree": "Degree"
+          },
+          "submit": "Save Profile"
+        }
+      },
+      "applications": {
+        "title": "My Applications",
+        "table": {
+          "job": "Job Title",
+          "company": "Company",
+          "date": "Applied Date",
+          "status": "Status",
+          "feedback": "View Feedback",
+          "actions": {
+            "viewDetail": "View Job Detail"
+          }
+        },
+        "status": {
+          "applied": "Applied",
+          "inReview": "In Review",
+          "interviewing": "Interviewing",
+          "offered": "Offered",
+          "rejected": "Rejected"
+        }
+      },
+      "savedJobs": {
+        "title": "Saved Jobs",
+        "empty": "You haven't saved any jobs yet.",
+        "unsave": "Unsave"
+      },
+      "settings": {
+        "title": "Settings",
+        "account": {
+          "title": "Account Settings",
+          "description": "Manage your account email and security.",
+          "changeEmail": "Change Email",
+          "changePassword": "Change Password"
+        },
+        "notifications": {
+          "title": "Notifications",
+          "description": "Configure how you receive alerts.",
+          "emailNotifications": "Email Notifications",
+          "pushNotifications": "Push Notifications"
+        },
+        "privacy": {
+          "title": "Privacy & Security",
+          "description": "Control your data and visibility.",
+          "publicProfile": "Public Profile",
+          "showExperience": "Show Experience"
+        },
+        "save": "Save changes"
       }
     }
   }

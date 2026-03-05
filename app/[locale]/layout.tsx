@@ -51,18 +51,17 @@ export function generateStaticParams() {
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
 
-  // Ensure that the incoming `locale` is valid
   if (!routing.locales.includes(locale as "vi" | "en")) {
     notFound();
   }
 
-  // Providing all messages to the client
-  // side is the easiest way to get started
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased`}>
+    <html lang={locale} className="dark" suppressHydrationWarning>
+      <body
+        className={`${inter.variable} font-sans antialiased bg-background text-foreground`}
+      >
         <NextIntlClientProvider messages={messages}>
           {children}
           <Toaster position="top-right" richColors />

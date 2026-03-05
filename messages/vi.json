@@ -20,7 +20,12 @@
     "reset": "Đặt lại",
     "save": "Lưu",
     "allPositions": "Tất cả vị trí",
-    "noApplicants": "Chưa có ứng viên"
+    "noApplicants": "Chưa có ứng viên",
+    "language": {
+      "toggle": "Chuyển đổi ngôn ngữ",
+      "vi": "Tiếng Việt",
+      "en": "English"
+    }
   },
   "Errors": {
     "invalidEmail": "Địa chỉ email không hợp lệ",
@@ -33,17 +38,21 @@
   },
   "Landing": {
     "hero": {
-      "badge": "Tích hợp AI thế hệ mới",
-      "title": "Tìm Việc Làm",
-      "titleHighlight": "Thông Minh Hơn",
-      "titleSuffix": "Với AI",
-      "description": "Nền tảng tuyển dụng đa ngôn ngữ tích hợp AI giúp kết nối ứng viên tài năng với nhà tuyển dụng hàng đầu. Phân tích CV tự động, gợi ý việc làm phù hợp.",
+      "badge": "Cuộc cách mạng Công việc được thúc đẩy bởi AI",
+      "title": "Tìm kiếm sự nghiệp",
+      "titleHighlight": "Được thúc đẩy bởi AI",
+      "titleSuffix": "Tiếp theo của bạn",
+      "description": "Kết nối với các công ty AI hàng đầu thế giới. Nâng tầm sự nghiệp của bạn với các cơ hội kỹ thuật, thiết kế và sản phẩm tiên tiến nhất.",
       "ctaPrimary": "Tìm Việc Ngay",
       "ctaSecondary": "Đăng Tin Tuyển Dụng",
-      "trustedBy": "Được tin dùng bởi"
+      "trustedBy": "Được tin dùng bởi",
+      "searchPlaceholder": "Tiêu đề công việc, từ khóa hoặc công ty...",
+      "locationPlaceholder": "Địa điểm hoặc Làm từ xa",
+      "searchButton": "Tìm kiếm",
+      "popular": "Phổ biến:"
     },
     "stats": {
-      "jobs": "Việc làm",
+      "jobs": "Công việc AI",
       "companies": "Công ty",
       "candidates": "Ứng viên",
       "hiredMonthly": "Được tuyển/tháng"
@@ -69,10 +78,52 @@
       "title": "Sẵn Sàng Bắt Đầu?",
       "description": "Tham gia cùng hàng ngàn ứng viên và nhà tuyển dụng đã tin dùng Global AI Job Board.",
       "button": "Đăng Ký Miễn Phí"
+    },
+    "jobs": {
+      "title": "Tìm kiếm công việc AI",
+      "subtitle": "Khám phá hàng ngàn cơ hội trong lĩnh vực Trí tuệ nhân tạo",
+      "filters": {
+        "title": "Bộ lọc",
+        "reset": "Đặt lại",
+        "type": "Loại hình",
+        "level": "Cấp bậc",
+        "category": "Lĩnh vực"
+      },
+      "search": {
+        "placeholder": "Tìm kiếm công việc...",
+        "location": "Địa điểm...",
+        "button": "Tìm kiếm",
+        "noResults": "Không tìm thấy công việc nào phù hợp với tiêu chí của bạn."
+      },
+      "sort": {
+        "label": "Sắp xếp theo",
+        "newest": "Mới nhất",
+        "salary": "Lương: Cao đến thấp",
+        "relevant": "Phù hợp nhất"
+      },
+      "stats": "Đang hiển thị {count} công việc",
+      "detail": {
+        "share": "Chia sẻ",
+        "applyNow": "Ứng tuyển ngay",
+        "viewDetails": "Xem chi tiết",
+        "description": "Mô tả công việc",
+        "requirements": "Yêu cầu công việc",
+        "benefits": "Phúc lợi",
+        "seniorLevel": "Cấp bậc Senior",
+        "company": {
+          "title": "Thông tin công ty",
+          "website": "Trang web",
+          "employees": "Nhân viên",
+          "viewProfile": "Xem hồ sơ công ty",
+          "visitSite": "Ghé thăm"
+        }
+      }
     }
   },
   "Nav": {
     "findJobs": "Tìm Việc Làm",
+    "companies": "Công Ty",
+    "pricing": "Bảng Giá",
     "forRecruiters": "Nhà Tuyển Dụng",
     "about": "Giới Thiệu",
     "login": "Đăng nhập",
@@ -82,6 +133,13 @@
     "logout": "Đăng xuất",
     "loggingOut": "Đang đăng xuất...",
     "logoutSuccess": "Đăng xuất thành công"
+  },
+  "Footer": {
+    "description": "Nền tảng tuyển dụng AI hàng đầu thế giới, kết nối tài năng với tương lai.",
+    "product": "Sản phẩm",
+    "company": "Công ty",
+    "legal": "Pháp lý",
+    "rights": "Bản quyền thuộc về Global AI Job Board."
   },
   "Auth": {
     "login": {
@@ -142,7 +200,8 @@
     }
   },
   "Dashboard": {
-    "headerTitle": "Bảng điều khiển Nhà tuyển dụng",
+    "headerTitleCandidate": "Bảng điều khiển Ứng viên",
+    "headerTitleRecruiter": "Bảng điều khiển Nhà tuyển dụng",
     "sidebar": {
       "overview": "Tổng quan",
       "jobs": "Tin tuyển dụng",
@@ -376,6 +435,117 @@
         "invite": "Mời ứng tuyển",
         "placeholder": "Tìm kiếm ứng viên bằng AI (Ví dụ: Tìm kĩ sư React có 3 năm kinh nghiệm...)",
         "submit": "Tìm kiếm"
+      }
+    },
+    "candidate": {
+      "sidebar": {
+        "overview": "Tổng quan",
+        "myApplications": "Đơn ứng tuyển",
+        "profile": "Hồ sơ cá nhân",
+        "savedJobs": "Việc làm đã lưu",
+        "settings": "Cài đặt",
+        "profileCompletion": "Hoàn thiện hồ sơ"
+      },
+      "overview": {
+        "title": "Tổng quan ứng viên",
+        "welcome": "Sẵn sàng cho thử thách AI tiếp theo?",
+        "stats": {
+          "totalApplications": "Tổng đơn ứng tuyển",
+          "activeInterviews": "Lịch phỏng vấn",
+          "avgMatchScore": "Điểm khớp AI TB"
+        },
+        "recommendations": {
+          "title": "Gợi ý dành cho bạn",
+          "viewAll": "Xem tất cả",
+          "match": "{score}% Phù hợp"
+        },
+        "activity": {
+          "title": "Hoạt động gần đây",
+          "applied": "Đã ứng tuyển vào {job} tại {company}",
+          "interview": "Lịch phỏng vấn mới cho vị trí {job}",
+          "statusChange": "Trạng thái đơn ứng tuyển {job} đã chuyển sang {status}"
+        }
+      },
+      "profile": {
+        "title": "Hồ sơ thông minh",
+        "cvParser": {
+          "title": "Phân tích CV bằng AI",
+          "description": "Kéo thả CV PDF vào đây để tự động điền hồ sơ bằng AI.",
+          "scanning": "Đang phân tích bằng AI...",
+          "extracting": "AI của chúng tôi đang trích xuất dữ liệu của bạn...",
+          "dropActive": "Thả để tải lên",
+          "success": "Phân tích CV thành công!",
+          "error": "Phân tích thất bại. Vui lòng thử lại."
+        },
+        "aiInfo": {
+          "title": "Sức mạnh Kết nối AI",
+          "description": "AI của chúng tôi phân tích CV của bạn để khớp với các kỹ năng của bạn với các vai trò công nghệ và AI hàng đầu. Hãy cập nhật hồ sơ của bạn để tăng khả năng hiển thị với nhà tuyển dụng."
+        },
+        "form": {
+          "personalInfo": "Thông tin cá nhân",
+          "experience": "Kinh nghiệm làm việc",
+          "education": "Học vấn",
+          "skills": "Kỹ năng chính",
+          "labels": {
+            "fullName": "Họ và tên",
+            "email": "Địa chỉ Email",
+            "phone": "Số điện thoại",
+            "bio": "Giới thiệu bản thân",
+            "jobTitle": "Vị trí mong muốn",
+            "company": "Công ty",
+            "period": "Thời gian",
+            "school": "Trường học/Đại học",
+            "degree": "Bằng cấp"
+          },
+          "submit": "Lưu hồ sơ"
+        }
+      },
+      "applications": {
+        "title": "Đơn ứng tuyển của tôi",
+        "table": {
+          "job": "Công việc",
+          "company": "Công ty",
+          "date": "Ngày ứng tuyển",
+          "status": "Trạng thái",
+          "feedback": "Xem phản hồi",
+          "actions": {
+            "viewDetail": "Xem chi tiết công việc"
+          }
+        },
+        "status": {
+          "applied": "Đã nộp",
+          "inReview": "Đang xem xét",
+          "interviewing": "Đang phỏng vấn",
+          "offered": "Đã đề nghị",
+          "rejected": "Đã từ chối"
+        }
+      },
+      "savedJobs": {
+        "title": "Việc làm đã lưu",
+        "empty": "Bạn chưa lưu công việc nào.",
+        "unsave": "Bỏ lưu"
+      },
+      "settings": {
+        "title": "Cài đặt",
+        "account": {
+          "title": "Cài đặt tài khoản",
+          "description": "Quản lý email và bảo mật tài khoản.",
+          "changeEmail": "Thay đổi Email",
+          "changePassword": "Thay đổi mật khẩu"
+        },
+        "notifications": {
+          "title": "Thông báo",
+          "description": "Cấu hình cách bạn nhận cảnh báo.",
+          "emailNotifications": "Thông báo qua Email",
+          "pushNotifications": "Thông báo đẩy"
+        },
+        "privacy": {
+          "title": "Quyền riêng tư & Bảo mật",
+          "description": "Kiểm soát dữ liệu và khả năng hiển thị của bạn.",
+          "publicProfile": "Hồ sơ công khai",
+          "showExperience": "Hiển thị kinh nghiệm"
+        },
+        "save": "Lưu thay đổi"
       }
     }
   }

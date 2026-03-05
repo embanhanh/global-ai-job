@@ -31,6 +31,18 @@ export type Job = Database["public"]["Tables"]["jobs"]["Row"] & {
 export type JobInsert = Database["public"]["Tables"]["jobs"]["Insert"];
 export type JobUpdate = Database["public"]["Tables"]["jobs"]["Update"];
 
+export type { JobWithCompany } from "./database";
+
+export interface JobSearchParams {
+  q?: string;
+  location?: string;
+  type?: string;
+  category?: string;
+  level?: string;
+  page?: string;
+  sort?: "newest" | "salary" | "relevant";
+}
+
 // ─── Application ────────────────────────────────────────────────────────────
 export type Application =
   Database["public"]["Tables"]["applications"]["Row"] & {
@@ -50,10 +62,12 @@ export type ApplicationUpdate =
   Database["public"]["Tables"]["applications"]["Update"];
 
 // ─── Company ────────────────────────────────────────────────────────────────
-export type Company = Database["public"]["Tables"]["companies"]["Row"];
+export type Company = Database["public"]["Tables"]["companies"]["Row"] & {
+  logo_url?: string | null;
+};
 
 // ─── Zod Schemas ────────────────────────────────────────────────────────────
-export const jobSchema = z.object({
+export const jobFormSchema = z.object({
   title: z.string().min(5),
   location: z.string().min(2),
   job_type: z.string().min(1),
@@ -64,7 +78,7 @@ export const jobSchema = z.object({
   hiring_steps: z.array(hiringStepSchema).optional(),
 });
 
-export type JobFormValues = z.infer<typeof jobSchema>;
+export type JobFormValues = z.infer<typeof jobFormSchema>;
 
 export const aiInsightSchema = z.object({
   strengths: z.array(z.string()),
