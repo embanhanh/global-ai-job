@@ -22,7 +22,10 @@ trigger: always_on
   - Interaction (onClick, onChange).
   - React Hooks (`useState`, `useEffect`, `useContext`).
   - Browser APIs.
-- **UI Orchestration**: Always implement `loading.tsx` (Suspense) and `error.tsx` for every route segment.
+- **UI Orchestration**:
+  - Always implement `loading.tsx` for route-level loading.
+  - Use **Granular Suspense**: Wrap dynamic components in `<Suspense key={JSON.stringify(searchParams)}>` to re-stream only specific segments when filters/params change.
+- **Zero CLS (Cumulative Layout Shift)**: Every `Suspense` fallback MUST be a **Skeleton** component that mirrors the exact dimensions and layout of the final content.
 - **Goal**: Minimize Client Bundle, maximize SEO, and secure Backend logic.
 
 ---
@@ -58,7 +61,9 @@ trigger: always_on
 
 - **Separation of Concerns**:
   - **Components**: Presentation only. No direct DB/API calls.
-  - **Actions**: All mutations/queries must stay in `/actions` or `/services`.
+  - **Actions**: All mutations/data updates must stay in `/actions` and queries `/services`.
+- **UX for Mutations**:
+  - Use `useActionState` (or `useFormState`) for handling server feedback.
 - **Component Rules**:
   - Max **150 lines** per file. If exceeded, split into sub-components.
   - No "Prop Drilling": Use Component Composition or Context.
@@ -74,7 +79,22 @@ trigger: always_on
 - **Git**: Write commit messages in **Conventional Commits** (feat:, fix:, chore:).
 - **Tailwind**: Use `cn()` utility from Shadcn for dynamic class merging.
 - **Icons**: Use `lucide-react`.
+- **Images**:
+  - ALWAYS use `next/image` for optimization.
+  - Implement a `SafeImage` wrapper with an `onError` handler to provide a fallback placeholder for broken URLs.
+  - Use `priority` for Above-the-fold images (e.g., Hero section).
+  - Use `placeholder="blur"` for large images to improve perceived performance.
 
 ---
 
-> **Note to AI**: If you encounter a task that violates these rules (e.g., adding a hardcoded string or a 200-line component), please alert the user and suggest a refactor according to these standards.
+## 7. Access Control (RBAC)
+
+- **Rule**: Security-first RBAC.
+- **Server Guard**: Use `RoleGuard` (Server Component) to wrap sensitive UI segments. Never rely solely on Client-side hiding.
+- **Data Protection**: Always re-verify user role/ownership inside **Server Actions** before executing DB mutations (Supabase).
+- **Navigation**: Use `proxy.ts` to protect private routes based on Auth session and Role.
+- **Consistency**: Roles must be managed via TypeScript Enums (e.g., `enum UserRole { ADMIN, RECRUITER, CANDIDATE }`).
+
+---
+
+> **Note to AI**: If you encounter a task that violates these rules (e.g., adding a hardcoded string, failing to provide a Skeleton for a Suspense boundary, or not using a Server Action for a mutation), please alert the user and suggest a refactor according to these standards.

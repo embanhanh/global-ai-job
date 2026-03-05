@@ -90,7 +90,10 @@ export type Database = {
           status: string;
           views_count: number;
           requirements: string[] | null;
+          benefits: string[] | null;
           hiring_steps: Json | null;
+          category: string | null;
+          level: string | null;
           created_at: string;
           updated_at: string;
         };
@@ -106,7 +109,10 @@ export type Database = {
           status?: string;
           views_count?: number;
           requirements?: string[] | null;
+          benefits?: string[] | null;
           hiring_steps?: Json | null;
+          category?: string | null;
+          level?: string | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -122,7 +128,10 @@ export type Database = {
           status?: string;
           views_count?: number;
           requirements?: string[] | null;
+          benefits?: string[] | null;
           hiring_steps?: Json | null;
+          category?: string | null;
+          level?: string | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -380,3 +389,9 @@ export const Constants = {
     Enums: {},
   },
 } as const;
+
+// ─── Zod Schemas & Helper Types ─────────────────────────────────────────────
+
+export interface JobWithCompany extends Tables<"jobs"> {
+  company: Tables<"companies">;
+}

@@ -15,6 +15,7 @@ import { toast } from "sonner";
 import { useLocale } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { AlertCircle } from "lucide-react";
+import { UserRole } from "@/types/enums";
 
 export function RegisterForm() {
   const t = useTranslations("Auth.register");
@@ -24,8 +25,7 @@ export function RegisterForm() {
   const [serverError, setServerError] = useState<string | null>(null);
   const searchParams = useSearchParams();
   const locale = useLocale();
-  const role =
-    (searchParams.get("role") as "candidate" | "recruiter") || "candidate";
+  const role = (searchParams.get("role") as UserRole) || UserRole.CANDIDATE;
 
   const registerSchema = z
     .object({

@@ -18,7 +18,7 @@ import { createJob, updateJob } from "@/actions/jobs.actions";
 import {
   Company,
   JobFormValues,
-  jobSchema,
+  jobFormSchema,
   DEFAULT_HIRING_STEPS,
 } from "@/types/jobs";
 
@@ -43,7 +43,7 @@ export function JobForm({ initialData, jobId }: JobFormProps) {
   }, []);
 
   const form = useForm<JobFormValues>({
-    resolver: zodResolver(jobSchema),
+    resolver: zodResolver(jobFormSchema),
     defaultValues: initialData || {
       title: "",
       location: "",

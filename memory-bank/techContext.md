@@ -22,6 +22,7 @@
 - **Server Components**: Ưu tiên tối đa RSC để giảm client bundle size.
 - **No Hardcoded Strings**: 100% text hiển thị phải thông qua `next-intl`.
 - **Component Size**: Giới hạn mỗi component tối đa 150 dòng (theo Vibe Rules).
+- **Security**: Áp dụng `RoleGuard` cho toàn bộ UI Dashboard và kiểm tra quyền tại lớp Server Actions.
 
 ## Integration Patterns
 

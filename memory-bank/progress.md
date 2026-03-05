@@ -23,17 +23,21 @@
 
 ### Phase 3: Dashboard & AI Features
 
-- [x] Candidate Dashboard UI Layout.
+- [x] Candidate Dashboard UI Layout & Pages (Overview, My Applications, Profile, Saved Jobs, Settings).
 - [x] Recruiter Dashboard (Overview, Jobs, Applicants, Search) - UI & Database.
-- [ ] Resume Upload & AI Markdown Parser.
+- [x] RBAC System (RoleGuard, Role-aware Layouts).
+- [x] i18n Completion for Dashboard modules.
+- [ ] Resume Upload & AI Markdown Parser (Real implementation).
 - [x] Job Posting & Editing Logic (UI & AI Assistant).
-- [x] Search & Pagination for Jobs.
+- [x] Search & Pagination for Jobs (Server-First & Modular).
+- [x] Refactor Public Components (`LanguageSwitcher`, `Hero`, `JobCard`) for Rule Compliance.
 - [x] **Job Detail Command Center** (Applicants, Content, Workflow).
-- [ ] Job Analytics & Reporting.
+- [ ] Job Analytics & Reporting (Next Focus).
 
 ## Current Status
 
 - **Hệ thống**: Stable (Auth & UI).
+- **Public Jobs**: Đã hoàn thiện refactor theo chuẩn code sạch, i18n và type-safe.
 - **Recruiter Dashboard**: Đã hoàn thiện chức năng CRUD Job và **Job Detail Command Center** (với Applicants Table & Kanban Board).
 - **Tính năng xác thực**: Đã hoạt động (Sử dụng Supabase Auth).
 - **Backend**: Supabase client đã config, Auth actions đã tích hợp, Schema đồng bộ.

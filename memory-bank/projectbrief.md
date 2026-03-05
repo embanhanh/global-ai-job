@@ -22,7 +22,9 @@ Nền tảng tuyển dụng thông minh (Global AI Job Board) hỗ trợ đa ng�
 ## Scope
 
 - Giai đoạn 1: Khởi tạo Project, cấu hình i18n và Auth UI (Hoàn thành).
-- Giai đoạn 2: Tích hợp Supabase Auth & DB (Sắp tới).
-- Giai đoạn 3: Xây dựng AI CV phân tích và Jobs matching.
-- Giai đoạn 4: Quản lý Profile và Dashboard.
-- Giai đoạn 5: Nâng cấp Job Management & Applicant Tracking (Đang thực hiện - Hoàn thành phần Core).
+- Giai đoạn 2: Tích hợp Supabase Auth & DB (Hoàn thành Core).
+- Giai đoạn 3: Xây dựng AI CV phân tích và Jobs matching (Sắp tới).
+- Giai đoạn 4: Quản lý Profile và Dashboard Candidate (Hoàn thành UI & Core Logic).
+- Giai đoạn 5: Hệ thống RBAC & Layout Isolation (Hoàn thành).
+- Giai đoạn 6: Nâng cấp Job Management & Applicant Tracking (Đã hoàn thành phần Core).
+- Giai đoạn 7: Job Analytics & Advanced AI Features (Sắp tới).
