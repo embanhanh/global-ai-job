@@ -3,10 +3,18 @@ import { UserRole } from "@/types/enums";
 
 export async function getProfile() {
   const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) return { success: false, error: "Not authenticated" };
 
   const { data: profile, error } = await supabase
     .from("profiles")
-    .select("full_name, email, phone, resume_url, role, bio, job_title")
+    .select(
+      "full_name, email, phone, resume_url, role, bio, job_title, skills, experience, education, settings",
+    )
+    .eq("id", user.id)
     .maybeSingle();
 
   if (error || !profile)
@@ -14,7 +22,7 @@ export async function getProfile() {
 
   return {
     success: true,
-    data: { ...profile },
+    data: profile,
   };
 }
 

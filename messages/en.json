@@ -109,6 +109,10 @@
         "share": "Share",
         "applyNow": "Apply Now",
         "applied": "Applied",
+        "save": "Save",
+        "saved": "Saved",
+        "saveSuccess": "Job saved successfully",
+        "unsaveSuccess": "Job removed from saved",
         "viewDetails": "View Details",
         "description": "Description",
         "requirements": "Requirements",
@@ -522,12 +526,25 @@
             "phone": "Phone Number",
             "bio": "Professional Bio",
             "jobTitle": "Target Job Title",
+            "resumeUrl": "CV (PDF/DOCX)",
+            "viewCV": "View Current CV",
+            "replaceCV": "Replace CV",
+            "uploadCV": "Upload New CV",
+            "noCV": "No CV uploaded",
+            "skills": "Professional Skills",
+            "addSkillPlaceholder": "Add a skill (e.g. React, Node.js)",
+            "add": "Add",
+            "noSkills": "No skills added yet",
             "company": "Company",
             "period": "Period",
             "school": "School/University",
             "degree": "Degree"
           },
-          "submit": "Save Profile"
+          "submit": "Save Profile",
+          "submitting": "Saving...",
+          "success": "Update Successful",
+          "successDescription": "Your profile has been updated in our system.",
+          "error": "Update Failed"
         }
       },
       "applications": {
@@ -553,7 +570,8 @@
       "savedJobs": {
         "title": "Saved Jobs",
         "empty": "You haven't saved any jobs yet.",
-        "unsave": "Unsave"
+        "unsave": "Unsave",
+        "unsaveSuccess": "Job removed from saved"
       },
       "settings": {
         "title": "Settings",
@@ -575,7 +593,8 @@
           "publicProfile": "Public Profile",
           "showExperience": "Show Experience"
         },
-        "save": "Save changes"
+        "save": "Save changes",
+        "saveSuccess": "Settings updated successfully"
       }
     }
   }

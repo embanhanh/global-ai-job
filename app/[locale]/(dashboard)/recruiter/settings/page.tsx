@@ -13,9 +13,8 @@ export default async function SettingsPage() {
   }
 
   const profile = result.data;
+  const settings =
+    (profile.settings as unknown as UserSettings) || DEFAULT_SETTINGS;
 
-  // Cast settings from DB to UserSettings, fallback to default if missing or invalid
-  const settings = (profile.settings as UserSettings) || DEFAULT_SETTINGS;
-
-  return <SettingsForm initialSettings={settings} role={UserRole.CANDIDATE} />;
+  return <SettingsForm initialSettings={settings} role={UserRole.RECRUITER} />;
 }

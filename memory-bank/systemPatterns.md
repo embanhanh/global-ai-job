@@ -21,17 +21,30 @@
   - **Server-driven**: Trạng thái tìm kiếm và trang hiện tại được lưu trên URL (searchParams). Toàn bộ logic lọc và phân trang được xử lý thông qua việc đồng bộ URL để đảm bảo tính SEO và chia sẻ liên kết.
   - **Component Decomposition**: Tuân thủ nghiêm ngặt giới hạn 150 dòng bằng cách tách nhỏ các logic hiển thị (ví dụ: `JobFilters`, `JobSearchHeader`) ra khỏi page chính.
   - **Shared UI**: Thành phần `Pagination` được thiết kế linh hoạt cho nhiều bảng dữ liệu. `ApplicantTable` và `JobListing` đều sử dụng chung mô hình đồng bộ URL.
+- **Optimistic-Debounce Pattern**:
+  - **Immediate Feedback**: Sử dụng `useOptimistic` bên trong `startTransition` để cập nhật trạng thái UI ngay lập tức khi người dùng click (ví dụ: Toggle switches).
+  - **Controlled Calls**: Sử dụng `useDebouncedCallback` để gộp các yêu cầu API lại, chỉ thực hiện cập nhật database sau một khoảng thời gian chờ (delay) nhất định. Pattern này cực kỳ hữu hiệu cho các settings thay đổi liên tục.
+  - **Transition Safety**: Toàn bộ cập nhật optimistic phải được bọc trong `startTransition` để đảm bảo tuân thủ cơ chế render của React 18+.
 - **Drag-and-Drop (DND) Pattern**:
   - **Kanban Flow**: Sử dụng `@dnd-kit` cho bảng Kanban.
   - **State Tracking**: Sử dụng `useRef` (ví dụ `dragItemInitialStage`) để "chốt" giá trị ban đầu khi bắt đầu kéo, giải quyết xung đột khi state UI cập nhật trước Server Action trong `onDragEnd`.
   - **Optimistic UI**: Cập nhật state local (`applicants`) trong `onDragOver` để card di chuyển mượt mà, sau đó gọi Server Action trong `onDragEnd`.
-- **Server Actions**: `getJobs` và `getApplicationsByJobId` hỗ trợ range-query trong Supabase để lấy dữ liệu theo trang hiệu quả.
+- **CV & Storage Pattern**:
+  - **Supabase Storage**: Sử dụng bucket `resumes` để lưu trữ file CV của ứng viên.
+  - **Client-Side Upload**: Thực hiện upload file trực tiếp từ Client Component (sử dụng Supabase Client) trước khi gọi Server Action để lưu URL/Path vào database.
+- **Server Actions & Logic Separation**:
+  - **Mutations via Actions**: Mọi thao tác thay đổi dữ liệu (Insert, Update, Delete) bắt buộc phải nằm trong `/actions`.
+  - **Queries via Services**: Logic truy vấn dữ liệu phức tạp hoặc reuse được tách vào `/services`.
+  - **Revalidation**: Sử dụng `revalidatePath` trong actions để đảm bảo UI cập nhật dữ liệu mới nhất sau khi mutation thành công.
 - **AI Interaction**: Toàn bộ CV được parse sang Markdown giúp AI (Vercel AI SDK) xử lý context tốt hơn.
 - **Database Architecture**:
   - Sử dụng Supabase làm DB chính với PostgreSQL.
   - **RLS-First Strategy**: Áp dụng Row Level Security (RLS) triệt để. Các quan hệ sở hữu được xác thực trực tiếp tại tầng database thông qua các chính sách (Policies), giúp tối giản hóa logic trong Server Actions.
   - **Automated Ownership**: Sử dụng `DEFAULT auth.uid()` cho các trường `candidate_id`, `recruiter_id`, và `profile_id` để tự động hóa việc gán quyền sở hữu khi tạo bản ghi mới.
   - **Application Snapshotting**: Hệ thống lưu bản sao thông tin cá nhân (`full_name`, `email`, `phone`) tại thời điểm ứng tuyển vào bảng `applications`. Điều này tách biệt hồ sơ ứng tuyển với Profile người dùng, cho phép thay đổi thông tin liên lạc mà không ảnh hưởng đến hồ sơ chính.
+  - **Postgres-First Logic**:
+    - **Triggers**: Sử dụng trigger (như `on_profile_created_settings`) để tự động khởi tạo các trường dữ liệu mặc định phức tạp (JSONB) ngay tại tầng DB, đảm bảo dữ liệu luôn hợp lệ dù được tạo qua UI hay console.
+    - **RLS-based Privacy**: Tích hợp logic nghiệp vụ nhạy cảm (như việc ẩn profile ứng viên) trực tiếp vào RLS logic: `USING ((settings->'privacy'->>'publicProfile')::boolean = true OR auth.uid() = id)`.
   - Sử dụng bảng trung gian `recruiter_companies` để quản lý quyền truy cập của nhà tuyển dụng vào dữ liệu công ty.
 - **Role-Based Access Control (RBAC) Pattern**:
   - **UserRole Enum**: Định nghĩa tập trung các quyền (`ADMIN`, `RECRUITER`, `CANDIDATE`) trong `types/enums.ts`.
@@ -44,6 +57,13 @@
   - **Zero-Hardcoded**: Tuyệt đối không để text cứng trong JSX. Sử dụng `useTranslations` (client) hoặc `getTranslations` (server).
   - **Strict Interface**: Sử dụng Zod hoặc explicit Interface cho toàn bộ props và data từ server để loại bỏ `any`.
   - **Locale-aware Assets**: Sử dụng các thư viện như `date-fns` kết hợp với locale của `next-intl` để định dạng thời gian chuẩn xác.
+- **Error Handling Pattern**:
+  - **Router-level Boundaries**: Sử dụng `error.tsx` cho từng phân đoạn route quan trọng (Dashboard, Job Details).
+  - **Server-to-Error-Boundary Flow**: Các Server Components không tự bắt lỗi để hiển thị UI lỗi cục bộ mà thực hiện `throw new Error()`. Điều này kích hoạt Next.js Error Boundary, giúp đồng nhất trải nghiệm người dùng và cung cấp sẵn cơ chế retry thông qua hàm `reset()`.
+  - **Global Error Logging**: `error.tsx` chịu trách nhiệm log lỗi ra các service giám sát (Sentry/Console) trước khi hiển thị UI cho người dùng.
+- **AnimatePresence Layout Pattern**:
+  - **PopLayout Smoothness**: Sử dụng `AnimatePresence mode="popLayout"` kết hợp với `layout` prop của framer-motion trong các grid danh sách (như Saved Jobs). Điều này giúp các item còn lại tự động tái sắp xếp vị trí một cách mượt mà khi một item bị xóa khỏi DOM, tránh hiện tượng "nhảy" layout đột ngột.
+  - **Client-Wrapper Strategy**: Duy trì Server Component cho việc fetch dữ liệu gốc, nhưng bọc danh sách bằng một Client Component mỏng (`SavedJobsClient`) để quản lý các trạng thái animation và optimistic feedback cục bộ.
 
 ## Folder Structure Highlights
 

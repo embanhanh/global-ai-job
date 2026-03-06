@@ -239,3 +239,62 @@ export async function getRecruiterJobById(id: string) {
     applications: data.applications,
   };
 }
+
+export async function getSavedJobsByCandidate(candidateId: string): Promise<{
+  data: JobWithCompany[];
+  count: number;
+}> {
+  const supabase = await createClient();
+
+  const { data, error, count } = await supabase
+    .from("saved_jobs")
+    .select(
+      `
+      job:jobs (
+        *,
+        company:companies (*)
+      )
+    `,
+      { count: "exact" },
+    )
+    .eq("user_id", candidateId)
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Error fetching saved jobs:", error);
+    return { data: [], count: 0 };
+  }
+
+  // Map the nested job structure to JobWithCompany[]
+  const savedJobs = (
+    data as unknown as Array<{
+      job: JobWithCompany;
+    }>
+  ).map((item) => item.job);
+
+  return {
+    data: savedJobs,
+    count: count || 0,
+  };
+}
+
+export async function isJobSaved(
+  jobId: string,
+  userId: string,
+): Promise<boolean> {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from("saved_jobs")
+    .select("id")
+    .eq("user_id", userId)
+    .eq("job_id", jobId)
+    .maybeSingle();
+
+  if (error) {
+    console.error("Error checking saved job status:", error);
+    return false;
+  }
+
+  return !!data;
+}

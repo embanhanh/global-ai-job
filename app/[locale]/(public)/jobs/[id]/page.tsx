@@ -2,12 +2,14 @@ import { Metadata } from "next";
 import { JobDetailHeader } from "@/components/jobs/detail-header";
 import { CompanyCard } from "@/components/jobs/company-card";
 import { JobDetailContent } from "@/components/jobs/detail-content";
-import { getJobById } from "@/services/jobs.service";
+import { getJobById, isJobSaved } from "@/services/jobs.service";
 import { notFound } from "next/navigation";
 import { hasAppliedToJob } from "@/services/applications.service";
 import { formatDistanceToNow } from "date-fns";
 import { vi, enUS } from "date-fns/locale";
-import { getProfile } from "@/services/profiles.service";
+import { getProfile, getCurrentRole } from "@/services/profiles.service";
+import { UserRole } from "@/types/enums";
+import { createClient } from "@/lib/supabase/server";
 
 interface JobDetailPageProps {
   params: Promise<{
@@ -35,6 +37,15 @@ export default async function JobDetailPage({ params }: JobDetailPageProps) {
   const job = await getJobById(id);
   const hasApplied = await hasAppliedToJob(id);
   const profileResult = await getProfile();
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const role = await getCurrentRole();
+  const isCandidate = role === UserRole.CANDIDATE;
+  const isSaved = user ? await isJobSaved(id, user.id) : false;
+
   const profileData =
     profileResult.success && profileResult.data
       ? {
@@ -78,6 +89,8 @@ export default async function JobDetailPage({ params }: JobDetailPageProps) {
         }}
         hasApplied={hasApplied}
         profileData={profileData}
+        initialIsSaved={isSaved}
+        isCandidate={isCandidate}
       />
 
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-12">

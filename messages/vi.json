@@ -109,6 +109,10 @@
         "share": "Chia sẻ",
         "applyNow": "Ứng tuyển ngay",
         "applied": "Đã ứng tuyển",
+        "save": "Lưu",
+        "saved": "Đã lưu",
+        "saveSuccess": "Đã lưu việc làm thành công",
+        "unsaveSuccess": "Đã bỏ lưu việc làm",
         "viewDetails": "Xem chi tiết",
         "notifications": {
           "success": "Ứng tuyển thành công!",
@@ -530,12 +534,25 @@
             "phone": "Số điện thoại",
             "bio": "Giới thiệu bản thân",
             "jobTitle": "Vị trí mong muốn",
+            "resumeUrl": "CV (PDF/DOCX)",
+            "viewCV": "Xem CV hiện tại",
+            "replaceCV": "Thay đổi CV",
+            "uploadCV": "Tải lên CV mới",
+            "noCV": "Chưa có CV",
+            "skills": "Kỹ năng chuyên môn",
+            "addSkillPlaceholder": "Thêm kỹ năng (vd: React, Node.js)",
+            "add": "Thêm",
+            "noSkills": "Chưa có kỹ năng nào được thêm",
             "company": "Công ty",
             "period": "Thời gian",
             "school": "Trường học/Đại học",
             "degree": "Bằng cấp"
           },
-          "submit": "Lưu hồ sơ"
+          "submit": "Lưu hồ sơ",
+          "submitting": "Đang lưu...",
+          "success": "Cập nhật thành công",
+          "successDescription": "Hồ sơ của bạn đã được cập nhật trên hệ thống.",
+          "error": "Cập nhật thất bại"
         }
       },
       "applications": {
@@ -561,7 +578,8 @@
       "savedJobs": {
         "title": "Việc làm đã lưu",
         "empty": "Bạn chưa lưu công việc nào.",
-        "unsave": "Bỏ lưu"
+        "unsave": "Bỏ lưu",
+        "unsaveSuccess": "Đã bỏ lưu việc làm"
       },
       "settings": {
         "title": "Cài đặt",
@@ -583,7 +601,8 @@
           "publicProfile": "Hồ sơ công khai",
           "showExperience": "Hiển thị kinh nghiệm"
         },
-        "save": "Lưu thay đổi"
+        "save": "Lưu thay đổi",
+        "saveSuccess": "Cập nhật cài đặt thành công"
       }
     }
   }

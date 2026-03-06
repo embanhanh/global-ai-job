@@ -101,3 +101,29 @@ export async function hasAppliedToJob(jobId: string) {
 
   return !!data;
 }
+
+import { CandidateApplication } from "@/types/candidate";
+
+export async function getApplicationsByCandidate() {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from("applications")
+    .select(
+      `
+      *,
+      jobs!inner (
+        title,
+        id,
+        companies!inner (name, logo_url)
+      )
+    `,
+    )
+    .order("applied_date", { ascending: false });
+
+  if (error) {
+    return { success: false, error: error.message };
+  }
+
+  return { success: true, data: data as CandidateApplication[] };
+}
