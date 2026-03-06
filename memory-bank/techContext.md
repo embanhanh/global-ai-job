@@ -5,10 +5,11 @@
 - **Frontend**: Next.js 16.1.6 (App Router), React 19.
 - **Styling**: Tailwind CSS v4, Framer Motion (animations), Lucide React (icons).
 - **Internationalization**: `next-intl`.
-- **Backend/Auth**: Supabase (@supabase/supabase-js).
+- **Backend/Auth**: Supabase (@supabase/supabase-js) - Database, Auth, và Storage (resumes bucket).
 - **AI**: Vercel AI SDK (@ai-sdk/google).
 - **Forms & Validation**: `react-hook-form`, `zod`, `@hookform/resolvers`.
 - **Drag & Drop**: `@dnd-kit/core`, `@dnd-kit/sortable`.
+- **Hooks & Utilities**: Custom `useDebouncedCallback` hook cho throttling tương tác người dùng.
 
 ## Development Setup
 

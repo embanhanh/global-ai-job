@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 import { User } from "lucide-react";
 
 interface PersonalInfoSectionProps {
@@ -93,6 +94,63 @@ export function PersonalInfoSection({ form }: PersonalInfoSectionProps) {
                   placeholder={t("labels.jobTitle")}
                   className="bg-white/5 border-white/10"
                 />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="resumeUrl"
+          render={({ field }) => (
+            <FormItem className="md:col-span-2">
+              <FormLabel>{t("labels.resumeUrl")}</FormLabel>
+              <FormControl>
+                {field.value ? (
+                  <div className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 rounded-lg">
+                    <div className="flex-1 truncate">
+                      <a
+                        href={
+                          field.value.startsWith("http")
+                            ? field.value
+                            : `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/resumes/${field.value}`
+                        }
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-violet-400 hover:text-violet-300 transition-colors flex items-center gap-2"
+                      >
+                        <span className="truncate max-w-[200px]">
+                          {t("labels.viewCV")}
+                        </span>
+                      </a>
+                    </div>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className="text-destructive hover:text-destructive/80"
+                      onClick={() => {
+                        field.onChange("");
+                      }}
+                    >
+                      {t("labels.replaceCV")}
+                    </Button>
+                  </div>
+                ) : (
+                  <Input
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    className="bg-white/5 border-white/10 cursor-pointer"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        // Store the file object temporarily on the field
+                        // We will handle the upload in the parent form
+                        field.onChange(file);
+                      }
+                    }}
+                  />
+                )}
               </FormControl>
               <FormMessage />
             </FormItem>

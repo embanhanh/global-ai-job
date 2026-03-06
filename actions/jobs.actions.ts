@@ -74,3 +74,45 @@ export async function deleteJob(id: string) {
   revalidatePath("/[locale]/recruiter/jobs", "page");
   return { success: true };
 }
+
+export async function toggleSaveJobAction(jobId: string) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { success: false, error: "Not authenticated" };
+  }
+
+  // Check if already saved
+  const { data: existing } = await supabase
+    .from("saved_jobs")
+    .select("id")
+    .eq("user_id", user.id)
+    .eq("job_id", jobId)
+    .maybeSingle();
+
+  if (existing) {
+    // Unsave
+    const { error } = await supabase
+      .from("saved_jobs")
+      .delete()
+      .eq("user_id", user.id)
+      .eq("job_id", jobId);
+
+    if (error) return { success: false, error: error.message };
+  } else {
+    // Save
+    const { error } = await supabase
+      .from("saved_jobs")
+      .insert({ user_id: user.id, job_id: jobId });
+
+    if (error) return { success: false, error: error.message };
+  }
+
+  revalidatePath("/[locale]/candidate/saved", "page");
+  revalidatePath(`/[locale]/jobs/${jobId}`, "page");
+
+  return { success: true, isSaved: !existing };
+}

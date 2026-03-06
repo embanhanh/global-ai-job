@@ -1,12 +1,14 @@
 "use client";
 
-import { ChevronLeft, Share2, Send, Check } from "lucide-react";
+import { ChevronLeft, Share2, Send, Check, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useState, useOptimistic, useTransition, useCallback } from "react";
 import Image from "next/image";
 import { ApplyJobDialog } from "./apply-job-dialog";
+import { toggleSaveJobAction } from "@/actions/jobs.actions";
+import { toast } from "sonner";
 
 interface JobDetailHeaderProps {
   jobId: string;
@@ -22,6 +24,8 @@ interface JobDetailHeaderProps {
     phone: string;
     resumeUrl: string | null;
   } | null;
+  initialIsSaved?: boolean;
+  isCandidate?: boolean;
 }
 
 export function JobDetailHeader({
@@ -30,9 +34,36 @@ export function JobDetailHeader({
   company,
   hasApplied = false,
   profileData,
+  initialIsSaved = false,
+  isCandidate = false,
 }: JobDetailHeaderProps) {
   const t = useTranslations("Landing.jobs.detail");
   const [showApplyDialog, setShowApplyDialog] = useState(false);
+  const [, startTransition] = useTransition();
+
+  const [optimisticIsSaved, addOptimisticIsSaved] = useOptimistic(
+    initialIsSaved,
+    (state, newState: boolean) => newState,
+  );
+
+  const handleToggleSave = useCallback(async () => {
+    const newState = !optimisticIsSaved;
+
+    startTransition(async () => {
+      addOptimisticIsSaved(newState);
+      const result = await toggleSaveJobAction(jobId);
+
+      if (result.success) {
+        toast.success(
+          newState
+            ? t("saveSuccess") || "Đã lưu việc làm"
+            : t("unsaveSuccess") || "Đã bỏ lưu việc làm",
+        );
+      } else {
+        toast.error(result.error || "Có lỗi xảy ra");
+      }
+    });
+  }, [jobId, optimisticIsSaved, addOptimisticIsSaved, t]);
 
   return (
     <div className="bg-slate-900 border-b border-white/5 py-8">
@@ -83,6 +114,26 @@ export function JobDetailHeader({
               <Share2 className="w-4 h-4 mr-2" />
               {t("share")}
             </Button>
+
+            {isCandidate && (
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={handleToggleSave}
+                className={`border-white/10 hover:bg-white/5 transition-all duration-300 ${
+                  optimisticIsSaved
+                    ? "text-rose-500 border-rose-500/30 bg-rose-500/5 hover:bg-rose-500/10"
+                    : "text-white"
+                }`}
+              >
+                <Heart
+                  className={`w-4 h-4 mr-2 transition-transform duration-300 ${
+                    optimisticIsSaved ? "fill-current scale-110" : "scale-100"
+                  }`}
+                />
+                {optimisticIsSaved ? t("saved") : t("save")}
+              </Button>
+            )}
             <Button
               size="lg"
               className={`${

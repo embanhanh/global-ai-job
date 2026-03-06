@@ -32,7 +32,10 @@
 - [x] Search & Pagination for Jobs (Server-First & Modular).
 - [x] Refactor Public Components (`LanguageSwitcher`, `Hero`, `JobCard`) for Rule Compliance.
 - [x] **Job Detail Command Center** (Applicants, Content, Workflow).
-- [x] **Job Application Flow**: Hoàn thiện form ứng tuyển, lưu trữ thông tin độc lập và gán quyền tự động qua RLS.
+- [x] **Candidate Applications Real Data**: Kết nối bảng "My Applications" với Supabase, triển khai Zero CLS loading và error boundaries.
+- [x] **Candidate Profile Real Data & Update**: Tích hợp dữ liệu thực, quản lý CV qua Supabase Storage, hỗ trợ kỹ năng, kinh nghiệm và học vấn. Tuân thủ 100% project rules (actions, services, loading, error).
+- [x] **Shared Settings Page**: Triển khai trang cài đặt dùng chung cho cả Candidate & Recruiter với Optimistic UI, Debouncing, và RLS-based privacy.
+- [x] **Saved Jobs Implementation**: Triển khai tính năng lưu việc làm với Optimistic UI, Server-First page refactor, và smooth unsave animations.
 - [ ] Job Analytics & Reporting (Next Focus).
 
 ## Current Status

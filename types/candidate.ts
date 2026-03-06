@@ -1,4 +1,6 @@
 import { z } from "zod";
+import { Database } from "./database";
+
 export const experienceSchema = z.object({
   id: z.string().optional(),
   company: z.string().min(2, "Company name is required"),
@@ -18,7 +20,8 @@ export const candidateProfileSchema = z.object({
   phone: z.string().min(10, "Phone number must be at least 10 characters"),
   bio: z.string().min(10, "Bio must be at least 10 characters"),
   jobTitle: z.string().min(2, "Target job title is required"),
-  skills: z.array(z.string()).min(1, "At least one skill is required"),
+  skills: z.array(z.string()),
+  resumeUrl: z.union([z.string(), z.any()]).optional(),
   experience: z.array(experienceSchema),
   education: z.array(educationSchema),
 });
@@ -40,10 +43,14 @@ export interface CandidateDashboardJob {
   matchScore?: number;
 }
 
-export interface CandidateApplication {
-  id: string;
-  job_title: string;
-  company: string;
-  applied_date: string;
-  status: "applied" | "inReview" | "interviewing" | "offered" | "rejected";
-}
+export type CandidateApplication =
+  Database["public"]["Tables"]["applications"]["Row"] & {
+    jobs: {
+      id: string;
+      title: string;
+      companies: {
+        name: string;
+        logo_url: string | null;
+      } | null;
+    } | null;
+  };

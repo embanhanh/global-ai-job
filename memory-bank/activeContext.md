@@ -2,7 +2,7 @@
 
 Dự án đã hoàn thành việc refactor toàn diện các trang công khai (Home, Job Listing, Job Detail) và các component dùng chung theo tiêu chuẩn `vibe-next-rules.md`. Trọng tâm hiện tại chuyển sang **Candidate Dashboard**, hệ thống **AI Resume Parser** và hoàn thiện các tính năng nâng cao cho **Recruiter Dashboard**.
 
-## Recent Changes
+## Recent Changes.
 
 - **Public Job Pages**:
   - Triển khai **Home Page** với Hero section sống động, Stats section và Featured Jobs.
@@ -38,14 +38,47 @@ Dự án đã hoàn thành việc refactor toàn diện các trang công khai (H
   - **RLS Reliance**: Removed redundant server-side `auth.getUser()` and manual `user.id` filtering in Server Actions. The system now trusts database-level security boundaries.
   - **Database Defaults**: Implemented `DEFAULT auth.uid()` for critical foreign keys (`candidate_id` in applications, `recruiter_id` in jobs, `profile_id` in recruiter_companies) to automate ownership assignment.
   - **Minimal Server Logic**: Server Actions are now more concise, focusing on business logic while Postgres/RLS handles the "who can do what".
+- **Candidate Dashboard Integration**:
+  - **Applications Page**: Thay thế dữ liệu mock bằng dữ liệu thực từ Supabase.
+  - **Service Layer**: Triển khai `getApplicationsByCandidate` với nested joins (`jobs`, `companies`).
+  - **UX Enhancement**: Thêm skeleton loading (`loading.tsx`) để đạt **Zero CLS** và trạng thái Empty State.
+  - **Navigation**: Tích hợp `Link` từ `i18n/navigation` để chuyển hướng mượt mà đến chi tiết công việc.
+- **Candidate Profile & CV Management Integration**:
+  - **RSC-First Refactor**: Chuyển trang Profile sang Server Component để fetch dữ liệu profile ban đầu, sử dụng pattern mapping dữ liệu tại page để giữ service layer nguyên bản.
+  - **Dynamic CV Management**: Triển khai giao diện thông minh: hiển thị link xem CV nếu đã có, và cho phép "Thay đổi CV" để upload file mới lên Supabase storage (`resumes` bucket).
+  - **Skills Management**: Bổ sung `SkillsSection` và cập nhật `candidateProfileSchema` để hỗ trợ quản lý danh sách kỹ năng chuyên môn.
+  - **Rules Compliance**: Bổ sung đầy đủ `loading.tsx` (Skeleton) và `error.tsx` cho router-level để đảm bảo Zero CLS và trải nghiệm người dùng tốt nhất.
+  - **Refactoring Strategy**: Di chuyển toàn bộ logic mutation (`updateProfile`) từ service layer sang `actions/profile.actions.ts` để tuân thủ quy tắc: Actions xử lý mutations, Services xử lý queries.
+  - **Database Fix**: Sử dụng Supabase MCP để phát hiện và bổ sung các cột thiếu (`skills`, `experience`, `education`) trực tiếp vào bảng `profiles`.
+- **Shared Settings Page Implementation**:
+  - **Unified Component**: Triển khai `SettingsForm` dùng chung cho cả Candidate và Recruiter, tuân thủ nghiêm ngặt quy tắc 150 dòng thông qua việc tách nhỏ thành `SettingsCard`, `ConfirmPrivacyDialog` và hook `useSettingsForm`.
+  - **Optimistic UI with Transition**: Sử dụng `useOptimistic` kết hợp với `startTransition` để cập nhật UI tức thì và tránh lỗi "state update outside transition".
+  - **Debounced Server Updates**: Tích hợp `useDebouncedCallback` (1s) để giảm tải cho server khi người dùng thay đổi settings liên tục.
+  - **Type-Safe Schema**: Định nghĩa `UserSettings` và `userSettingsSchema` (Zod), loại bỏ hoàn toàn `any` trong toàn bộ luồng settings.
+  - **Zero CLS & Resilience**: Bổ sung `loading.tsx` (Skeleton) và `error.tsx` cho cả hai route settings.
+  - **Automated Defaults**: Thêm trigger Postgres `on_profile_created_settings` để tự động khởi tạo JSONB settings cho profile mới.
+  - **RLS-based Privacy**: Cập nhật RLS policy để ẩn profile ứng viên nếu `publicProfile` là false.
+- **Saved Jobs Feature Implementation**:
+  - **Interactive Job Header**: Tích hợp nút "Lưu" vào `JobDetailHeader`, sử dụng `useOptimistic` để phản hồi tức thì và `toggleSaveJobAction` để xử lý persistence.
+  - **RSC Saved Jobs Page**: Refactor toàn diện trang "Saved Jobs" từ Client sang Server Component, fetch dữ liệu qua `getSavedJobsByCandidate`.
+  - **Optimistic Unsave Experience**: Triển khai `SavedJobsClient` với `AnimatePresence` (framer-motion) để card việc làm biến mất mượt mà khi người dùng bỏ lưu, kết hợp hoàn hảo giữa logic Server và trải nghiệm Client.
+  - **Robust Handling**: Bổ sung `loading.tsx` (Skeleton) đồng nhất layout và `error.tsx` chuyên biệt cho route Saved Jobs.
+  - **i18n & RBAC**: Hoàn thiện toàn bộ bản dịch và giới hạn tính năng chỉ dành cho `CANDIDATE`.
 
 ## Next Steps
 
 1.  **AI Resume Parser Internal Logic**: Hoàn thiện logic xử lý file thật (PDF to Markdown) thay vì mock.
 2.  **Job Analytics Tab**: Triển khai biểu đồ và báo cáo hiệu quả tuyển dụng cho từng job.
-3.  **Real Data Integration**: Kết nối Candidate Dashboard với real database (Applications, Saved Jobs).
-4.  **Social Login**: Tích hợp Google và Github OAuth.
+3.  **Social Login**: Tích hợp Google và Github OAuth.
+4.  **Recruiter Talent Search**: Nâng cấp công cụ tìm kiếm ứng viên bằng AI.
+
+## Decisions & Patterns
 
 - **RLS-First Security**: Chuyển từ việc kiểm tra Auth thủ công trong code sang tin cậy hoàn toàn vào Row Level Security (RLS) và Database Defaults. Điều này giúp giảm độ phức tạp của Server Actions và đảm bảo bảo mật ở tầng sâu nhất.
+- **Mutation/Query Separation**: Khẳng định quy tắc tách biệt: `services/` chỉ chứa logic truy vấn dữ liệu (read-only), trong khi `actions/` chịu trách nhiệm cho mọi thay đổi trạng thái (mutations) và revalidation.
 - **Application Info Snapshoting**: Lưu thông tin cá nhân trực tiếp vào bản ghi ứng tuyển (`applications`) thay vì đồng bộ ngược lại Profile. Quyết định này giúp giữ Profile nguyên bản và tăng tính linh hoạt cho ứng viên khi nộp đơn.
-- **Form Schema Centralization**: Di chuyển toàn bộ Zod Schemas liên quan đến form ứng tuyển vào thư mục `types/` để đảm bảo tính tái sử dụng và sạch sẽ cho component UI.
+- **Form Schema Centralization**: Di chuyển toàn bộ Zod Schemas liên quan đến form ứng tuyển và profile vào thư mục `types/` để đảm bảo tính tái sử dụng và sạch sẽ cho component UI.
+- **Next.js Error Boundaries**: Ưu tiên sử dụng `error.tsx` kết hợp với việc `throw error` trong Server Components thay vì xử lý lỗi inline UI. Điều này giúp tách biệt logic nghiệp vụ và logic hiển thị lỗi, đồng thời cung cấp cơ chế cứu vãn (reset/retry) tự động của Next.js.
+- **RSC-Client Bridge Pattern**: Sử dụng một component Client wrapper (`ProfileClient`) để bao bọc các form phức tạp cần trạng thái tương tác cao (như AI CV Parser/CV Upload) trong khi vẫn duy trì việc fetch dữ liệu gốc từ Server Component.
+- **Optimistic-Debounce Pattern**: Kết hợp `useOptimistic` để phản hồi UI tức thì với `useDebouncedCallback` để trì hoãn việc gọi API. Điều này cân bằng giữa trải nghiệm người dùng mượt mà và hiệu năng hệ thống, đồng thời đảm bảo tính toàn vẹn dữ liệu bằng cách đồng bộ trạng thái cuối cùng sau khi người dùng ngừng tương tác.
+- **Postgres-First Defaults**: Ưu tiên sử dụng Database Triggers và Default values (như `on_profile_created_settings`) để đảm bảo tính nhất quán của dữ liệu ngay cả khi bản ghi được tạo từ bên ngoài ứng dụng.
