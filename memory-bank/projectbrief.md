@@ -17,7 +17,7 @@ Nền tảng tuyển dụng thông minh (Global AI Job Board) hỗ trợ đa ng�
 - **AI CV Sorting**: Nhà tuyển dụng có thể lọc hồ sơ bằng các câu lệnh ngôn ngữ tự nhiên hoặc tiêu chí AI.
 - **Smart Dashboard**: Bảng điều khiển tùy chỉnh cho từng vai trò người dùng.
 - **Job Detail Command Center**: Quản lý tập trung từng tin tuyển dụng với các tab: Ứng viên (DataTable), Nội dung (AI Scoring), Workflow (Kanban), và Analytics.
-- **CV to Markdown**: Chuyển đổi hồ sơ ứng viên sang định dạng Markdown để AI xử lý hiệu quả nhất.
+- **Follow & Push Notifications**: Hệ thống theo dõi công ty và nhận thông báo đẩy (FCM Topics) theo thời gian thực, đa ngôn ngữ.
 
 ## Scope
 
@@ -26,5 +26,6 @@ Nền tảng tuyển dụng thông minh (Global AI Job Board) hỗ trợ đa ng�
 - Giai đoạn 3: Xây dựng AI CV phân tích và Jobs matching (Sắp tới).
 - Giai đoạn 4: Quản lý Profile và Dashboard Candidate (Hoàn thành UI & Core Logic).
 - Giai đoạn 5: Hệ thống RBAC & Layout Isolation (Hoàn thành).
-- Giai đoạn 6: Nâng cấp Job Management & Applicant Tracking (Đã hoàn thành phần Core).
-- Giai đoạn 7: Job Analytics & Advanced AI Features (Sắp tới).
+- Giai đoạn 6: Nâng cấp Job Management & Applicant Tracking (Hoàn thành).
+- Giai đoạn 7: Hệ thống Follow & Push Notifications (Hoàn thành).
+- Giai đoạn 8: Job Analytics & Advanced AI Features (Sắp tới).

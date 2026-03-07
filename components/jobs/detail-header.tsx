@@ -1,19 +1,27 @@
 "use client";
-
 import { ChevronLeft, Share2, Send, Check, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { FollowButton } from "@/components/shared/follow-button";
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-import { useState, useOptimistic, useTransition, useCallback } from "react";
+import {
+  useState,
+  useOptimistic,
+  useTransition,
+  useCallback,
+  useEffect,
+} from "react";
 import Image from "next/image";
 import { ApplyJobDialog } from "./apply-job-dialog";
 import { toggleSaveJobAction } from "@/actions/jobs.actions";
+import { isFollowing } from "@/services/follows.service";
 import { toast } from "sonner";
 
 interface JobDetailHeaderProps {
   jobId: string;
   title: string;
   company: {
+    id: string;
     name: string;
     logo_url: string | null;
   } | null;
@@ -40,6 +48,17 @@ export function JobDetailHeader({
   const t = useTranslations("Landing.jobs.detail");
   const [showApplyDialog, setShowApplyDialog] = useState(false);
   const [, startTransition] = useTransition();
+  const [following, setFollowing] = useState(false);
+
+  useEffect(() => {
+    if (company?.id) {
+      async function checkFollow() {
+        const result = await isFollowing(company!.id);
+        setFollowing(result);
+      }
+      checkFollow();
+    }
+  }, [company?.id, company]);
 
   const [optimisticIsSaved, addOptimisticIsSaved] = useOptimistic(
     initialIsSaved,
@@ -78,7 +97,7 @@ export function JobDetailHeader({
 
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex items-start gap-5">
-            <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden flex-shrink-0">
+            <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden shrink-0">
               {company?.logo_url ? (
                 <Image
                   src={company.logo_url}
@@ -97,7 +116,7 @@ export function JobDetailHeader({
               <h1 className="text-3xl font-bold text-white mb-2">{title}</h1>
               <div className="flex items-center gap-3 text-slate-400">
                 <span className="font-medium text-slate-300">
-                  {company?.name}
+                  {company?.name || "Company"}
                 </span>
                 <span className="w-1 h-1 rounded-full bg-slate-600" />
                 <span>{t("location")}</span>
@@ -114,6 +133,12 @@ export function JobDetailHeader({
               <Share2 className="w-4 h-4 mr-2" />
               {t("share")}
             </Button>
+            {company?.id && (
+              <FollowButton
+                companyId={company.id}
+                initialIsFollowing={following}
+              />
+            )}
 
             {isCandidate && (
               <Button

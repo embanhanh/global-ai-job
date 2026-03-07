@@ -2,6 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { UserRole } from "@/types/enums";
+import { revalidatePath } from "next/cache";
 
 interface AuthData {
   email: string;
@@ -53,5 +54,6 @@ export async function signUp(formData: AuthData) {
 export async function signOutOfApp() {
   const supabase = await createClient();
   await supabase.auth.signOut();
+  revalidatePath("/");
   return { success: true };
 }

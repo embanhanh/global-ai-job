@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { UserRole } from "@/types/enums";
 import { getProfile } from "@/services/profiles.service";
 import { hasAppliedToJob } from "@/services/applications.service";
+import { sendApplicationNotification } from "./notifications.actions";
 
 export async function updateApplicationStage(id: string, stage: string) {
   const supabase = await createClient();
@@ -69,19 +70,41 @@ export async function applyToJob(
       return { success: false, error: "alreadyApplied" };
     }
 
-    // Create application with specific personal info for this submission
-    const { error: insertError } = await supabase.from("applications").insert({
-      job_id: jobId,
-      resume_url: resumeUrl,
-      cover_letter: data?.coverLetter || null,
-      full_name: data?.fullName || profile.full_name || "",
-      email: data?.email || user.email || "",
-      phone: data?.phone || profile.phone || "",
-      stage: "sourcing",
-      ai_status: "pending",
-    });
+    // 1. Fetch job title
+    const { data: job } = await supabase
+      .from("jobs")
+      .select("title")
+      .eq("id", jobId)
+      .single();
+
+    if (!job) return { success: false, error: "error" };
+
+    // 2. Create application with specific personal info for this submission
+    const { data: application, error: insertError } = await supabase
+      .from("applications")
+      .insert({
+        job_id: jobId,
+        resume_url: resumeUrl,
+        cover_letter: data?.coverLetter || null,
+        full_name: data?.fullName || profile.full_name || "",
+        email: data?.email || user.email || "",
+        phone: data?.phone || profile.phone || "",
+        stage: "sourcing",
+        ai_status: "pending",
+      })
+      .select()
+      .single();
 
     if (insertError) throw insertError;
+
+    // 3. Notify recruiter
+    await sendApplicationNotification(
+      jobId,
+      job.title,
+      profile.id,
+      data?.fullName || profile.full_name || "",
+      application.id,
+    );
 
     return { success: true };
   } catch (error) {

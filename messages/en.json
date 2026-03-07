@@ -25,6 +25,13 @@
       "toggle": "Toggle language",
       "vi": "Vietnamese",
       "en": "English"
+    },
+    "follow": {
+      "follow": "Follow",
+      "following": "Following",
+      "success": "Followed company to receive notifications",
+      "unfollowSuccess": "Unfollowed company",
+      "error": "An error occurred"
     }
   },
   "Errors": {
@@ -237,6 +244,15 @@
   "Dashboard": {
     "headerTitleCandidate": "Candidate Dashboard",
     "headerTitleRecruiter": "Recruiter Dashboard",
+    "notifications": {
+      "title": "Notifications",
+      "markAllRead": "Mark all as read",
+      "empty": "No notifications yet",
+      "loading": "Loading notifications...",
+      "newNotification": "New notification",
+      "NEW_JOB_POSTED": "{company_name} just posted a new position: {job_title}",
+      "NEW_APPLICATION": "Candidate <candidate>{candidate_name}</candidate> just applied for <job>{job_title}</job>"
+    },
     "sidebar": {
       "overview": "Overview",
       "jobs": "Job Postings",

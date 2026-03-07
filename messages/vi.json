@@ -22,9 +22,16 @@
     "allPositions": "Tất cả vị trí",
     "noApplicants": "Chưa có ứng viên",
     "language": {
-      "toggle": "Chuyển đổi ngôn ngữ",
+      "toggle": "Thay đổi ngôn ngữ",
       "vi": "Tiếng Việt",
-      "en": "English"
+      "en": "Tiếng Anh"
+    },
+    "follow": {
+      "follow": "Theo dõi",
+      "following": "Đang theo dõi",
+      "success": "Đã theo dõi công ty để nhận thông báo",
+      "unfollowSuccess": "Đã bỏ theo dõi công ty",
+      "error": "Có lỗi xảy ra"
     }
   },
   "Errors": {
@@ -244,6 +251,15 @@
   "Dashboard": {
     "headerTitleCandidate": "Bảng điều khiển Ứng viên",
     "headerTitleRecruiter": "Bảng điều khiển Nhà tuyển dụng",
+    "notifications": {
+      "title": "Thông báo",
+      "markAllRead": "Đánh dấu tất cả là đã đọc",
+      "empty": "Chưa có thông báo nào",
+      "loading": "Đang tải thông báo...",
+      "newNotification": "Thông báo mới",
+      "NEW_JOB_POSTED": "{company_name} vừa đăng tuyển vị trí mới: {job_title}",
+      "NEW_APPLICATION": "Ứng viên <candidate>{candidate_name}</candidate> vừa ứng tuyển vào vị trí <job>{job_title}</job>"
+    },
     "sidebar": {
       "overview": "Tổng quan",
       "jobs": "Tin tuyển dụng",

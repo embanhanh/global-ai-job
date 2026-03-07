@@ -5,7 +5,7 @@
 - **Frontend**: Next.js 16.1.6 (App Router), React 19.
 - **Styling**: Tailwind CSS v4, Framer Motion (animations), Lucide React (icons).
 - **Internationalization**: `next-intl`.
-- **Backend/Auth**: Supabase (@supabase/supabase-js) - Database, Auth, và Storage (resumes bucket).
+- **Backend/Auth**: Supabase (@supabase/supabase-js) - Database, Auth, và Storage (resumes bucket). Firebase (Admin & Client SDK) - Cloud Messaging (FCM).
 - **AI**: Vercel AI SDK (@ai-sdk/google).
 - **Forms & Validation**: `react-hook-form`, `zod`, `@hookform/resolvers`.
 - **Drag & Drop**: `@dnd-kit/core`, `@dnd-kit/sortable`.
@@ -27,5 +27,6 @@
 
 ## Integration Patterns
 
-- **Supabase**: Sử dụng client-side supabase client cho Auth và server-side client cho database operations.
+- **Supabase**: Sử dụng client-side supabase client singleton cho Auth và server-side client cho database operations.
+- **Firebase**: Sử dụng Firebase Admin SDK cho việc gửi thông báo server-side và Firebase Messaging Client cho việc đăng ký nhận thông báo.
 - **AI SDK**: Sử dụng `generateObject` cho trích xuất dữ liệu CV có cấu trúc.

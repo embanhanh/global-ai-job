@@ -3,6 +3,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 import { JobInsert, JobUpdate } from "@/types/jobs";
+import { sendJobNotification } from "./notifications.actions";
 
 export async function createJob(jobData: Omit<JobInsert, "recruiter_id">) {
   const supabase = await createClient();
@@ -17,12 +18,40 @@ export async function createJob(jobData: Omit<JobInsert, "recruiter_id">) {
     return { success: false, error: error.message };
   }
 
+  // Notify followers if job is active
+  if (data.status === "active") {
+    console.log("Job is active, sending notification");
+    // Get company name for notification
+    const { data: company } = await supabase
+      .from("companies")
+      .select("name")
+      .eq("id", data.company_id)
+      .single();
+
+    if (company) {
+      // Trigger notification (fire and forget on the server)
+      sendJobNotification(
+        data.id,
+        data.company_id,
+        company.name,
+        data.title,
+      ).catch((err) => console.error("Failed to send job notification:", err));
+    }
+  }
+
   revalidatePath("/[locale]/recruiter/jobs", "page");
   return { success: true, data };
 }
 
 export async function updateJob(id: string, jobData: JobUpdate) {
   const supabase = await createClient();
+
+  // Get current job to check status transition
+  const { data: currentJob } = await supabase
+    .from("jobs")
+    .select("status, title, company_id, companies(name)")
+    .eq("id", id)
+    .single();
 
   const { data, error } = await supabase
     .from("jobs")
@@ -33,6 +62,25 @@ export async function updateJob(id: string, jobData: JobUpdate) {
 
   if (error) {
     return { success: false, error: error.message };
+  }
+
+  // Notify followers if job transitioned to active
+  if (
+    jobData.status === "active" &&
+    currentJob &&
+    currentJob.status !== "active"
+  ) {
+    console.log("Job transitioned to active, sending notification");
+    // TypeScript workaround since we know companies is joined as single object here
+    const company = currentJob.companies as unknown as { name: string };
+    if (company) {
+      sendJobNotification(
+        data.id,
+        currentJob.company_id,
+        company.name,
+        jobData.title || currentJob.title,
+      ).catch((err) => console.error("Failed to send job notification:", err));
+    }
   }
 
   revalidatePath("/[locale]/recruiter/jobs", "page");
@@ -46,6 +94,13 @@ export async function updateJobStatus(
 ) {
   const supabase = await createClient();
 
+  // Get current job to check status transition
+  const { data: currentJob } = await supabase
+    .from("jobs")
+    .select("status, title, company_id, companies(name)")
+    .eq("id", id)
+    .single();
+
   const { data, error } = await supabase
     .from("jobs")
     .update({ status, updated_at: new Date().toISOString() })
@@ -55,6 +110,22 @@ export async function updateJobStatus(
 
   if (error) {
     return { success: false, error: error.message };
+  }
+
+  // Notify followers if job transitioned to active
+  if (status === "active" && currentJob && currentJob.status !== "active") {
+    console.log(
+      "Job status changed to active via toggle, sending notification",
+    );
+    const company = currentJob.companies as unknown as { name: string };
+    if (company) {
+      sendJobNotification(
+        data.id,
+        currentJob.company_id,
+        company.name,
+        currentJob.title,
+      ).catch((err) => console.error("Failed to send job notification:", err));
+    }
   }
 
   revalidatePath("/[locale]/recruiter/jobs", "page");
