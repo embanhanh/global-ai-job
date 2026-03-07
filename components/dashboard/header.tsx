@@ -3,6 +3,8 @@ import { UserNav } from "@/components/shared/user-nav";
 import { getTranslations } from "next-intl/server";
 import { getCurrentRole } from "@/services/profiles.service";
 import { UserRole } from "@/types/enums";
+import { NotificationBell } from "@/components/notifications/notification-bell";
+import { getUnreadCountServer } from "@/services/notifications.service";
 
 interface DashboardHeaderProps {
   locale: string;
@@ -15,6 +17,7 @@ export async function DashboardHeader({ locale }: DashboardHeaderProps) {
   } = await supabase.auth.getUser();
   const role = await getCurrentRole();
   const t = await getTranslations({ locale, namespace: "Dashboard" });
+  const unreadCount = user ? await getUnreadCountServer() : 0;
 
   const titleKey =
     role === UserRole.RECRUITER
@@ -31,7 +34,9 @@ export async function DashboardHeader({ locale }: DashboardHeaderProps) {
       </div>
 
       <div className="flex items-center gap-4">
-        {/* We can add a simple language switcher here later if needed */}
+        {user && (
+          <NotificationBell initialUnreadCount={unreadCount} locale={locale} />
+        )}
         <UserNav user={user || null} locale={locale} />
       </div>
     </header>

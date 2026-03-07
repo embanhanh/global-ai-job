@@ -84,6 +84,7 @@ export default async function JobDetailPage({ params }: JobDetailPageProps) {
         jobId={id}
         title={job.title}
         company={{
+          id: job.company.id,
           name: job.company.name,
           logo_url: job.company.logo_url,
         }}

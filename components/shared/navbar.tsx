@@ -4,6 +4,8 @@ import { Briefcase } from "lucide-react";
 import { UserNav } from "@/components/shared/user-nav";
 import { LanguageSwitcher } from "@/components/shared/language-switcher";
 import { createClient } from "@/lib/supabase/server";
+import { NotificationBell } from "@/components/notifications/notification-bell";
+import { getUnreadCountServer } from "@/services/notifications.service";
 
 export async function Navbar({ locale }: { locale: string }) {
   const t = await getTranslations("Nav");
@@ -13,6 +15,8 @@ export async function Navbar({ locale }: { locale: string }) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  const unreadCount = user ? await getUnreadCountServer() : 0;
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-[#050816]/80 backdrop-blur-md px-6 py-4">
@@ -51,6 +55,12 @@ export async function Navbar({ locale }: { locale: string }) {
 
         <div className="flex items-center gap-4">
           <LanguageSwitcher />
+          {user && (
+            <NotificationBell
+              initialUnreadCount={unreadCount}
+              locale={locale}
+            />
+          )}
           <UserNav user={user} locale={locale} />
         </div>
       </div>

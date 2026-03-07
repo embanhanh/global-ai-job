@@ -12,7 +12,7 @@ export async function getProfile() {
   const { data: profile, error } = await supabase
     .from("profiles")
     .select(
-      "full_name, email, phone, resume_url, role, bio, job_title, skills, experience, education, settings",
+      "id, full_name, email, phone, resume_url, role, bio, job_title, skills, experience, education, settings",
     )
     .eq("id", user.id)
     .maybeSingle();

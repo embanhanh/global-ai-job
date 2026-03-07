@@ -97,7 +97,14 @@ export function SettingsForm({ initialSettings, role }: SettingsFormProps) {
           <div className="space-y-4 pt-4">
             {[
               { key: "publicProfile", label: t("privacy.publicProfile") },
-              { key: "showExperience", label: t("privacy.showExperience") },
+              ...(role === UserRole.CANDIDATE
+                ? [
+                    {
+                      key: "showExperience",
+                      label: t("privacy.showExperience"),
+                    },
+                  ]
+                : []),
             ].map((item) => (
               <div
                 key={item.key}

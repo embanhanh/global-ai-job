@@ -64,6 +64,18 @@
 - **AnimatePresence Layout Pattern**:
   - **PopLayout Smoothness**: Sử dụng `AnimatePresence mode="popLayout"` kết hợp với `layout` prop của framer-motion trong các grid danh sách (như Saved Jobs). Điều này giúp các item còn lại tự động tái sắp xếp vị trí một cách mượt mà khi một item bị xóa khỏi DOM, tránh hiện tượng "nhảy" layout đột ngột.
   - **Client-Wrapper Strategy**: Duy trì Server Component cho việc fetch dữ liệu gốc, nhưng bọc danh sách bằng một Client Component mỏng (`SavedJobsClient`) để quản lý các trạng thái animation và optimistic feedback cục bộ.
+- **Singleton Supabase Client Pattern**:
+  - **Browser Consistency**: Khởi tạo Supabase client dưới dạng singleton trong `lib/supabase/client.ts` khi chạy ở phía Client.
+  - **Auth Sync**: Đảm bảo toàn bộ ứng dụng (Layout, Hooks, Components) đều lắng nghe cùng một Auth state, tránh việc race-condition hoặc lệch session giữa các phần của UI.
+- **Follow & Push Notification Pattern**:
+  - **Topic-based FCM**: Đăng ký người dùng vào các topic FCM dựa trên `company_id` và `locale` (ví dụ: `company_123_vi`) để gửi thông báo hàng loạt cho ứng viên theo ngôn ngữ ưu tiên.
+  - **I18n Metadata**: Lưu thông báo trong DB chỉ với `type` và `metadata` (JSONB). Việc render chuỗi ký tự được xử lý hoàn toàn tại Client bằng `next-intl` để đảm bảo linh hoạt ngôn ngữ.
+  - **Robust Language & Auth Sync**: Sử dụng `LanguageSync` component bọc ngoài root layout kết hợp với hook `useLanguageSync` sử dụng explicit session tracking (`session.user.id`) để tự động cập nhật topic FCM khi người dùng thay đổi ngôn ngữ, đăng nhập hoặc chuyển đổi tài khoản.
+  - **Service Worker Persistence**: Sử dụng `firebase-messaging-sw.js` để xử lý thông báo nền, tích hợp đồng bộ với trạng thái đăng nhập của ứng dụng qua FCM Token.
+  - **Verification Heartbeat**: Triển khai cơ chế log định kỳ (heartbeat) trong môi trường phát triển để xác nhận tính "sống" của hook đồng bộ hóa mà không cần trigger event thật.
+- **Service Environmental Separation**:
+  - **Safe Client Access**: Các file trong `/services` dùng cho Client Component TUYỆT ĐỐI không được import từ `@/lib/supabase/server` (vốn chứa `next/headers`).
+  - **Naming Convention**: Để tránh rò rỉ server-only code, các logic cần server client được tách ra với hậu tố `-server.service.ts` hoặc tương đương để đảm bảo tính minh bạch và an toàn môi trường.
 
 ## Folder Structure Highlights
 

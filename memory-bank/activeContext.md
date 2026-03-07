@@ -1,6 +1,4 @@
-## Current Focus
-
-Dự án đã hoàn thành việc refactor toàn diện các trang công khai (Home, Job Listing, Job Detail) và các component dùng chung theo tiêu chuẩn `vibe-next-rules.md`. Trọng tâm hiện tại chuyển sang **Candidate Dashboard**, hệ thống **AI Resume Parser** và hoàn thiện các tính năng nâng cao cho **Recruiter Dashboard**.
+Dự án đã hoàn thành việc triển khai hệ thống **Follow & Push Notification**, đồng thời refactor toàn diện các trang công khai và dashboard theo tiêu chuẩn `vibe-next-rules.md`. Trọng tâm hiện tại là hoàn thiện logic **AI Resume Parser** (PDF to Markdown) và xử lý triệt để các lỗi môi trường (server vs client) trong hệ thống service.
 
 ## Recent Changes.
 
@@ -64,6 +62,24 @@ Dự án đã hoàn thành việc refactor toàn diện các trang công khai (H
   - **Optimistic Unsave Experience**: Triển khai `SavedJobsClient` với `AnimatePresence` (framer-motion) để card việc làm biến mất mượt mà khi người dùng bỏ lưu, kết hợp hoàn hảo giữa logic Server và trải nghiệm Client.
   - **Robust Handling**: Bổ sung `loading.tsx` (Skeleton) đồng nhất layout và `error.tsx` chuyên biệt cho route Saved Jobs.
   - **i18n & RBAC**: Hoàn thiện toàn bộ bản dịch và giới hạn tính năng chỉ dành cho `CANDIDATE`.
+- **Follow & Push Notification System**:
+  - **Database schema**: Triển khai các bảng `follows` và `notifications` (i18n-ready metadata).
+  - **FCM Integration**: Tích hợp Firebase Client & Admin SDK để đẩy thông báo qua Browser.
+  - **Foreground Reception**: Tích hợp `onMessage` vào `NotificationBell` để nhận push notifications real-time khi user đang hoạt động (kèm Toast UI và đếm unread).
+  - **Multilingual Topics**: Tự động đăng ký người dùng vào các topic theo công ty và ngôn ngữ (vd: `company_[id]_[locale]`). Quản trị trực tiếp việc sub/unsub real-time trên FCM thông qua action `toggleFollow`.
+  - **Robust Synchronization (`useLanguageSync`)**:
+    - Refactor hook sử dụng `supabase.auth.onAuthStateChange` kết hợp với explicit session tracking (`session.user.id`).
+    - Đảm bảo đồng bộ hóa topic và token ngay lập tức khi đăng nhập, chuyển đổi tài khoản hoặc thay đổi ngôn ngữ.
+    - **Heartbeat Monitoring**: Thêm log nhịp tim (15s) và high-visibility logs (Emoji) để kiểm tra trạng thái hoạt động của hook trong Browser Console.
+    - **Logout Sync**: Triển khai action `clearFCMToken` để xóa token trong Database khi người dùng đăng xuất, ngăn chặn việc gửi thông báo đến thiết bị đã thoát.
+    - **Server-First Auth State Sync**: Refactor `LanguageSync` thành Server Component để tự động fetch session và truyền `userId` xuống client, giải quyết vấn đề trình duyệt không nhận được event `onAuthStateChange` từ các thao tác login/logout bằng Server Actions (`actions/auth.ts`).
+  - **Singleton Supabase Client**: Chuyển đổi Supabase client ở phía trình duyệt sang pattern Singleton (`lib/supabase/client.ts`) để đảm bảo tất cả các component dùng chung một Auth listener và state duy nhất.
+  - **Environment Safety Refactor**: Tách biệt logic truy vấn cho Server và Client trong hệ thống Service để tránh lỗi `next/headers`.
+  - **i18n Fixed**: Xử lý triệt để các lỗi `MISSING_MESSAGE` và `INSUFFICIENT_PATH` thông qua phân tích của `next-mcp`.
+  - **Automated Triggers**: Triển khai cơ chế tự động gửi thông báo:
+    - Khi ứng viên apply (`applyToJob` -> thông báo trực tiếp cho Nhà tuyển dụng).
+    - Khi bài đăng mới ở trạng thái active (`createJob` -> thông báo qua FCM Topics cho Followers).
+    - Khi bài đăng chuyển từ các trạng thái khác ("draft", "closed") sang "active" (xử lý qua `updateJob` và `updateJobStatus`).
 
 ## Next Steps
 

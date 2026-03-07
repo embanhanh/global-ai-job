@@ -36,6 +36,12 @@
 - [x] **Candidate Profile Real Data & Update**: Tích hợp dữ liệu thực, quản lý CV qua Supabase Storage, hỗ trợ kỹ năng, kinh nghiệm và học vấn. Tuân thủ 100% project rules (actions, services, loading, error).
 - [x] **Shared Settings Page**: Triển khai trang cài đặt dùng chung cho cả Candidate & Recruiter với Optimistic UI, Debouncing, và RLS-based privacy.
 - [x] **Saved Jobs Implementation**: Triển khai tính năng lưu việc làm với Optimistic UI, Server-First page refactor, và smooth unsave animations.
+- [x] **Follow & Push Notification System**: Triển khai follows table, FCM integration, i18n-ready notifications và auto-topic subscription.
+- [x] **Automated Notification Triggers**: Tự động thông báo khi có ứng tuyển mới hoặc tin tuyển dụng mới (Active). Hỗ trợ trigger khi Job chuyển từ Draft sang Active qua Edit/Toggle.
+- [x] **Robust Auth & FCM Synchronization**: Triển khai Singleton Supabase Client, session-aware synchronization (`useLanguageSync`), và logout token clearance.
+- [x] **Server-First Auth State Sync**: Refactor `LanguageSync` thành Server Component để truyền trực tiếp trạng thái đăng nhập cho client hook, giải quyết triệt để lỗi Client Supabase không lắng nghe được event sau Server Action login.
+- [x] **Real-time FCM Topic Subscription**: Cập nhật action `toggleFollow` để sub/unsub trực tiếp vào FCM topic thay vì chỉ ghi nhận vào DB.
+- [x] **Client-Side FCM Reception**: Lắng nghe `onMessage` (Firebase Messaging SDK) trong giao diện để hiển thị Toast và tăng số lượng thông báo chưa đọc theo thời gian thực (Foreground).
 - [ ] Job Analytics & Reporting (Next Focus).
 
 ## Current Status

@@ -49,7 +49,7 @@ export function Sidebar({}: SidebarProps) {
       icon: Search,
     },
     {
-      href: "/settings",
+      href: "/recruiter/settings",
       label: t("settings"),
       icon: Settings,
     },
