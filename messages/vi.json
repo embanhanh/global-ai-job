@@ -26,12 +26,20 @@
       "vi": "Tiếng Việt",
       "en": "Tiếng Anh"
     },
+    "activity": {
+      "JOB_APPLIED": "Đã ứng tuyển vị trí: {job_title}",
+      "RECRUITER_FOLLOWED": "Đã theo dõi công ty: {company_name}",
+      "PROFILE_UPDATED": "Đã cập nhật thông tin hồ sơ",
+      "APPLICATION_UPDATED": "Đã cập nhật trạng thái ứng tuyển cho {job_title}",
+      "NEW_JOB_POSTED": "Đã đăng tin tuyển dụng mới: {job_title}"
+    },
     "follow": {
       "follow": "Theo dõi",
       "following": "Đang theo dõi",
       "success": "Đã theo dõi công ty để nhận thông báo",
       "unfollowSuccess": "Đã bỏ theo dõi công ty",
-      "error": "Có lỗi xảy ra"
+      "error": "Có lỗi xảy ra",
+      "authRequired": "Vui lòng đăng nhập để theo dõi công ty."
     }
   },
   "Errors": {
@@ -572,7 +580,12 @@
         }
       },
       "applications": {
+        "noApplications": "Không có đơn ứng tuyển nào.",
         "title": "Đơn ứng tuyển của tôi",
+        "filter": {
+          "all": "Tất cả ứng tuyển",
+          "interview": "Phỏng vấn"
+        },
         "table": {
           "job": "Công việc",
           "company": "Công ty",

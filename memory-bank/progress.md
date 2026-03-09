@@ -42,6 +42,9 @@
 - [x] **Server-First Auth State Sync**: Refactor `LanguageSync` thành Server Component để truyền trực tiếp trạng thái đăng nhập cho client hook, giải quyết triệt để lỗi Client Supabase không lắng nghe được event sau Server Action login.
 - [x] **Real-time FCM Topic Subscription**: Cập nhật action `toggleFollow` để sub/unsub trực tiếp vào FCM topic thay vì chỉ ghi nhận vào DB.
 - [x] **Client-Side FCM Reception**: Lắng nghe `onMessage` (Firebase Messaging SDK) trong giao diện để hiển thị Toast và tăng số lượng thông báo chưa đọc theo thời gian thực (Foreground).
+- [x] **Automated Activity Tracking System**: Logging activities dynamically via Postgres Triggers & Views instead of manual inserts inside Server Actions.
+- [x] **Candidate Dashboard Stats**: Implemented filtering applications by stage and showing relevant stats on Candidate Dashboard with search params redirection.
+- [x] **Route Protection and Sign-out**: Protected `/candidate` and `/recruiter` routes via `proxy.ts` middleware and handled strict `router.push('/')` after logout.
 - [ ] Job Analytics & Reporting (Next Focus).
 
 ## Current Status

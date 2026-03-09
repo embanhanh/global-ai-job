@@ -62,7 +62,11 @@ export function FollowButton({
           result.action === "followed" ? t("success") : t("unfollowSuccess"),
         );
       } else {
-        toast.error(result.error || t("error"));
+        if (result.error === "Authentication required") {
+          toast.error(t("authRequired"));
+        } else {
+          toast.error(result.error || t("error"));
+        }
       }
     });
   }, [companyId, optimisticIsFollowing, addOptimisticIsFollowing, locale, t]);

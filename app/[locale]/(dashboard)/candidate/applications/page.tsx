@@ -22,13 +22,22 @@ import { format } from "date-fns";
 import { vi, enUS } from "date-fns/locale";
 import { getLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { cn } from "@/lib/utils";
 
-export default async function ApplicationsPage() {
+export default async function ApplicationsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ stage?: string }>;
+}) {
   const t = await getTranslations("Dashboard.candidate.applications");
   const locale = await getLocale();
   const dateLocale = locale === "vi" ? vi : enUS;
 
-  const { data: applications, error } = await getApplicationsByCandidate();
+  const { stage } = await searchParams;
+
+  const { data: applications, error } = await getApplicationsByCandidate({
+    stage,
+  });
 
   if (error) {
     throw new Error(error);
@@ -78,8 +87,32 @@ export default async function ApplicationsPage() {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h1 className="text-3xl font-bold tracking-tight">{t("title")}</h1>
+        <div className="flex gap-2">
+          <Link
+            href="/candidate/applications"
+            className={cn(
+              "px-4 py-2 rounded-full text-sm font-medium transition-colors border",
+              !stage
+                ? "bg-white/10 text-white border-white/20"
+                : "bg-transparent text-white/50 border-white/5 hover:bg-white/5 hover:text-white",
+            )}
+          >
+            {t("filter.all")}
+          </Link>
+          <Link
+            href="/candidate/applications?stage=interview"
+            className={cn(
+              "px-4 py-2 rounded-full text-sm font-medium transition-colors border",
+              stage === "interview"
+                ? "bg-white/10 text-white border-white/20"
+                : "bg-transparent text-white/50 border-white/5 hover:bg-white/5 hover:text-white",
+            )}
+          >
+            {t("filter.interview")}
+          </Link>
+        </div>
       </div>
 
       <div className="rounded-2xl border border-white/5 bg-[#0a0a14]/40 overflow-hidden">

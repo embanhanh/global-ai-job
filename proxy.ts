@@ -1,16 +1,37 @@
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 import { updateSession } from "@/lib/supabase/middleware";
-import { type NextRequest } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
 // Next.js 16: This file replaces middleware.ts
 // Named export 'proxy' is required for the new proxy convention
 const intlProxy = createMiddleware(routing);
 
 export async function proxy(request: NextRequest) {
-  // Update session before intl handles the request
-  await updateSession(request);
-  return intlProxy(request);
+  const { supabaseResponse, user } = await updateSession(request);
+
+  const pathname = request.nextUrl.pathname;
+  const isProtectedPath = /^\/(vi|en)?\/(candidate|recruiter)(\/|$)/.test(
+    pathname,
+  );
+
+  if (isProtectedPath && !user) {
+    const locale = pathname.match(/^\/(vi|en)/)?.[1] || "vi";
+    const redirectUrl = request.nextUrl.clone();
+    redirectUrl.pathname = `/${locale}/login`;
+    return NextResponse.redirect(redirectUrl);
+  }
+
+  const intlResponse = intlProxy(request);
+
+  // Merge cookies from supabaseResponse to intlResponse to preserve auth session updates
+  supabaseResponse.cookies
+    .getAll()
+    .forEach((cookie: { name: string; value: string }) => {
+      intlResponse.cookies.set(cookie.name, cookie.value);
+    });
+
+  return intlResponse;
 }
 
 // Alternatively, use default export (both work during transition period)

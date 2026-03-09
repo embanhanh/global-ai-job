@@ -1,4 +1,4 @@
-Dự án đã hoàn thành việc triển khai hệ thống **Follow & Push Notification**, đồng thời refactor toàn diện các trang công khai và dashboard theo tiêu chuẩn `vibe-next-rules.md`. Trọng tâm hiện tại là hoàn thiện logic **AI Resume Parser** (PDF to Markdown) và xử lý triệt để các lỗi môi trường (server vs client) trong hệ thống service.
+Dự án đã hoàn thành việc triển khai hệ thống **Follow & Push Notification**, đồng thời refactor toàn diện các trang công khai và dashboard theo tiêu chuẩn `vibe-next-rules.md`. Trọng tâm hiện tại là hoàn thiện logic **AI Resume Parser** (PDF to Markdown), triển khai hệ thống **Automated Activity Tracking**, và xử lý triệt để các lỗi môi trường (server vs client) trong hệ thống service.
 
 ## Recent Changes.
 
@@ -80,6 +80,11 @@ Dự án đã hoàn thành việc triển khai hệ thống **Follow & Push Noti
     - Khi ứng viên apply (`applyToJob` -> thông báo trực tiếp cho Nhà tuyển dụng).
     - Khi bài đăng mới ở trạng thái active (`createJob` -> thông báo qua FCM Topics cho Followers).
     - Khi bài đăng chuyển từ các trạng thái khác ("draft", "closed") sang "active" (xử lý qua `updateJob` và `updateJobStatus`).
+
+- **Automated Activity Tracking System**:
+  - **PostgreSQL Triggers & Views**: Centralized activity logging using an `audit_log` table and `process_audit_log` function triggered automatically on INSERT/UPDATE/DELETE across `applications`, `follows`, and `profiles`.
+  - **Zero-Mutation Server Actions**: Completely removed the need for manual tracking inserts in Next.js Server Actions.
+  - **Shared Dashboard UI**: Implemented Server Component `RecentActivity` that translates activity keys using `next-intl` and dynamically formats metadata, integrated into both Candidate and Recruiter dashboards.
 
 ## Next Steps
 

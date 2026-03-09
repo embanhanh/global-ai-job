@@ -26,12 +26,20 @@
       "vi": "Vietnamese",
       "en": "English"
     },
+    "activity": {
+      "JOB_APPLIED": "Applied for position: {job_title}",
+      "RECRUITER_FOLLOWED": "Followed company: {company_name}",
+      "PROFILE_UPDATED": "Updated profile information",
+      "APPLICATION_UPDATED": "Application status updated for {job_title}",
+      "NEW_JOB_POSTED": "New job posted: {job_title}"
+    },
     "follow": {
       "follow": "Follow",
       "following": "Following",
       "success": "Followed company to receive notifications",
       "unfollowSuccess": "Unfollowed company",
-      "error": "An error occurred"
+      "error": "An error occurred",
+      "authRequired": "Please login to follow companies."
     }
   },
   "Errors": {
@@ -565,6 +573,11 @@
       },
       "applications": {
         "title": "My Applications",
+        "noApplications": "No applications yet",
+        "filter": {
+          "all": "All Applications",
+          "interview": "Interviewing"
+        },
         "table": {
           "job": "Job Title",
           "company": "Company",

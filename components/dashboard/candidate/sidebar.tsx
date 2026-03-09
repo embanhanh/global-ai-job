@@ -16,15 +16,18 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 interface CandidateSidebarProps {
   locale: string;
+  initialProfileCompletion: number;
 }
-export function CandidateSidebar({}: CandidateSidebarProps) {
+export function CandidateSidebar({
+  initialProfileCompletion,
+}: CandidateSidebarProps) {
   const t = useTranslations("Dashboard.candidate.sidebar");
   const t_common = useTranslations("Common");
   const pathname = usePathname();
   const router = useRouter();
   const [isCollapsed, setIsCollapsed] = useState(false);
-  // Mock profile completion
-  const profileCompletion = 75;
+
+  const profileCompletion = initialProfileCompletion;
   const navItems = [
     {
       href: "/candidate",
