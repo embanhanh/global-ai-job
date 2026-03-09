@@ -27,11 +27,13 @@
       "en": "English"
     },
     "activity": {
-      "JOB_APPLIED": "Applied for position: {job_title}",
+      "JOB_APPLIED": "Applied for position: {title}",
       "RECRUITER_FOLLOWED": "Followed company: {company_name}",
       "PROFILE_UPDATED": "Updated profile information",
-      "APPLICATION_UPDATED": "Application status updated for {job_title}",
-      "NEW_JOB_POSTED": "New job posted: {job_title}"
+      "APPLICATION_UPDATED": "Application status updated",
+      "NEW_JOB_POSTED": "New job posted: {title}",
+      "JOB_POSTED": "Posted new job: {title}",
+      "JOB_UPDATED": "Updated job posting: {title}"
     },
     "follow": {
       "follow": "Follow",
@@ -287,6 +289,7 @@
         "tryNow": "Try now"
       },
       "jobs": {
+        "allJobs": "All Job Postings",
         "title": "Manage Postings",
         "description": "Manage and track your job postings effectively.",
         "postJob": "Post a Job",
@@ -303,7 +306,9 @@
           "edit": "Edit",
           "viewApplicants": "View Applicants",
           "close": "Close Job",
-          "reopen": "Reopen Job"
+          "reopen": "Reopen Job",
+          "closeSuccess": "Job closed successfully",
+          "reopenSuccess": "Job reopened successfully"
         },
         "aiAssistant": {
           "title": "AI JD Assistant",

@@ -2,9 +2,10 @@ import { getTranslations } from "next-intl/server";
 import { JobList } from "@/components/dashboard/recruiter/jobs/job-list";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
-import { Plus, Filter } from "lucide-react";
+import { Plus } from "lucide-react";
 import { getRecruiterJobs } from "@/services/jobs.service";
 import { SearchInput } from "@/components/dashboard/recruiter/jobs/search-input";
+import { JobFilter } from "@/components/dashboard/recruiter/jobs/job-filter";
 import { Pagination } from "@/components/shared/pagination";
 
 export default async function JobsPage({
@@ -12,10 +13,10 @@ export default async function JobsPage({
   searchParams,
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ query?: string; page?: string }>;
+  searchParams: Promise<{ query?: string; page?: string; status?: string }>;
 }) {
   const { locale } = await params;
-  const { query, page } = await searchParams;
+  const { query, page, status } = await searchParams;
   const currentPage = Number(page) || 1;
 
   const t = await getTranslations({
@@ -29,6 +30,7 @@ export default async function JobsPage({
     pagination,
   } = await getRecruiterJobs({
     query,
+    status,
     page: currentPage,
     pageSize: 10,
   });
@@ -64,13 +66,7 @@ export default async function JobsPage({
           defaultValue={query}
           className="pl-10 bg-white/5 border-white/10 text-white h-11 focus:border-violet-500/50"
         />
-        <Button
-          variant="outline"
-          className="border-white/10 hover:text-white hover:bg-white/5 h-11"
-        >
-          <Filter className="w-4 h-4 mr-2" />
-          {t("filter")}
-        </Button>
+        <JobFilter value={status} />
       </div>
 
       {jobs.length > 0 ? (

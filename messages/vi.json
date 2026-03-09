@@ -27,11 +27,13 @@
       "en": "Tiếng Anh"
     },
     "activity": {
-      "JOB_APPLIED": "Đã ứng tuyển vị trí: {job_title}",
+      "JOB_APPLIED": "Đã ứng tuyển vị trí: {title}",
       "RECRUITER_FOLLOWED": "Đã theo dõi công ty: {company_name}",
       "PROFILE_UPDATED": "Đã cập nhật thông tin hồ sơ",
-      "APPLICATION_UPDATED": "Đã cập nhật trạng thái ứng tuyển cho {job_title}",
-      "NEW_JOB_POSTED": "Đã đăng tin tuyển dụng mới: {job_title}"
+      "APPLICATION_UPDATED": "Đã cập nhật trạng thái ứng tuyển",
+      "NEW_JOB_POSTED": "Đã đăng tin tuyển dụng mới: {title}",
+      "JOB_POSTED": "Đã đăng tin tuyển dụng mới: {title}",
+      "JOB_UPDATED": "Đã cập nhật tin tuyển dụng: {title}"
     },
     "follow": {
       "follow": "Theo dõi",
@@ -294,6 +296,7 @@
         "tryNow": "Thử ngay"
       },
       "jobs": {
+        "allJobs": "Tất cả tin tuyển dụng",
         "title": "Quản lý tin đăng",
         "description": "Quản lý và theo dõi hiệu quả các tin tuyển dụng của bạn.",
         "postJob": "Đăng tin mới",
@@ -310,7 +313,9 @@
           "edit": "Chỉnh sửa",
           "viewApplicants": "Xem ứng viên",
           "close": "Đóng tin",
-          "reopen": "Mở lại tin"
+          "reopen": "Mở lại tin",
+          "closeSuccess": "Đã đóng tin tuyển dụng thành công",
+          "reopenSuccess": "Đã mở lại tin tuyển dụng thành công"
         },
         "aiAssistant": {
           "title": "Trợ lý AI JD",
