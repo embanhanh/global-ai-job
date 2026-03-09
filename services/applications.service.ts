@@ -104,13 +104,15 @@ export async function hasAppliedToJob(jobId: string) {
 
 import { CandidateApplication } from "@/types/candidate";
 
-export async function getApplicationsByCandidate() {
+export async function getApplicationsByCandidate(
+  options: {
+    stage?: string;
+  } = {},
+) {
   const supabase = await createClient();
 
-  const { data, error } = await supabase
-    .from("applications")
-    .select(
-      `
+  let dbQuery = supabase.from("applications").select(
+    `
       *,
       jobs!inner (
         title,
@@ -118,12 +120,59 @@ export async function getApplicationsByCandidate() {
         companies!inner (name, logo_url)
       )
     `,
-    )
-    .order("applied_date", { ascending: false });
+  );
+
+  if (options.stage && options.stage !== "all") {
+    if (options.stage === "interview") {
+      dbQuery = dbQuery.in("stage", ["interview", "interviewing"]);
+    } else {
+      dbQuery = dbQuery.eq("stage", options.stage);
+    }
+  }
+
+  const { data, error } = await dbQuery.order("applied_date", {
+    ascending: false,
+  });
 
   if (error) {
     return { success: false, error: error.message };
   }
 
   return { success: true, data: data as CandidateApplication[] };
+}
+
+export async function getCandidateDashboardStats() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { success: false, error: "Not authenticated" };
+  }
+
+  // Get total applications
+  const { count: totalApplications, error: totalError } = await supabase
+    .from("applications")
+    .select("*", { count: "exact", head: true })
+    .eq("candidate_id", user.id);
+
+  // Get active interviews (stage = interview or interviewing)
+  const { count: activeInterviews, error: interviewsError } = await supabase
+    .from("applications")
+    .select("*", { count: "exact", head: true })
+    .eq("candidate_id", user.id)
+    .in("stage", ["interview", "interviewing"]);
+
+  if (totalError || interviewsError) {
+    return { success: false, error: "Failed to fetch stats" };
+  }
+
+  return {
+    success: true,
+    data: {
+      totalApplications: totalApplications || 0,
+      activeInterviews: activeInterviews || 0,
+    },
+  };
 }

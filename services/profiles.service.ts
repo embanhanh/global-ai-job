@@ -42,3 +42,24 @@ export async function getCurrentRole(): Promise<UserRole | null> {
 
   return (profile?.role as UserRole) || null;
 }
+
+export async function getProfileCompletionProgress(): Promise<number> {
+  const { success, data: profile } = await getProfile();
+  if (!success || !profile) return 0;
+
+  let score = 0;
+
+  if (profile.full_name) score += 10;
+  if (profile.email) score += 10;
+  if (profile.phone) score += 10;
+  if (profile.bio) score += 10;
+  if (profile.job_title) score += 10;
+  if (profile.resume_url) score += 20;
+  if (Array.isArray(profile.skills) && profile.skills.length > 0) score += 10;
+  if (Array.isArray(profile.experience) && profile.experience.length > 0)
+    score += 10;
+  if (Array.isArray(profile.education) && profile.education.length > 0)
+    score += 10;
+
+  return Math.min(score, 100);
+}

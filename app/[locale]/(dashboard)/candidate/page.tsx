@@ -12,13 +12,8 @@ import { Link } from "@/i18n/navigation";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { JobCard } from "@/components/shared/job-card";
-import { cn } from "@/lib/utils";
-// Mock data
-const mockStats = {
-  totalApplications: 12,
-  activeInterviews: 3,
-  avgMatchScore: 84,
-};
+import { RecentActivity } from "@/components/dashboard/recent-activity";
+import { getCandidateDashboardStats } from "@/services/applications.service";
 const mockRecommendedJobs = [
   {
     id: "1",
@@ -51,32 +46,19 @@ const mockRecommendedJobs = [
     matchScore: 88,
   },
 ];
-const mockActivity = [
-  {
-    id: "1",
-    type: "applied",
-    job: "Senior AI Engineer",
-    company: "Google DeepMind",
-    timestamp: "2 hours ago",
-  },
-  {
-    id: "2",
-    type: "interview",
-    job: "Machine Learning Researcher",
-    company: "OpenAI",
-    timestamp: "1 day ago",
-  },
-  {
-    id: "3",
-    type: "statusChange",
-    job: "Computer Vision Engineer",
-    company: "Tesla",
-    status: "In Review",
-    timestamp: "2 days ago",
-  },
-];
-export default async function CandidateOverviewPage() {
-  const t = await getTranslations("Dashboard.candidate.overview");
+
+export default async function CandidateOverviewPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({
+    locale,
+    namespace: "Dashboard.candidate.overview",
+  });
+  const { data: stats } = await getCandidateDashboardStats();
+
   return (
     <div className="space-y-8">
       {/* Header & Welcome */}
@@ -86,21 +68,25 @@ export default async function CandidateOverviewPage() {
       </div>
       {/* Top Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <StatsCard
-          title={t("stats.totalApplications")}
-          value={mockStats.totalApplications}
-          icon={FileText}
-          trend={{ value: 20, isPositive: true }}
-        />
-        <StatsCard
-          title={t("stats.activeInterviews")}
-          value={mockStats.activeInterviews}
-          icon={Calendar}
-          trend={{ value: 50, isPositive: true }}
-        />
+        <Link href="/candidate/applications">
+          <StatsCard
+            title={t("stats.totalApplications")}
+            value={stats?.totalApplications || 0}
+            icon={FileText}
+            className="hover:border-violet-500/50 cursor-pointer transition-colors"
+          />
+        </Link>
+        <Link href="/candidate/applications?stage=interview">
+          <StatsCard
+            title={t("stats.activeInterviews")}
+            value={stats?.activeInterviews || 0}
+            icon={Calendar}
+            className="hover:border-violet-500/50 cursor-pointer transition-colors"
+          />
+        </Link>
         <StatsCard
           title={t("stats.avgMatchScore")}
-          value={`${mockStats.avgMatchScore}%`}
+          value={"--%"}
           icon={BarChart}
           className="border-violet-500/20 bg-violet-600/5"
         />
@@ -182,53 +168,15 @@ export default async function CandidateOverviewPage() {
       {/* Recent Activity */}
       <section className="space-y-4">
         <h2 className="text-xl font-bold">{t("activity.title")}</h2>
-        <div className="rounded-2xl border border-white/5 bg-[#0a0a14]/40 p-6 space-y-6">
-          {mockActivity.map((item, index) => (
-            <div key={item.id} className="flex gap-4 relative">
-              {index !== mockActivity.length - 1 && (
-                <div className="absolute left-[11px] top-8 bottom-[-24px] w-px bg-white/5" />
-              )}
-              <div
-                className={cn(
-                  "w-[22px] h-[22px] rounded-full flex items-center justify-center shrink-0 z-10",
-                  item.type === "applied"
-                    ? "bg-blue-500/20 border border-blue-500/30"
-                    : item.type === "interview"
-                      ? "bg-emerald-500/20 border border-emerald-500/30"
-                      : "bg-amber-500/20 border border-amber-500/30",
-                )}
-              >
-                <div
-                  className={cn(
-                    "w-1.5 h-1.5 rounded-full shadow-lg",
-                    item.type === "applied"
-                      ? "bg-blue-400 shadow-blue-500/50"
-                      : item.type === "interview"
-                        ? "bg-emerald-400 shadow-emerald-500/50"
-                        : "bg-amber-400 shadow-amber-500/50",
-                  )}
-                />
-              </div>
-              <div className="space-y-1">
-                <p className="text-sm text-white/80">
-                  {item.type === "applied" &&
-                    t("activity.applied", {
-                      job: item.job,
-                      company: item.company,
-                    })}
-                  {item.type === "interview" &&
-                    t("activity.interview", { job: item.job })}
-                  {item.type === "statusChange" &&
-                    t("activity.statusChange", {
-                      job: item.job,
-                      status: item.status || "",
-                    })}
-                </p>
-                <p className="text-xs text-white/30">{item.timestamp}</p>
-              </div>
+        <Suspense
+          fallback={
+            <div className="h-[300px] flex items-center justify-center">
+              <Skeleton className="w-[100px] h-[100px] rounded-full" />
             </div>
-          ))}
-        </div>
+          }
+        >
+          <RecentActivity locale={locale} />
+        </Suspense>
       </section>
     </div>
   );

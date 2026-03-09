@@ -58,6 +58,7 @@ export function UserNav({ user }: UserNavProps) {
         toast.success(t("logoutSuccess") || "Logged out successfully", {
           id: toastId,
         });
+        router.push("/");
         router.refresh();
       } catch {
         toast.error(t("logoutError") || "Failed to log out", { id: toastId });

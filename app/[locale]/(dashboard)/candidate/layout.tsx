@@ -1,6 +1,8 @@
 import { CandidateSidebar } from "@/components/dashboard/candidate/sidebar";
 import { CandidateMobileNav } from "@/components/dashboard/candidate/mobile-nav";
 import { DashboardHeader } from "@/components/dashboard/header";
+import { getProfileCompletionProgress } from "@/services/profiles.service";
+
 export default async function CandidateLayout({
   children,
   params,
@@ -9,10 +11,15 @@ export default async function CandidateLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const profileCompletion = await getProfileCompletionProgress();
+
   return (
     <div className="flex h-screen bg-[#050508] text-white overflow-hidden">
       {/* Sidebar for Desktop */}
-      <CandidateSidebar locale={locale} />
+      <CandidateSidebar
+        locale={locale}
+        initialProfileCompletion={profileCompletion}
+      />
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0 relative overflow-hidden">
         {/* Header */}

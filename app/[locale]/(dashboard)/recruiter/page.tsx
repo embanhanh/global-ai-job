@@ -10,6 +10,9 @@ import {
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+import { RecentActivity } from "@/components/dashboard/recent-activity";
 
 export default async function RecruiterDashboardPage({
   params,
@@ -85,14 +88,19 @@ export default async function RecruiterDashboardPage({
               <MoreHorizontal className="w-5 h-5" />
             </Button>
           </div>
-          <div className="flex-1 flex flex-col items-center justify-center text-center space-y-4 opacity-40">
-            <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-              <TrendingUp className="w-8 h-8 text-neutral-400" />
-            </div>
-            <div>
-              <p className="text-white font-medium">{t("noActivity")}</p>
-              <p className="text-sm text-white/50">{t("noActivityDesc")}</p>
-            </div>
+          <div className="flex-1 overflow-y-auto custom-scrollbar pr-2">
+            <Suspense
+              fallback={
+                <div className="h-full flex flex-col items-center justify-center space-y-4">
+                  <Skeleton className="w-[100px] h-[100px] rounded-full" />
+                </div>
+              }
+            >
+              <RecentActivity
+                locale={locale}
+                className="border-0 bg-transparent p-0"
+              />
+            </Suspense>
           </div>
         </Card>
 
