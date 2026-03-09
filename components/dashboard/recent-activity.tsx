@@ -56,6 +56,10 @@ export async function RecentActivity({
         const isUpdated =
           item.activity_key === "PROFILE_UPDATED" ||
           item.activity_key === "APPLICATION_UPDATED";
+        const isJobPosted =
+          item.activity_key === "JOB_POSTED" ||
+          item.activity_key === "NEW_JOB_POSTED";
+        const isJobUpdated = item.activity_key === "JOB_UPDATED";
 
         return (
           <div key={item.id} className="flex gap-4 relative">
@@ -69,9 +73,11 @@ export async function RecentActivity({
                   ? "bg-blue-500/20 border border-blue-500/30"
                   : isFollowed
                     ? "bg-emerald-500/20 border border-emerald-500/30"
-                    : isUpdated
-                      ? "bg-amber-500/20 border border-amber-500/30"
-                      : "bg-violet-500/20 border border-violet-500/30",
+                    : isJobPosted
+                      ? "bg-violet-500/20 border border-violet-500/30"
+                      : isJobUpdated || isUpdated
+                        ? "bg-amber-500/20 border border-amber-500/30"
+                        : "bg-slate-500/20 border border-slate-500/30",
               )}
             >
               <div
@@ -81,9 +87,11 @@ export async function RecentActivity({
                     ? "bg-blue-400 shadow-blue-500/50"
                     : isFollowed
                       ? "bg-emerald-400 shadow-emerald-500/50"
-                      : isUpdated
-                        ? "bg-amber-400 shadow-amber-500/50"
-                        : "bg-violet-400 shadow-violet-500/50",
+                      : isJobPosted
+                        ? "bg-violet-400 shadow-violet-500/50"
+                        : isJobUpdated || isUpdated
+                          ? "bg-amber-400 shadow-amber-500/50"
+                          : "bg-slate-400 shadow-slate-500/50",
                 )}
               />
             </div>

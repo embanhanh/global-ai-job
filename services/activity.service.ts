@@ -13,9 +13,19 @@ export async function getUserActivities(
 ): Promise<UserActivity[]> {
   const supabase = await createClient();
 
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
+
+  if (authError || !user) {
+    return [];
+  }
+
   const { data, error } = await supabase
     .from("v_user_activities")
     .select("*")
+    .eq("user_id", user.id)
     .order("created_at", { ascending: false })
     .limit(limit);
 

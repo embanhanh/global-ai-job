@@ -84,7 +84,13 @@ Dự án đã hoàn thành việc triển khai hệ thống **Follow & Push Noti
 - **Automated Activity Tracking System**:
   - **PostgreSQL Triggers & Views**: Centralized activity logging using an `audit_log` table and `process_audit_log` function triggered automatically on INSERT/UPDATE/DELETE across `applications`, `follows`, and `profiles`.
   - **Zero-Mutation Server Actions**: Completely removed the need for manual tracking inserts in Next.js Server Actions.
+  - **View Security Integration**: Đảm bảo view `v_user_activities` hoạt động vói `security_invoker = true` để kế thừa RLS từ bảng `audit_log`. Cập nhật Service layer bằng việc kiểm tra `session` để loại bỏ rò rỉ dữ liệu activity giữa các user.
+  - **Trigger Optimization**: Refactor `audit_profiles_trigger` bằng cách tự tạo một function tùy chỉnh để BỎ QUA các lần cập nhật hệ thống (như login fetch `fcm_token` hay `preferred_lang`), qua đó loại bỏ spam log không cần thiết.
   - **Shared Dashboard UI**: Implemented Server Component `RecentActivity` that translates activity keys using `next-intl` and dynamically formats metadata, integrated into both Candidate and Recruiter dashboards.
+
+- **Recruiter Job Management Extensions**:
+  - **Quick Job Status Toggle**: Bổ sung Menu Items (Đóng/Mở lại tin) ngay trên `JobCard`. Sử dụng Server Actions qua `useTransition`, tích hợp `toast` (Sonner), và phản hồi i18n chuẩn mực cho hai ngôn ngữ (vi, en).
+  - **Status Filtering via URL**: Mở rộng `getRecruiterJobs` để lọc theo tham số `status` (active / draft / closed). Khai báo component `JobFilter` dựa trên shadcn `Select` có thể tự động sync filter qua searchParams (URL-driven approach).
 
 ## Next Steps
 

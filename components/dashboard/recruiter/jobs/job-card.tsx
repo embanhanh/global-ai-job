@@ -1,5 +1,8 @@
 "use client";
 
+import { useTransition } from "react";
+import { toast } from "sonner";
+import { updateJobStatus } from "@/actions/jobs.actions";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -34,6 +37,29 @@ interface JobCardProps {
 
 export function JobCard({ job, t }: JobCardProps) {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
+  const handleToggleStatus = async () => {
+    const newStatus = job.status === "closed" ? "active" : "closed";
+
+    startTransition(async () => {
+      const result = await updateJobStatus(job.id, newStatus);
+      if (result.success) {
+        toast.success(
+          newStatus === "closed"
+            ? t("actions.closeSuccess", {
+                defaultValue: "Đã đóng tin tuyển dụng",
+              })
+            : t("actions.reopenSuccess", {
+                defaultValue: "Đã mở lại tin tuyển dụng",
+              }),
+        );
+      } else {
+        toast.error(result.error || t("common.error"));
+      }
+    });
+  };
+
   const statusMap = {
     active: {
       label: t("active"),
@@ -134,10 +160,16 @@ export function JobCard({ job, t }: JobCardProps) {
                 {t("actions.viewApplicants")}
               </DropdownMenuItem>
               <DropdownMenuSeparator className="bg-white/5" />
-              <DropdownMenuItem className="focus:bg-red-500/10 focus:text-red-400 cursor-pointer text-red-400">
-                {job.status === "closed"
-                  ? t("actions.reopen")
-                  : t("actions.close")}
+              <DropdownMenuItem
+                onClick={handleToggleStatus}
+                disabled={isPending}
+                className="focus:bg-red-500/10 focus:text-red-400 cursor-pointer text-red-400"
+              >
+                {isPending
+                  ? t("common.loading", { defaultValue: "Đang xử lý..." })
+                  : job.status === "closed"
+                    ? t("actions.reopen")
+                    : t("actions.close")}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

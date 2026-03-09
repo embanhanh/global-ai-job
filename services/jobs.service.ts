@@ -114,10 +114,11 @@ export async function getJobById(id: string): Promise<JobWithCompany | null> {
 
 export async function getRecruiterJobs(params?: {
   query?: string;
+  status?: string;
   page?: number;
   pageSize?: number;
 }) {
-  const { query, page = 1, pageSize = 10 } = params || {};
+  const { query, status, page = 1, pageSize = 10 } = params || {};
   const supabase = await createClient();
   const {
     data: { user },
@@ -134,6 +135,9 @@ export async function getRecruiterJobs(params?: {
 
   if (query) {
     countQuery = countQuery.ilike("title", `%${query}%`);
+  }
+  if (status && status !== "all") {
+    countQuery = countQuery.eq("status", status);
   }
 
   const { count: totalCount, error: countError } = await countQuery;
@@ -156,6 +160,9 @@ export async function getRecruiterJobs(params?: {
 
   if (query) {
     dataQuery = dataQuery.ilike("title", `%${query}%`);
+  }
+  if (status && status !== "all") {
+    dataQuery = dataQuery.eq("status", status);
   }
 
   const from = (page - 1) * pageSize;
