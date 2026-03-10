@@ -54,3 +54,24 @@ export async function getFollowedCompanies() {
 
   return data;
 }
+
+export async function getFollowingCompanyIds() {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) return [];
+
+  const { data, error } = await supabase
+    .from("follows")
+    .select("following_id")
+    .eq("follower_id", user.id);
+
+  if (error) {
+    console.error("Error fetching following company IDs:", error);
+    return [];
+  }
+
+  return data.map((d: { following_id: string }) => d.following_id);
+}
