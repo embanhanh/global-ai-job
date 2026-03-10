@@ -31,6 +31,7 @@
 - [x] Job Posting & Editing Logic (UI & AI Assistant).
 - [x] Search & Pagination for Jobs (Server-First & Modular).
 - [x] Refactor Public Components (`LanguageSwitcher`, `Hero`, `JobCard`) for Rule Compliance.
+- [x] **Public Company Directory & Detail**: Triển khai trang danh sách công ty và trang chi tiết (`/companies/[id]`) với filters, search, Skeletons (Zero CLS), JSON-LD Organization schema. Tích hợp `CompanyCard` với tính năng Theo dõi (FCM) và render danh sách việc làm đang tuyển (`active`).
 - [x] **Job Detail Command Center** (Applicants, Content, Workflow).
 - [x] **Candidate Applications Real Data**: Kết nối bảng "My Applications" với Supabase, triển khai Zero CLS loading và error boundaries.
 - [x] **Candidate Profile Real Data & Update**: Tích hợp dữ liệu thực, quản lý CV qua Supabase Storage, hỗ trợ kỹ năng, kinh nghiệm và học vấn. Tuân thủ 100% project rules (actions, services, loading, error).
@@ -46,6 +47,7 @@
 - [x] **Candidate Dashboard Stats**: Implemented filtering applications by stage and showing relevant stats on Candidate Dashboard with search params redirection.
 - [x] **Route Protection and Sign-out**: Protected `/candidate` and `/recruiter` routes via `proxy.ts` middleware and handled strict `router.push('/')` after logout.
 - [x] **Recruiter Jobs Management Extensions**: Bổ sung bộ lọc Status bằng URL SearchParams và Component `JobFilter` dựa trên shadcn, tối ưu hóa Card với action Quick Toggle Status.
+- [x] **Next.js 15 Routing Compatibility**: Khắc phục dứt điểm lỗi crash `invalid input syntax for type uuid: "undefined"` khi truy cập trang chi tiết công ty bằng cách xử lý bất đồng bộ (`await`) cho dynamic `params` và thắt chặt validation tại Service layer.
 - [ ] Job Analytics & Reporting (Next Focus).
 
 ## Current Status

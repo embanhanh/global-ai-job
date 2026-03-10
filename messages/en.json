@@ -172,6 +172,32 @@
       }
     }
   },
+  "Companies": {
+    "title": "Top Companies Hiring AI Talents",
+    "subtitle": "Discover the most innovative organizations in Artificial Intelligence",
+    "search": {
+      "placeholder": "Search by name or description...",
+      "button": "Search",
+      "noResults": "No companies found matching your criteria."
+    },
+    "filters": {
+      "title": "Filters",
+      "industry": "Industry",
+      "allIndustries": "All Industries",
+      "reset": "Reset All"
+    },
+    "card": {
+      "activeJobs": "{count} Active Jobs"
+    }
+  },
+  "CompanyDetail": {
+    "about": "About us",
+    "openRoles": "Open Roles",
+    "website": "Visit Website",
+    "noActiveJobs": "No active jobs found for this company.",
+    "location": "Location",
+    "industry": "Industry"
+  },
   "Nav": {
     "findJobs": "Find Jobs",
     "companies": "Companies",

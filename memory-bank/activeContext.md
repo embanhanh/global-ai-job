@@ -14,6 +14,16 @@ Dự án đã hoàn thành việc triển khai hệ thống **Follow & Push Noti
     - `JobCard` hỗ trợ format ngày tháng theo locale (`vi` / `enUS`).
 - **Data Integration**: Thay thế mock data bằng dữ liệu thực từ Supabase trong toàn bộ luồng Public Jobs.
 
+- **Public Company Directory (New)**:
+  - **Company Listing Page**: Xây dựng trang danh sách công ty public (`app/[locale]/(public)/companies`) với kiến trúc Server-First.
+  - **Two-Column Layout**: Left Sidebar chứa `CompanyFilters` (lọc theo industry) và Right Content chứa `CompanySearchHeader` cùng `CompanyGrid`.
+  - **Suspense & Zero CLS**: Sử dụng `CompanyGridSkeleton` kết hợp với `Suspense` bọc xung quanh grid danh sách công ty, đảm bảo trải nghiệm Zero CLS khi load và lọc.
+  - **Performance Optimization**: Sử dụng `useDebouncedCallback` cho ô tìm kiếm và giải quyết bài toán N+1 querying bằng cách chỉ fetch `following_id` một lần duy nhất qua `getFollowingCompanyIds` trong `follows.service.ts`.
+  - **Interactive & Shared UI**: Tạo `CompanyCard` hỗ trợ hiệu ứng `framer-motion` khi hover và tích hợp nút Follow kết nối mượt mà với tính năng nhận thông báo (topic FCM) đã phát triển.
+  - **Company Detail Page (`/companies/[id]`)**: Hiển thị chi tiết (Logo, Industry, Location, Website, Giới thiệu) và danh sách **Active Jobs** của công ty (tái sử dụng `JobCard`). Áp dụng Zero CLS qua `loading.tsx` Skeleton chuyên biệt và render JSON-LD Organization schema.
+  - **Next.js 15 Compatibility Fix**: Khắc phục lỗi `invalid input syntax for type uuid: "undefined"` trên môi trường Next.js 15 bằng cách `await props.params` trước khi sử dụng ID, đồng thời thêm validation ID chặt chẽ tại tầng service (`getPublicCompanyById`, `getCompanyActiveJobs`) để chặn các query lỗi.
+  - **i18n & SEO**: Dịch 100% nội dung qua namespaces `Companies` và `CompanyDetail` (vi, en); cung cấp đầy đủ thẻ `generateMetadata` và cấu trúc SEO.
+
 - **Candidate Dashboard & RBAC**:
   - **Full Dashboard Implementation**: Hoàn thành toàn bộ các trang: Overview, Applications, Saved Jobs, Profile, và Settings cho Ứng viên.
   - **RBAC System**: Triển khai `RoleGuard` và `UserRole` enum để phân quyền truy cập.
