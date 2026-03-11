@@ -1,16 +1,10 @@
+"use client";
 import { Filter } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-type TFunction = (
-  key: string,
-  values?: Record<string, string | number | boolean | Date>,
-) => string;
-
-interface TalentSearchFiltersProps {
-  t: TFunction;
-  t_common: TFunction;
-}
-
-export function TalentSearchFilters({ t, t_common }: TalentSearchFiltersProps) {
+export function TalentSearchFilters() {
+  const t = useTranslations("Dashboard.recruiter.search");
+  const t_common = useTranslations("Common");
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">

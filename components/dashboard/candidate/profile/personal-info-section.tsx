@@ -111,16 +111,22 @@ export function PersonalInfoSection({ form }: PersonalInfoSectionProps) {
                     <div className="flex-1 truncate">
                       <a
                         href={
-                          field.value.startsWith("http")
-                            ? field.value
-                            : `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/resumes/${field.value}`
+                          typeof field.value === "string"
+                            ? field.value.startsWith("http")
+                              ? field.value
+                              : `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/resumes/${field.value}`
+                            : field.value instanceof File
+                              ? URL.createObjectURL(field.value)
+                              : "#"
                         }
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-violet-400 hover:text-violet-300 transition-colors flex items-center gap-2"
                       >
                         <span className="truncate max-w-[200px]">
-                          {t("labels.viewCV")}
+                          {field.value instanceof File
+                            ? field.value.name
+                            : t("labels.viewCV")}
                         </span>
                       </a>
                     </div>
