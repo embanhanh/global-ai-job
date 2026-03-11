@@ -523,7 +523,19 @@
         "viewDetails": "View details",
         "invite": "Invite to apply",
         "placeholder": "Search candidates with AI (e.g., Find React engineers with 3 years experience...)",
-        "submit": "Search"
+        "submit": "Search",
+        "emptyQuery": "Please enter a skill or position to search for candidates with AI",
+        "errorSearch": "Error while searching: {error}",
+        "noMatches": "No candidates found matching your criteria.",
+        "tryDifferentKeywords": "Try searching with different keywords.",
+        "anonymousCandidate": "Anonymous Candidate",
+        "roleNotUpdated": "Not updated",
+        "expNotUpdated": "Not updated",
+        "hasExperience": "Has experience",
+        "experienceAt": "{title} at {company}",
+        "defaultExplanation": "Candidate matches your query based on vector similarity.",
+        "trySuggestion1": "Find React engineer with 3 years AI experience...",
+        "trySuggestion2": "MLOps expert proficient in Kubernetes..."
       }
     },
     "candidate": {

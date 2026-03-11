@@ -103,6 +103,7 @@ export function AiCvParser({ onParseComplete }: AiCvParserProps) {
                   ? "border-violet-500 bg-violet-500/5"
                   : "border-white/10 hover:border-violet-500/50 hover:bg-white/5",
               ),
+              suppressHydrationWarning: true,
             })}
           >
             <input {...getInputProps()} />

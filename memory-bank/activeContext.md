@@ -102,12 +102,17 @@ Dự án đã hoàn thành việc triển khai hệ thống **Follow & Push Noti
   - **Quick Job Status Toggle**: Bổ sung Menu Items (Đóng/Mở lại tin) ngay trên `JobCard`. Sử dụng Server Actions qua `useTransition`, tích hợp `toast` (Sonner), và phản hồi i18n chuẩn mực cho hai ngôn ngữ (vi, en).
   - **Status Filtering via URL**: Mở rộng `getRecruiterJobs` để lọc theo tham số `status` (active / draft / closed). Khai báo component `JobFilter` dựa trên shadcn `Select` có thể tự động sync filter qua searchParams (URL-driven approach).
 
+- **Natural Language Candidate Search (Semantic Matching)**:
+  - **Database setup**: Kích hoạt pgvector, thêm `content_vector` vector(768) vào bảng `profiles` thông qua Supabase MCP Migration.
+  - **RPC Function `match_candidates`**: Cho phép tính độ tương đồng cosine, giới hạn hiển thị chỉ những public profile và format đầu ra trực tiếp từ db.
+  - **AI Text Embedding Service**: Thúc đẩy `@ai-sdk/google` với `gemini-embedding-001` (Gemini) sinh vector dựa trên metadata profile (Skills, Experience, Education, Bio). Hàm `syncProfileEmbedding` giúp đẩy dữ liệu về Supabase.
+  - **RSC UI & URL-Driven**: `<TalentSearchHeader>` dùng `useDebouncedCallback` để bắt dữ liệu nhập và cập nhật lên url searchParam `?query=XXX`, theo sau đó `<TalentSearchList>` server component catch params, chạy Action `searchCandidatesAction` và đổ render UI an toàn dạng `<Suspense>` tránh CLS.
+
 ## Next Steps
 
 1.  **AI Resume Parser Internal Logic**: Hoàn thiện logic xử lý file thật (PDF to Markdown) thay vì mock.
 2.  **Job Analytics Tab**: Triển khai biểu đồ và báo cáo hiệu quả tuyển dụng cho từng job.
 3.  **Social Login**: Tích hợp Google và Github OAuth.
-4.  **Recruiter Talent Search**: Nâng cấp công cụ tìm kiếm ứng viên bằng AI.
 
 ## Decisions & Patterns
 

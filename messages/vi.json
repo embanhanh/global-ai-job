@@ -531,7 +531,19 @@
         "viewDetails": "Xem chi tiết",
         "invite": "Mời ứng tuyển",
         "placeholder": "Tìm kiếm ứng viên bằng AI (Ví dụ: Tìm kĩ sư React có 3 năm kinh nghiệm...)",
-        "submit": "Tìm kiếm"
+        "submit": "Tìm kiếm",
+        "emptyQuery": "Vui lòng nhập kỹ năng hoặc vị trí để tìm kiếm ứng viên bằng AI",
+        "errorSearch": "Lỗi khi tìm kiếm: {error}",
+        "noMatches": "Không tìm thấy ứng viên phù hợp với yêu cầu của bạn.",
+        "tryDifferentKeywords": "Hãy thử thay đổi từ khóa tìm kiếm.",
+        "anonymousCandidate": "Ứng viên ẩn danh",
+        "roleNotUpdated": "Chưa cập nhật",
+        "expNotUpdated": "Chưa cập nhật",
+        "hasExperience": "Có kinh nghiệm",
+        "experienceAt": "{title} tại {company}",
+        "defaultExplanation": "Ứng viên phù hợp với từ khóa của bạn dựa trên điểm tương đồng (Vector Search).",
+        "trySuggestion1": "Tìm kỹ sư React có 3 năm kinh nghiệm làm AI...",
+        "trySuggestion2": "Chuyên gia MLOps thành thạo Kubernetes..."
       }
     },
     "candidate": {

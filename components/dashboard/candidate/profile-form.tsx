@@ -67,39 +67,39 @@ export function ProfileForm({ initialData }: ProfileFormProps) {
   }, [state, t]);
 
   const onSubmit = async (values: CandidateProfileValues) => {
-    startTransition(async () => {
-      try {
-        let resumeUrl = values.resumeUrl;
+    try {
+      let resumeUrl = values.resumeUrl;
 
-        // If it's a File object, we need to upload it first
-        if (values.resumeUrl instanceof File) {
-          const supabase = createClient();
-          const {
-            data: { user },
-          } = await supabase.auth.getUser();
+      // If it's a File object, we need to upload it first
+      if (values.resumeUrl instanceof File) {
+        const supabase = createClient();
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
 
-          if (!user) throw new Error("Not authenticated");
+        if (!user) throw new Error("Not authenticated");
 
-          const fileExt = values.resumeUrl.name.split(".").pop();
-          const fileName = `${user.id}/${Date.now()}.${fileExt}`;
+        const fileExt = values.resumeUrl.name.split(".").pop();
+        const fileName = `${user.id}/${Date.now()}.${fileExt}`;
 
-          const { error: uploadError } = await supabase.storage
-            .from("resumes")
-            .upload(fileName, values.resumeUrl);
+        const { error: uploadError } = await supabase.storage
+          .from("resumes")
+          .upload(fileName, values.resumeUrl);
 
-          if (uploadError) throw uploadError;
-          resumeUrl = fileName;
-        }
+        if (uploadError) throw uploadError;
+        resumeUrl = fileName;
+      }
 
-        await formAction({
+      startTransition(() => {
+        formAction({
           ...values,
           resumeUrl: resumeUrl as string,
         });
-      } catch (error) {
-        console.error("Profile update error:", error);
-        toast.error(t("error"));
-      }
-    });
+      });
+    } catch (error) {
+      console.error("Profile update error:", error);
+      toast.error(t("error"));
+    }
   };
 
   return (

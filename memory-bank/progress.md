@@ -48,7 +48,12 @@
 - [x] **Route Protection and Sign-out**: Protected `/candidate` and `/recruiter` routes via `proxy.ts` middleware and handled strict `router.push('/')` after logout.
 - [x] **Recruiter Jobs Management Extensions**: Bổ sung bộ lọc Status bằng URL SearchParams và Component `JobFilter` dựa trên shadcn, tối ưu hóa Card với action Quick Toggle Status.
 - [x] **Next.js 15 Routing Compatibility**: Khắc phục dứt điểm lỗi crash `invalid input syntax for type uuid: "undefined"` khi truy cập trang chi tiết công ty bằng cách xử lý bất đồng bộ (`await`) cho dynamic `params` và thắt chặt validation tại Service layer.
-- [ ] Job Analytics & Reporting (Next Focus).
+- [x] **Natural Language Candidate Search**: Ứng dụng pgvector và Gemini để tìm kiếm ứng viên dùng ngôn ngữ tự nhiên, tính điểm tương đồng cosine với server actions.
+- [ ] Job Analytics & Reporting (Next Focus)
+
+1.  **AI Resume Parser Internal Logic**: Hoàn thiện logic xử lý file thật (PDF to Markdown) thay vì mock.
+2.  **Job Analytics Tab**: Triển khai biểu đồ và báo cáo hiệu quả tuyển dụng cho từng job.
+3.  **Social Login**: Tích hợp Google và Github OAuth.
 
 ## Current Status
 

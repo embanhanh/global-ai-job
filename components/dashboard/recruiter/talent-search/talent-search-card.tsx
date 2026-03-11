@@ -1,3 +1,5 @@
+"use client";
+import { useTranslations } from "next-intl";
 import { Star, Sparkles, UserCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -14,17 +16,14 @@ export interface TalentResult {
   explanation: string;
 }
 
-type TFunction = (
-  key: string,
-  values?: Record<string, string | number | boolean | Date>,
-) => string;
 
 interface TalentSearchCardProps {
   result: TalentResult;
-  t: TFunction;
 }
 
-export function TalentSearchCard({ result, t }: TalentSearchCardProps) {
+export function TalentSearchCard({ result }: TalentSearchCardProps) {
+  const t = useTranslations("Dashboard.recruiter.search");
+
   return (
     <Card className="bg-[#0a0a14]/60 backdrop-blur-xl border-white/5 p-6 group hover:border-violet-500/30 transition-all duration-300">
       <div className="flex flex-col md:flex-row gap-6">
