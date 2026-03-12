@@ -32,26 +32,32 @@ export function JobFilter({ value }: { value?: string }) {
 
   return (
     <Select value={value || "all"} onValueChange={handleFilterChange}>
-      <SelectTrigger className="w-[180px] h-11 bg-white/5 border-white/10 text-white focus:ring-violet-500/50">
-        <Filter className="w-4 h-4 mr-2 text-white/50" />
+      <SelectTrigger className="w-[180px] h-11 bg-accent/50 border-sidebar-border text-foreground focus:ring-primary/50">
+        <Filter className="w-4 h-4 mr-2 text-muted-foreground" />
         <SelectValue placeholder={t("filter")} />
       </SelectTrigger>
-      <SelectContent className="bg-[#0a0a14] border-white/10 text-white">
-        <SelectItem value="all" className="focus:bg-white/5 focus:text-white">
+      <SelectContent className="bg-popover border-border text-popover-foreground">
+        <SelectItem
+          value="all"
+          className="focus:bg-accent focus:text-accent-foreground"
+        >
           {t("allJobs", { defaultValue: "All Jobs" })}
         </SelectItem>
         <SelectItem
           value="active"
-          className="focus:bg-white/5 focus:text-white"
+          className="focus:bg-accent focus:text-accent-foreground"
         >
           {t("active")}
         </SelectItem>
-        <SelectItem value="draft" className="focus:bg-white/5 focus:text-white">
+        <SelectItem
+          value="draft"
+          className="focus:bg-accent focus:text-accent-foreground"
+        >
           {t("draft")}
         </SelectItem>
         <SelectItem
           value="closed"
-          className="focus:bg-white/5 focus:text-white"
+          className="focus:bg-accent focus:text-accent-foreground"
         >
           {t("closed")}
         </SelectItem>

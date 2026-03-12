@@ -53,7 +53,7 @@ export function SavedJobsClient({ initialJobs }: SavedJobsClientProps) {
               <div className="absolute top-4 right-4 z-10">
                 <button
                   onClick={() => handleUnsave(job.id)}
-                  className="p-2 rounded-full bg-slate-900/80 backdrop-blur-sm border border-white/10 text-white/40 hover:text-rose-400 hover:bg-rose-400/10 hover:border-rose-400/30 transition-all duration-200"
+                  className="p-2 rounded-full bg-background/80 backdrop-blur-sm border border-border text-muted-foreground hover:text-rose-500 hover:bg-rose-500/10 hover:border-rose-500/30 transition-all duration-200"
                   title={t("unsave")}
                 >
                   <HeartOff className="w-4 h-4" />
@@ -67,12 +67,12 @@ export function SavedJobsClient({ initialJobs }: SavedJobsClientProps) {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="flex flex-col items-center justify-center py-24 text-center space-y-4 bg-white/5 border border-white/10 rounded-3xl"
+          className="flex flex-col items-center justify-center py-24 text-center space-y-4 bg-muted/50 border border-border rounded-3xl"
         >
-          <div className="w-20 h-20 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-            <HeartOff className="w-10 h-10 text-white/20" />
+          <div className="w-20 h-20 rounded-full bg-background border border-border flex items-center justify-center">
+            <HeartOff className="w-10 h-10 text-muted-foreground/30" />
           </div>
-          <p className="text-white/40 font-medium">{t("empty")}</p>
+          <p className="text-muted-foreground font-medium">{t("empty")}</p>
         </motion.div>
       )}
     </AnimatePresence>

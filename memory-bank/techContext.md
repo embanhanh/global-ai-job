@@ -3,7 +3,8 @@
 ## Core Technologies
 
 - **Frontend**: Next.js 16.1.6 (App Router), React 19.
-- **Styling**: Tailwind CSS v4, Framer Motion (animations), Lucide React (icons).
+- **Styling**: Tailwind CSS v4, Framer Motion, **Anime.js v4** (advanced animations), Lucide React (icons).
+- **3D Graphics**: `Three.js` (@react-three/fiber, @react-three/drei).
 - **Internationalization**: `next-intl`.
 - **Backend/Auth**: Supabase (@supabase/supabase-js) - Database, Auth, và Storage (resumes bucket). Firebase (Admin & Client SDK) - Cloud Messaging (FCM).
 - **AI**: Vercel AI SDK (@ai-sdk/google).

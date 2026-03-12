@@ -1,12 +1,14 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Search, MapPin, Sparkles } from "lucide-react";
+import { Search, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { motion } from "framer-motion";
 import { useState } from "react";
 import { useRouter } from "@/i18n/navigation";
+import { LocationSelector } from "@/components/shared/location-selector";
+import { Hero3D } from "./hero-3d";
+import { AnimeReveal } from "@/components/shared/anime-reveal";
 
 export function HomeHero() {
   const t = useTranslations("Landing.hero");
@@ -30,91 +32,97 @@ export function HomeHero() {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center pt-32 pb-20 px-6">
-      {/* Ambient Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-violet-700/10 blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-indigo-700/10 blur-[120px]" />
-      </div>
+    <section className="relative min-h-[90vh] flex items-center justify-center pt-20 px-6 overflow-hidden bg-background">
+      {/* 3D Content */}
+      <Hero3D />
 
-      <div className="relative max-w-5xl mx-auto text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
+      {/* Background radial glow — theme-aware */}
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle at center, var(--hero-glow) 0%, transparent 70%)",
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto w-full relative z-10 text-center">
+        <AnimeReveal stagger={150} delay={200}>
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-violet-500/30 bg-violet-500/10 backdrop-blur-sm mb-8">
-            <Sparkles className="w-4 h-4 text-violet-400" />
-            <span className="text-sm text-violet-300 font-medium">
+          <div
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-md mb-8 animate-pulse"
+            style={{
+              background: "var(--hero-badge-bg, var(--primary)/0.08)",
+              border: "1px solid var(--primary)",
+              borderColor: "oklch(from var(--primary) l c h / 0.2)",
+            }}
+          >
+            <Sparkles className="w-4 h-4 text-primary" />
+            <span className="text-sm font-medium text-muted-foreground">
               {t("badge")}
             </span>
           </div>
 
           {/* Headline */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tight mb-8 text-white">
-            {t("title")}{" "}
-            <span className="bg-linear-to-r from-violet-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-8xl font-black text-foreground tracking-tight mb-8">
+            {t("title")} <br />
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-violet-500 via-fuchsia-500 to-violet-500 bg-size-[200%_auto] animate-shimmer">
               {t("titleHighlight")}
-            </span>
+            </span>{" "}
             <br />
-            <span className="text-white/40">{t("titleSuffix")}</span>
+            {t("titleSuffix")}
           </h1>
 
-          {/* Description */}
-          <p className="max-w-2xl mx-auto text-lg md:text-xl text-white/50 leading-relaxed mb-12">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12">
             {t("description")}
           </p>
 
           {/* Search Bar */}
-          <div className="max-w-3xl mx-auto mb-12">
-            <div className="relative flex flex-col md:flex-row items-center gap-2 p-2 rounded-2xl md:rounded-full bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl">
+          <div className="max-w-4xl mx-auto">
+            <div className="p-2 rounded-2xl glass shadow-2xl flex flex-col md:flex-row gap-2 items-center">
               <div className="relative flex-1 w-full flex items-center px-4">
-                <Search className="w-5 h-5 text-white/40 absolute left-4" />
+                <Search className="w-5 h-5 text-muted-foreground absolute left-4" />
                 <Input
                   value={q}
                   onChange={(e) => setQ(e.target.value)}
                   onKeyDown={handleKeyDown}
                   placeholder={t("searchPlaceholder")}
-                  className="bg-transparent border-none text-white placeholder:text-white/30 h-12 pl-10 focus-visible:ring-0"
+                  className="bg-transparent border-none text-foreground placeholder:text-muted-foreground/60 h-12 pl-10 focus-visible:ring-0"
                 />
               </div>
-              <div className="hidden md:block w-px h-8 bg-white/10" />
-              <div className="relative flex-1 w-full flex items-center px-4">
-                <MapPin className="w-5 h-5 text-white/40 absolute left-4" />
-                <Input
+              <div className="hidden md:block w-px h-8 bg-border" />
+              <div className="relative flex-1 w-full">
+                <LocationSelector
                   value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  onKeyDown={handleKeyDown}
+                  onChange={setLocation}
                   placeholder={t("locationPlaceholder")}
-                  className="bg-transparent border-none text-white placeholder:text-white/30 h-12 pl-10 focus-visible:ring-0"
+                  className="bg-transparent border-none hover:bg-transparent h-12"
                 />
               </div>
               <Button
                 onClick={handleSearch}
-                className="w-full md:w-auto h-12 px-8 rounded-full bg-violet-600 hover:bg-violet-500 text-white font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(139,92,246,0.3)]"
+                className="w-full md:w-auto h-12 px-8 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-bold transition-all hover:scale-[1.02] shadow-[0_0_20px_rgba(139,92,246,0.3)]"
               >
                 {t("searchButton")}
               </Button>
             </div>
           </div>
 
-          {/* Tags */}
-          <div className="flex flex-wrap items-center justify-center gap-3 text-sm text-white/40">
+          {/* Popular Tags */}
+          <div className="flex flex-wrap items-center justify-center gap-3 text-sm text-muted-foreground mt-12">
             <span>{t("popular")}</span>
             {["AI Engineer", "React", "Python", "Data Scientist", "NLP"].map(
               (tag) => (
                 <button
                   key={tag}
                   onClick={() => router.push(`/jobs?q=${tag}`)}
-                  className="px-3 py-1 rounded-full border border-white/5 bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all text-white/60 hover:text-white"
+                  className="px-3 py-1 rounded-full border border-border bg-muted/40 hover:bg-muted hover:border-primary/30 transition-all text-foreground/70 hover:text-foreground"
                 >
                   {tag}
                 </button>
               ),
             )}
           </div>
-        </motion.div>
+        </AnimeReveal>
       </div>
     </section>
   );

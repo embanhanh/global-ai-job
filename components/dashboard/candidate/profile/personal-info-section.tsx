@@ -24,9 +24,9 @@ export function PersonalInfoSection({ form }: PersonalInfoSectionProps) {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center gap-3 border-b border-white/5 pb-4">
-        <div className="p-2 rounded-lg bg-violet-600/10 border border-violet-500/20">
-          <User className="w-4 h-4 text-violet-400" />
+      <div className="flex items-center gap-3 border-b border-border pb-4">
+        <div className="p-2 rounded-lg bg-primary/10 border border-primary/20">
+          <User className="w-4 h-4 text-primary" />
         </div>
         <h2 className="text-xl font-bold">{t("personalInfo")}</h2>
       </div>
@@ -41,7 +41,7 @@ export function PersonalInfoSection({ form }: PersonalInfoSectionProps) {
                 <Input
                   {...field}
                   placeholder={t("labels.fullName")}
-                  className="bg-white/5 border-white/10"
+                  className="bg-accent/50 border-border"
                 />
               </FormControl>
               <FormMessage />
@@ -58,7 +58,7 @@ export function PersonalInfoSection({ form }: PersonalInfoSectionProps) {
                 <Input
                   {...field}
                   placeholder={t("labels.email")}
-                  className="bg-white/5 border-white/10"
+                  className="bg-accent/50 border-border"
                 />
               </FormControl>
               <FormMessage />
@@ -75,7 +75,7 @@ export function PersonalInfoSection({ form }: PersonalInfoSectionProps) {
                 <Input
                   {...field}
                   placeholder={t("labels.phone")}
-                  className="bg-white/5 border-white/10"
+                  className="bg-accent/50 border-border"
                 />
               </FormControl>
               <FormMessage />
@@ -92,7 +92,7 @@ export function PersonalInfoSection({ form }: PersonalInfoSectionProps) {
                 <Input
                   {...field}
                   placeholder={t("labels.jobTitle")}
-                  className="bg-white/5 border-white/10"
+                  className="bg-accent/50 border-border"
                 />
               </FormControl>
               <FormMessage />
@@ -107,7 +107,7 @@ export function PersonalInfoSection({ form }: PersonalInfoSectionProps) {
               <FormLabel>{t("labels.resumeUrl")}</FormLabel>
               <FormControl>
                 {field.value ? (
-                  <div className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 rounded-lg">
+                  <div className="flex items-center gap-4 p-4 bg-accent/50 border border-border rounded-lg">
                     <div className="flex-1 truncate">
                       <a
                         href={
@@ -121,7 +121,7 @@ export function PersonalInfoSection({ form }: PersonalInfoSectionProps) {
                         }
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-violet-400 hover:text-violet-300 transition-colors flex items-center gap-2"
+                        className="text-primary hover:text-primary/80 transition-colors flex items-center gap-2"
                       >
                         <span className="truncate max-w-[200px]">
                           {field.value instanceof File
@@ -146,7 +146,7 @@ export function PersonalInfoSection({ form }: PersonalInfoSectionProps) {
                   <Input
                     type="file"
                     accept=".pdf,.doc,.docx"
-                    className="bg-white/5 border-white/10 cursor-pointer"
+                    className="bg-accent/50 border-border cursor-pointer"
                     onChange={(e) => {
                       const file = e.target.files?.[0];
                       if (file) {
@@ -173,7 +173,7 @@ export function PersonalInfoSection({ form }: PersonalInfoSectionProps) {
               <Textarea
                 {...field}
                 placeholder={t("labels.bio")}
-                className="bg-white/5 border-white/10 min-h-[120px]"
+                className="bg-accent/50 border-border min-h-[120px]"
               />
             </FormControl>
             <FormMessage />

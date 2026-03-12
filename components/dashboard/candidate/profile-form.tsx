@@ -118,11 +118,11 @@ export function ProfileForm({ initialData }: ProfileFormProps) {
         <ExperienceSection form={form} />
         <EducationSection form={form} />
 
-        <div className="pt-8 border-t border-white/5 flex justify-end">
+        <div className="pt-8 border-t border-border flex justify-end">
           <Button
             type="submit"
             disabled={isPending}
-            className="bg-violet-600 hover:bg-violet-700 text-white px-8 h-12 rounded-xl font-bold text-lg shadow-lg shadow-violet-500/20 disabled:opacity-50"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 h-12 rounded-xl font-bold text-lg shadow-lg shadow-primary/20 disabled:opacity-50"
           >
             {isPending ? (
               <>

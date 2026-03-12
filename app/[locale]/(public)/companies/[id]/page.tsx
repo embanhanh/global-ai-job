@@ -70,8 +70,8 @@ export default async function CompanyDetailPage(props: {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="bg-slate-50 min-h-screen pb-20 dark:bg-slate-950 pt-20">
-        <div className="bg-white border-b border-slate-200 dark:bg-slate-900 dark:border-slate-800">
+      <div className="bg-background min-h-screen pb-20 pt-20">
+        <div className="border-b border-border bg-card/30 backdrop-blur-sm">
           <div className="container mx-auto px-4 py-8 md:py-12 md:px-6">
             <CompanyHeader company={company} isFollowing={isFollowingCompany} />
           </div>

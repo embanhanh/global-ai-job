@@ -26,6 +26,12 @@
       "vi": "Vietnamese",
       "en": "English"
     },
+    "theme": {
+      "toggle": "Toggle theme",
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
     "activity": {
       "JOB_APPLIED": "Applied for position: {title}",
       "RECRUITER_FOLLOWED": "Followed company: {company_name}",
@@ -42,6 +48,11 @@
       "unfollowSuccess": "Unfollowed company",
       "error": "An error occurred",
       "authRequired": "Please login to follow companies."
+    },
+    "location": {
+      "placeholder": "Select location",
+      "searchPlaceholder": "Search city/province...",
+      "noResults": "No location found"
     }
   },
   "Errors": {
@@ -70,9 +81,13 @@
     },
     "stats": {
       "jobs": "AI Jobs",
+      "valueJobs": "10,000+",
       "companies": "Companies",
+      "valueCompanies": "5,000+",
       "candidates": "Candidates",
-      "hiredMonthly": "Hired/month"
+      "valueCandidates": "2,000,000+",
+      "hiredMonthly": "Hired/month",
+      "valueHiredMonthly": "1,500+"
     },
     "features": {
       "title": "Why Choose Us?",
@@ -170,6 +185,20 @@
           "applying": "Applying..."
         }
       }
+    },
+    "topEmployers": {
+      "title": "Top",
+      "titleHighlight": "Employers",
+      "description": "Partnering with global leaders in AI and Technology to bring you the best career opportunities.",
+      "viewAll": "Explore All Companies",
+      "jobsCount": "{count} Jobs",
+      "defaultIndustry": "Technology"
+    },
+    "featuredJobs": {
+      "title": "Featured",
+      "titleHighlight": "AI Jobs",
+      "description": "Explore the latest opportunities from leading AI companies around the globe.",
+      "viewAll": "View All Jobs"
     }
   },
   "Companies": {
@@ -484,6 +513,7 @@
         "summary": "Candidate Summary",
         "viewCv": "View original CV",
         "details": {
+          "viewCv": "View original CV",
           "title": "Applicant Details",
           "backToList": "Back to applicants",
           "highFit": "High Match",

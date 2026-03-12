@@ -1,16 +1,18 @@
-import { UseFormRegister, FieldErrors } from "react-hook-form";
+import { UseFormRegister, FieldErrors, Control, Controller } from "react-hook-form";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { JobFormValues } from "@/types/jobs";
+import { LocationSelector } from "@/components/shared/location-selector";
 
 interface JobBasicInfoProps {
   register: UseFormRegister<JobFormValues>;
   errors: FieldErrors<JobFormValues>;
+  control: Control<JobFormValues>;
   t: (key: string) => string;
 }
 
-export function JobBasicInfo({ register, errors, t }: JobBasicInfoProps) {
+export function JobBasicInfo({ register, errors, control, t }: JobBasicInfoProps) {
   const jobTypes = [
     { value: "full-time", label: t("labels.jobTypes.fullTime") },
     { value: "part-time", label: t("labels.jobTypes.partTime") },
@@ -21,7 +23,7 @@ export function JobBasicInfo({ register, errors, t }: JobBasicInfoProps) {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <Label htmlFor="title" className="text-white/80">
+        <Label htmlFor="title" className="text-foreground/80">
           {t("labels.jobTitle")}
         </Label>
         <Input
@@ -29,12 +31,12 @@ export function JobBasicInfo({ register, errors, t }: JobBasicInfoProps) {
           placeholder={t("placeholders.jobTitle")}
           {...register("title")}
           className={cn(
-            "bg-white/5 border-white/10 text-white h-11 focus:border-violet-500/50",
-            errors.title && "border-red-500/50 focus:border-red-500/50",
+            "bg-accent/50 border-border text-foreground h-11 focus:border-primary/50",
+            errors.title && "border-destructive/50 focus:border-destructive/50",
           )}
         />
         {errors.title && (
-          <p className="text-xs text-red-400">
+          <p className="text-xs text-destructive">
             {errors.title.message as string}
           </p>
         )}
@@ -42,39 +44,42 @@ export function JobBasicInfo({ register, errors, t }: JobBasicInfoProps) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="location" className="text-white/80">
+          <Label htmlFor="location" className="text-foreground/80">
             {t("labels.location")}
           </Label>
-          <Input
-            id="location"
-            placeholder={t("placeholders.location")}
-            {...register("location")}
-            className={cn(
-              "bg-white/5 border-white/10 text-white h-11 focus:border-violet-500/50",
-              errors.location && "border-red-500/50 focus:border-red-500/50",
+          <Controller
+            name="location"
+            control={control}
+            render={({ field }) => (
+              <LocationSelector
+                value={field.value}
+                onChange={field.onChange}
+                placeholder={t("placeholders.location")}
+                error={!!errors.location}
+              />
             )}
           />
           {errors.location && (
-            <p className="text-xs text-red-400">
+            <p className="text-xs text-destructive">
               {errors.location.message as string}
             </p>
           )}
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="job_type" className="text-white/80">
+          <Label htmlFor="job_type" className="text-foreground/80">
             {t("labels.jobType")}
           </Label>
           <select
             id="job_type"
             {...register("job_type")}
-            className="w-full h-11 rounded-md border border-white/10 bg-white/5 px-3 py-1 text-sm text-white focus:outline-none focus:border-violet-500/50 transition-colors"
+            className="w-full h-11 rounded-md border border-border bg-accent/50 px-3 py-1 text-sm text-foreground focus:outline-none focus:border-primary/50 transition-colors"
           >
             {jobTypes.map((type) => (
               <option
                 key={type.value}
                 value={type.value}
-                className="bg-[#0a0a14]"
+                className="bg-popover text-popover-foreground"
               >
                 {type.label}
               </option>
@@ -84,7 +89,7 @@ export function JobBasicInfo({ register, errors, t }: JobBasicInfoProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="salary_range" className="text-white/80">
+        <Label htmlFor="salary_range" className="text-foreground/80">
           {t("labels.salaryRange")}
         </Label>
         <Input
@@ -92,8 +97,8 @@ export function JobBasicInfo({ register, errors, t }: JobBasicInfoProps) {
           placeholder={t("placeholders.salaryRange")}
           {...register("salary_range")}
           className={cn(
-            "bg-white/5 border-white/10 text-white h-11 focus:border-violet-500/50",
-            errors.salary_range && "border-red-500/50 focus:border-red-500/50",
+            "bg-accent/50 border-border text-foreground h-11 focus:border-primary/50",
+            errors.salary_range && "border-destructive/50 focus:border-destructive/50",
           )}
         />
       </div>

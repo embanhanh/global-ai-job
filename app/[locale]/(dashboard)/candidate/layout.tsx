@@ -14,7 +14,7 @@ export default async function CandidateLayout({
   const profileCompletion = await getProfileCompletionProgress();
 
   return (
-    <div className="flex h-screen bg-[#050508] text-white overflow-hidden">
+    <div className="flex h-screen bg-background text-foreground overflow-hidden">
       {/* Sidebar for Desktop */}
       <CandidateSidebar
         locale={locale}

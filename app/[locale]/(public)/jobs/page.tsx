@@ -31,7 +31,7 @@ export default async function JobListingPage({
   const totalPages = Math.ceil((count || 0) / limit);
 
   return (
-    <div className="min-h-screen bg-[#050816] pt-32 pb-20 relative overflow-hidden">
+    <div className="min-h-screen bg-background pt-32 pb-20 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-violet-600/10 blur-[120px] rounded-full" />
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-fuchsia-600/10 blur-[120px] rounded-full" />

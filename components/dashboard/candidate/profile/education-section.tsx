@@ -27,10 +27,10 @@ export function EducationSection({ form }: EducationSectionProps) {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between border-b border-white/5 pb-4">
+      <div className="flex items-center justify-between border-b border-border pb-4">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-emerald-600/10 border border-emerald-500/20">
-            <GraduationCap className="w-4 h-4 text-emerald-400" />
+          <div className="p-2 rounded-lg bg-primary/10 border border-primary/20">
+            <GraduationCap className="w-4 h-4 text-primary" />
           </div>
           <h2 className="text-xl font-bold">{t("education")}</h2>
         </div>
@@ -39,7 +39,7 @@ export function EducationSection({ form }: EducationSectionProps) {
           variant="outline"
           size="sm"
           onClick={() => append({ school: "", degree: "", period: "" })}
-          className="border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10"
+          className="border-primary/30 text-primary hover:bg-primary/10"
         >
           <Plus className="w-4 h-4 mr-2" />
           {t("education")}
@@ -49,13 +49,13 @@ export function EducationSection({ form }: EducationSectionProps) {
         {fields.map((field, index) => (
           <div
             key={field.id}
-            className="relative p-6 rounded-2xl bg-white/5 border border-white/10 space-y-4"
+            className="relative p-6 rounded-2xl bg-accent/50 border border-border space-y-4"
           >
             <Button
               type="button"
               variant="ghost"
               size="icon"
-              className="absolute top-2 right-2 text-white/20 hover:text-red-400"
+              className="absolute top-2 right-2 text-muted-foreground/30 hover:text-destructive"
               onClick={() => remove(index)}
             >
               <Trash2 className="w-4 h-4" />
@@ -68,7 +68,7 @@ export function EducationSection({ form }: EducationSectionProps) {
                   <FormItem>
                     <FormLabel>{t("labels.school")}</FormLabel>
                     <FormControl>
-                      <Input {...field} className="bg-[#050508]" />
+                      <Input {...field} className="bg-accent/50 border-border" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -81,7 +81,7 @@ export function EducationSection({ form }: EducationSectionProps) {
                   <FormItem>
                     <FormLabel>{t("labels.degree")}</FormLabel>
                     <FormControl>
-                      <Input {...field} className="bg-[#050508]" />
+                      <Input {...field} className="bg-accent/50 border-border" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -94,7 +94,7 @@ export function EducationSection({ form }: EducationSectionProps) {
                   <FormItem>
                     <FormLabel>{t("labels.period")}</FormLabel>
                     <FormControl>
-                      <Input {...field} className="bg-[#050508]" />
+                      <Input {...field} className="bg-accent/50 border-border" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

@@ -36,18 +36,18 @@ export function KanbanColumn({
       {/* Column Header */}
       <div className="flex items-center justify-between mb-4 px-2">
         <div className="flex items-center gap-2">
-          <h3 className="text-sm font-bold text-white uppercase tracking-wider">
+          <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
             {stage.title}
           </h3>
-          <span className="bg-white/5 text-white/40 text-[10px] px-2 py-0.5 rounded-full font-bold">
+          <span className="bg-primary/10 text-primary text-[10px] px-2 py-0.5 rounded-full font-bold">
             {applicants.length}
           </span>
         </div>
         <div className="flex items-center gap-1 opacity-0 group-hover/column:opacity-100 transition-opacity">
-          <button className="p-1 hover:bg-white/5 rounded text-white/30 hover:text-white transition-colors">
+          <button className="p-1 hover:bg-accent rounded text-muted-foreground/30 hover:text-foreground transition-colors">
             <Plus className="w-4 h-4" />
           </button>
-          <button className="p-1 hover:bg-white/5 rounded text-white/30 hover:text-white transition-colors">
+          <button className="p-1 hover:bg-accent rounded text-muted-foreground/30 hover:text-foreground transition-colors">
             <MoreHorizontal className="w-4 h-4" />
           </button>
         </div>
@@ -56,7 +56,7 @@ export function KanbanColumn({
       {/* Column Content */}
       <div
         ref={setNodeRef}
-        className="flex-1 rounded-2xl bg-white/2 border border-white/3 p-3 min-h-[500px] transition-colors group-hover/column:bg-white/4"
+        className="flex-1 rounded-2xl bg-muted/50 border border-border p-3 min-h-[500px] transition-colors group-hover/column:bg-muted/70"
       >
         <SortableContext
           items={applicants.map((a) => a.id)}
@@ -74,8 +74,8 @@ export function KanbanColumn({
         </SortableContext>
 
         {applicants.length === 0 && (
-          <div className="h-full flex flex-col items-center justify-center p-8 text-center space-y-2 border-2 border-dashed border-white/5 rounded-xl">
-            <p className="text-xs text-white/20 font-medium">
+          <div className="h-full flex flex-col items-center justify-center p-8 text-center space-y-2 border-2 border-dashed border-border rounded-xl">
+            <p className="text-xs text-muted-foreground/30 font-medium">
               {t("noApplicants")}
             </p>
           </div>

@@ -36,14 +36,14 @@ export function CompanyFilters() {
   return (
     <div className="space-y-6">
       <div>
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="font-semibold text-slate-900 dark:text-slate-50">
+        <div className="flex items-center justify-between mb-4 pb-2 border-b border-border/50">
+          <h3 className="font-semibold text-foreground">
             {t("industry")}
           </h3>
           {currentIndustry !== "all" && (
             <button
               onClick={() => updateParams("industry", "all")}
-              className="text-xs font-medium text-violet-600 hover:text-violet-700 dark:text-violet-400"
+              className="text-xs font-medium text-primary hover:underline transition-all"
             >
               {t("reset")}
             </button>
@@ -58,11 +58,11 @@ export function CompanyFilters() {
             <RadioGroupItem
               value="all"
               id="ind-all"
-              className="border-slate-300 text-violet-600"
+              className="border-border text-primary data-[state=checked]:border-primary"
             />
             <Label
               htmlFor="ind-all"
-              className="text-slate-700 font-medium cursor-pointer dark:text-slate-300"
+              className="text-foreground font-medium cursor-pointer"
             >
               {t("allIndustries")}
             </Label>
@@ -72,11 +72,11 @@ export function CompanyFilters() {
               <RadioGroupItem
                 value={industry}
                 id={`ind-${industry}`}
-                className="border-slate-300 text-violet-600"
+                className="border-border text-primary data-[state=checked]:border-primary"
               />
               <Label
                 htmlFor={`ind-${industry}`}
-                className="text-slate-600 cursor-pointer hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200"
+                className="text-muted-foreground cursor-pointer hover:text-foreground transition-colors"
               >
                 {industry}
               </Label>

@@ -95,8 +95,8 @@ export default async function ApplicationsPage({
             className={cn(
               "px-4 py-2 rounded-full text-sm font-medium transition-colors border",
               !stage
-                ? "bg-white/10 text-white border-white/20"
-                : "bg-transparent text-white/50 border-white/5 hover:bg-white/5 hover:text-white",
+                ? "bg-primary/10 text-primary border-primary/20"
+                : "bg-transparent text-muted-foreground border-border hover:bg-muted hover:text-foreground",
             )}
           >
             {t("filter.all")}
@@ -106,8 +106,8 @@ export default async function ApplicationsPage({
             className={cn(
               "px-4 py-2 rounded-full text-sm font-medium transition-colors border",
               stage === "interview"
-                ? "bg-white/10 text-white border-white/20"
-                : "bg-transparent text-white/50 border-white/5 hover:bg-white/5 hover:text-white",
+                ? "bg-primary/10 text-primary border-primary/20"
+                : "bg-transparent text-muted-foreground border-border hover:bg-muted hover:text-foreground",
             )}
           >
             {t("filter.interview")}
@@ -115,23 +115,23 @@ export default async function ApplicationsPage({
         </div>
       </div>
 
-      <div className="rounded-2xl border border-white/5 bg-[#0a0a14]/40 overflow-hidden">
+      <div className="rounded-2xl border border-border bg-card overflow-hidden">
         <Table>
-          <TableHeader className="bg-white/5">
-            <TableRow className="border-white/5 hover:bg-transparent">
-              <TableHead className="text-white/50 font-bold">
+          <TableHeader className="bg-muted/50">
+            <TableRow className="border-border hover:bg-transparent">
+              <TableHead className="text-muted-foreground font-bold">
                 {t("table.job")}
               </TableHead>
-              <TableHead className="text-white/50 font-bold">
+              <TableHead className="text-muted-foreground font-bold">
                 {t("table.company")}
               </TableHead>
-              <TableHead className="text-white/50 font-bold">
+              <TableHead className="text-muted-foreground font-bold">
                 {t("table.date")}
               </TableHead>
-              <TableHead className="text-white/50 font-bold">
+              <TableHead className="text-muted-foreground font-bold">
                 {t("table.status")}
               </TableHead>
-              <TableHead className="text-right text-white/50 font-bold px-6">
+              <TableHead className="text-right text-muted-foreground font-bold px-6">
                 {t("table.feedback")}
               </TableHead>
             </TableRow>
@@ -141,15 +141,15 @@ export default async function ApplicationsPage({
               (applications as CandidateApplication[]).map((app) => (
                 <TableRow
                   key={app.id}
-                  className="border-white/5 hover:bg-white/2 transition-colors group"
+                  className="border-border hover:bg-muted/50 transition-colors group"
                 >
-                  <TableCell className="font-medium text-white">
+                  <TableCell className="font-medium">
                     {app.jobs?.title}
                   </TableCell>
-                  <TableCell className="text-white/60">
+                  <TableCell className="text-muted-foreground">
                     {app.jobs?.companies?.name}
                   </TableCell>
-                  <TableCell className="text-white/40">
+                  <TableCell className="text-muted-foreground/60">
                     {format(new Date(app.applied_date), "dd MMM, yyyy", {
                       locale: dateLocale,
                     })}
@@ -174,16 +174,16 @@ export default async function ApplicationsPage({
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="h-8 w-8 text-white/40 hover:text-white"
+                            className="h-8 w-8 text-muted-foreground hover:text-foreground"
                           >
                             <MoreVertical className="w-4 h-4" />
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent
                           align="end"
-                          className="bg-[#12121e] border-white/10 text-white"
+                          className="bg-popover border-border"
                         >
-                          <DropdownMenuItem className="hover:bg-white/5 cursor-pointer gap-2">
+                          <DropdownMenuItem className="focus:bg-accent cursor-pointer gap-2">
                             <Link
                               href={`/jobs/${app.jobs?.id}`}
                               className="flex items-center gap-2"
@@ -199,10 +199,10 @@ export default async function ApplicationsPage({
                 </TableRow>
               ))
             ) : (
-              <TableRow className="border-white/5 hover:bg-transparent">
+              <TableRow className="border-border hover:bg-transparent">
                 <TableCell colSpan={5} className="h-[200px] text-center">
-                  <div className="flex flex-col items-center justify-center text-white/40 gap-3">
-                    <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center">
+                  <div className="flex flex-col items-center justify-center text-muted-foreground gap-3">
+                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center">
                       <Inbox className="w-6 h-6" />
                     </div>
                     <span>{t("noApplications") || "No applications yet"}</span>

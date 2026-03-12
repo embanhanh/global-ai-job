@@ -110,8 +110,13 @@ export function JobForm({ initialData, jobId, company }: JobFormProps) {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 max-w-5xl">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-6">
-          <Card className="bg-[#0a0a14]/60 backdrop-blur-xl border-white/5 p-6 space-y-6">
-            <JobBasicInfo register={register} errors={errors} t={t} />
+          <Card className="bg-card/60 backdrop-blur-xl border-border p-6 space-y-6">
+            <JobBasicInfo 
+              register={register} 
+              errors={errors} 
+              control={control}
+              t={t} 
+            />
             <JobDescriptionField register={register} errors={errors} t={t} />
             <JobRequirementsField control={control} t={t} />
             <JobHiringStepsField control={control} t={t} />

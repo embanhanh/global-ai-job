@@ -11,7 +11,7 @@ export default async function RecruiterLayout({
   const { locale } = await params;
 
   return (
-    <div className="flex min-h-screen bg-[#06060c]">
+    <div className="flex min-h-screen bg-background text-foreground">
       {/* Sidebar - Desktop */}
       <Sidebar locale={locale} />
 

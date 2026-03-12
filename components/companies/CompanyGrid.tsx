@@ -22,13 +22,16 @@ export async function CompanyGrid({
 
   if (!result.success || !result.data || result.data.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-slate-200 bg-slate-50 py-24 text-center dark:border-slate-800 dark:bg-slate-900/50">
-        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800">
-          <Building2 className="h-8 w-8 text-slate-400" />
+      <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border bg-muted/30 py-24 text-center">
+        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-muted">
+          <Building2 className="h-8 w-8 text-muted-foreground" />
         </div>
-        <h3 className="mt-4 text-lg font-semibold text-slate-900 dark:text-slate-50">
+        <h3 className="mt-4 text-lg font-semibold text-foreground">
           {t("noResults")}
         </h3>
+        <p className="mt-2 text-sm text-muted-foreground">
+          {t("tryChangingFilters")}
+        </p>
       </div>
     );
   }

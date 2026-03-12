@@ -22,24 +22,24 @@ export function JobListHeader({ count, searchParams }: JobListHeaderProps) {
   };
 
   return (
-    <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/5">
-      <p className="text-white/40 text-sm">{t("stats", { count })}</p>
+    <div className="flex items-center justify-between mb-8 pb-4 border-b border-border">
+      <p className="text-muted-foreground text-sm">{t("stats", { count })}</p>
       <div className="flex items-center gap-2">
-        <span className="text-white/20 text-xs uppercase font-bold tracking-wider">
+        <span className="text-muted-foreground/30 text-xs uppercase font-bold tracking-wider">
           {t("sort.label")}
         </span>
         <select
           defaultValue={searchParams.sort || "newest"}
           onChange={handleSortChange}
-          className="bg-transparent border-none text-white/60 text-sm focus:ring-0 focus:outline-none cursor-pointer font-medium hover:text-white transition-colors"
+          className="bg-transparent border-none text-muted-foreground text-sm focus:ring-0 focus:outline-none cursor-pointer font-medium hover:text-foreground transition-colors"
         >
-          <option value="newest" className="bg-[#050816]">
+          <option value="newest" className="bg-background text-foreground">
             {t("sort.newest")}
           </option>
-          <option value="salary" className="bg-[#050816]">
+          <option value="salary" className="bg-background text-foreground">
             {t("sort.salary")}
           </option>
-          <option value="relevant" className="bg-[#050816]">
+          <option value="relevant" className="bg-background text-foreground">
             {t("sort.relevant")}
           </option>
         </select>

@@ -8,10 +8,11 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 
 export async function generateMetadata({
-  params: { locale },
+  params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Companies" });
 
   return {
@@ -23,12 +24,13 @@ export async function generateMetadata({
 export default async function CompaniesPage({
   searchParams,
 }: {
-  searchParams: {
+  searchParams: Promise<{
     q?: string;
     industry?: string;
     page?: string;
-  };
+  }>;
 }) {
+  const resolvedSearchParams = await searchParams;
   const t = await getTranslations("Companies");
   const followingIds = await getFollowingCompanyIds();
 
@@ -50,13 +52,13 @@ export default async function CompaniesPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="bg-slate-50 min-h-screen pb-20 dark:bg-slate-950 pt-20">
-        <div className="bg-white border-b border-slate-200 dark:bg-slate-900 dark:border-slate-800">
+      <div className="bg-background min-h-screen pb-20 pt-20">
+        <div className="border-b border-border bg-card/30 backdrop-blur-sm">
           <div className="container mx-auto px-4 py-12 md:py-16 md:px-6">
-            <h1 className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl dark:text-slate-50">
+            <h1 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
               {t("title")}
             </h1>
-            <p className="mt-4 text-lg text-slate-600 dark:text-slate-400 max-w-2xl">
+            <p className="mt-4 text-lg text-muted-foreground max-w-2xl">
               {t("subtitle")}
             </p>
           </div>
@@ -73,11 +75,11 @@ export default async function CompaniesPage({
             <CompanySearchHeader />
 
             <Suspense
-              key={JSON.stringify(searchParams)}
+              key={JSON.stringify(resolvedSearchParams)}
               fallback={<CompanyGridSkeleton />}
             >
               <CompanyGrid
-                searchParams={searchParams}
+                searchParams={resolvedSearchParams}
                 followingIds={followingIds}
               />
             </Suspense>

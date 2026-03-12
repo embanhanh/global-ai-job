@@ -63,7 +63,7 @@ export function NotificationBell({
         <Button
           variant="ghost"
           size="icon"
-          className="relative text-white/60 hover:text-white hover:bg-white/5 transition-colors"
+          className="relative text-foreground/60 hover:text-foreground hover:bg-accent transition-colors"
         >
           <Bell className="w-5 h-5" />
           <AnimatePresence>
@@ -83,10 +83,10 @@ export function NotificationBell({
       </PopoverTrigger>
       <PopoverContent
         align="end"
-        className="w-80 p-0 bg-[#0c0c14] border-white/5 shadow-2xl backdrop-blur-xl"
+        className="w-80 p-0 bg-popover border-border shadow-2xl backdrop-blur-xl"
       >
-        <div className="flex items-center justify-between p-4 border-b border-white/5">
-          <h4 className="font-semibold text-white">{t("title")}</h4>
+        <div className="flex items-center justify-between p-4 border-b border-border">
+          <h4 className="font-semibold text-foreground">{t("title")}</h4>
           {unreadCount > 0 && (
             <button
               onClick={handleMarkAllRead}
