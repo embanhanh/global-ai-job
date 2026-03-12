@@ -3,7 +3,7 @@
 import { SlidersHorizontal } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { JobSearchParams } from "@/types/jobs";
 
@@ -55,14 +55,14 @@ export function JobFilters({ searchParams }: JobFiltersProps) {
 
   return (
     <aside className="w-full lg:w-72 space-y-8">
-      <div className="flex items-center justify-between pb-4 border-b border-white/5">
-        <h2 className="text-xl font-bold text-white flex items-center gap-2">
-          <SlidersHorizontal className="w-5 h-5 text-violet-400" />
+      <div className="flex items-center justify-between pb-4 border-b border-border">
+        <h2 className="text-xl font-bold text-foreground flex items-center gap-2">
+          <SlidersHorizontal className="w-5 h-5 text-primary" />
           {t("filters.title")}
         </h2>
         <Link
           href="/jobs"
-          className="text-xs text-white/40 hover:text-white transition-colors"
+          className="text-xs text-muted-foreground hover:text-foreground transition-colors"
         >
           {t("filters.reset")}
         </Link>
@@ -71,7 +71,7 @@ export function JobFilters({ searchParams }: JobFiltersProps) {
       <div className="space-y-8">
         {filterSections.map((section) => (
           <div key={section.id} className="space-y-4">
-            <h3 className="text-xs font-bold text-white/30 uppercase tracking-[0.2em]">
+            <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-[0.2em] opacity-50">
               {section.label}
             </h3>
             <div className="flex flex-wrap gap-2">
@@ -90,10 +90,10 @@ export function JobFilters({ searchParams }: JobFiltersProps) {
                     <Badge
                       variant="outline"
                       className={cn(
-                        "cursor-pointer transition-all py-1.5 px-3",
+                        "cursor-pointer transition-all py-1.5 px-3 border-border",
                         isActive
-                          ? "border-violet-500 bg-violet-500/20 text-white"
-                          : "border-white/5 bg-white/2 text-white/40 hover:border-violet-500/50 hover:bg-violet-500/5 hover:text-white",
+                          ? "border-primary bg-primary/15 text-primary shadow-sm shadow-primary/10"
+                          : "bg-muted/30 text-muted-foreground hover:border-primary/50 hover:bg-primary/5 hover:text-foreground",
                       )}
                     >
                       {option}

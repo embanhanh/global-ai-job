@@ -34,7 +34,7 @@ export function CandidateMobileNav() {
     },
   ];
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#0a0a14]/90 backdrop-blur-xl border-t border-white/5 px-4 pb-safe-area-inset-bottom">
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-xl border-t border-border px-4 pb-safe-area-inset-bottom">
       <div className="flex items-center justify-around h-16">
         {navItems.map((item) => {
           const isActive = pathname === item.href;
@@ -45,7 +45,7 @@ export function CandidateMobileNav() {
               href={item.href}
               className={cn(
                 "flex flex-col items-center justify-center gap-1 min-w-[64px] transition-colors",
-                isActive ? "text-violet-400" : "text-white/40",
+                isActive ? "text-primary" : "text-muted-foreground",
               )}
             >
               <Icon className="w-5 h-5" />

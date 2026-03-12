@@ -1,13 +1,13 @@
 "use client";
 
-import { Search, MapPin } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { JobSearchParams } from "@/types/jobs";
 import { useState, useEffect, useCallback } from "react";
 import { useRouter, usePathname } from "@/i18n/navigation";
 import { useSearchParams } from "next/navigation";
+import { LocationSelector } from "@/components/shared/location-selector";
 
 interface JobSearchHeaderProps {
   initialParams: JobSearchParams;
@@ -73,45 +73,43 @@ export function JobSearchHeader({ initialParams }: JobSearchHeaderProps) {
 
   return (
     <div className="mb-12 space-y-4">
-      <div className="p-2 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl flex flex-col md:flex-row gap-2 items-center">
+      <div className="p-2 rounded-2xl bg-card/50 border border-border backdrop-blur-xl shadow-2xl flex flex-col md:flex-row gap-2 items-center">
         <div className="relative flex-1 w-full flex items-center px-4">
-          <Search className="w-5 h-5 text-white/40 absolute left-4" />
-          <Input
+          <Search className="w-5 h-5 text-muted-foreground absolute left-4" />
+          <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder={t("search.placeholder")}
-            className="bg-transparent border-none text-white placeholder:text-white/20 h-12 pl-10 focus-visible:ring-0"
+            className="bg-transparent border-none text-foreground placeholder:text-muted-foreground/50 h-12 pl-10 focus:ring-0 w-full outline-hidden"
           />
         </div>
-        <div className="hidden md:block w-px h-8 bg-white/10" />
-        <div className="relative flex-1 w-full flex items-center px-4">
-          <MapPin className="w-5 h-5 text-white/40 absolute left-4" />
-          <Input
+        <div className="hidden md:block w-px h-8 bg-border/50" />
+        <div className="relative flex-1 w-full">
+          <LocationSelector
             value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            onKeyDown={handleKeyDown}
+            onChange={setLocation}
             placeholder={t("search.location")}
-            className="bg-transparent border-none text-white placeholder:text-white/20 h-12 pl-10 focus-visible:ring-0"
+            className="bg-transparent border-none hover:bg-transparent h-12 text-foreground"
           />
         </div>
         <Button
           onClick={handleManualSearch}
-          className="w-full md:w-auto h-12 px-8 rounded-xl bg-violet-600 hover:bg-violet-500 font-bold transition-all hover:scale-[1.02]"
+          className="w-full md:w-auto h-12 px-8 rounded-xl bg-linear-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 font-bold transition-all hover:scale-[1.02] text-white border-none shadow-lg shadow-primary/20"
         >
           {t("search.button")}
         </Button>
       </div>
 
       {/* Popular Tags */}
-      <div className="flex flex-wrap items-center gap-3 text-sm text-white/40 px-2">
+      <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground px-2">
         <span>{t("search.popular")}</span>
         {["AI Engineer", "React", "Python", "Data Scientist", "NLP"].map(
           (tag) => (
             <button
               key={tag}
               onClick={() => updateFilters({ q: tag })}
-              className="px-3 py-1 rounded-full border border-white/5 bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all text-white/60 hover:text-white"
+              className="px-3 py-1 rounded-full border border-border bg-muted/30 hover:bg-primary/10 hover:border-primary/30 transition-all text-muted-foreground hover:text-primary"
             >
               {tag}
             </button>

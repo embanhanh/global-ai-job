@@ -12,7 +12,7 @@ export default async function LoginPage() {
         <div className="w-10 h-10 rounded-xl bg-linear-to-br from-violet-500 to-indigo-600 flex items-center justify-center group-hover:scale-110 transition-transform">
           <Sparkles className="w-6 h-6 text-white" />
         </div>
-        <span className="text-xl font-bold text-white tracking-tight">
+        <span className="text-xl font-bold text-foreground tracking-tight">
           {t("brand")}
         </span>
       </Link>

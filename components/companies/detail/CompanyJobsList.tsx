@@ -7,13 +7,13 @@ export async function CompanyJobsList({ jobs }: { jobs: JobWithCompany[] }) {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-xl font-bold text-slate-900 dark:text-slate-50">
+      <h2 className="text-xl font-bold text-foreground">
         {t("openRoles")}
       </h2>
 
       {jobs.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-8 text-center dark:border-slate-800 dark:bg-slate-900/50">
-          <p className="text-slate-500 dark:text-slate-400">
+        <div className="rounded-2xl border border-dashed border-border bg-muted/30 p-8 text-center">
+          <p className="text-muted-foreground">
             {t("noActiveJobs")}
           </p>
         </div>

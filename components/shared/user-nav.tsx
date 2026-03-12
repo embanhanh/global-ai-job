@@ -36,13 +36,13 @@ export function UserNav({ user }: UserNavProps) {
       <div className="flex items-center gap-4">
         <Link
           href="/login"
-          className="text-sm font-medium text-white/70 hover:text-white transition-colors"
+          className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
         >
           {t("login")}
         </Link>
         <Button
           asChild
-          className="bg-violet-600 hover:bg-violet-500 text-white rounded-full px-6"
+          className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-6"
         >
           <Link href="/role-selection">{t("register")}</Link>
         </Button>
@@ -74,28 +74,28 @@ export function UserNav({ user }: UserNavProps) {
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="relative h-10 w-10 rounded-full bg-white/5 border border-white/10 p-0 overflow-hidden"
+          className="relative h-10 w-10 rounded-full bg-accent border border-border p-0 overflow-hidden"
         >
-          <UserCircle className="w-6 h-6 text-violet-400" />
+          <UserCircle className="w-6 h-6 text-primary" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="w-56 bg-[#0a0f1d] border-white/10 text-white"
+        className="w-56 bg-popover border-border text-foreground"
         align="end"
         forceMount
       >
         <DropdownMenuLabel className="font-normal font-sans">
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none">{user.email}</p>
-            <p className="text-xs leading-none text-white/50 capitalize">
+            <p className="text-xs leading-none text-muted-foreground capitalize">
               {role}
             </p>
           </div>
         </DropdownMenuLabel>
-        <DropdownMenuSeparator className="bg-white/5" />
+        <DropdownMenuSeparator className="bg-border" />
         <DropdownMenuItem
           asChild
-          className="focus:bg-white/5 focus:text-white cursor-pointer"
+          className="focus:bg-accent focus:text-accent-foreground cursor-pointer"
         >
           <Link href={dashboardHref} className="flex items-center">
             <LayoutDashboard className="mr-2 h-4 w-4" />
@@ -104,14 +104,14 @@ export function UserNav({ user }: UserNavProps) {
         </DropdownMenuItem>
         <DropdownMenuItem
           asChild
-          className="focus:bg-white/5 focus:text-white cursor-pointer"
+          className="focus:bg-accent focus:text-accent-foreground cursor-pointer"
         >
           <Link href="/profile" className="flex items-center">
             <User className="mr-2 h-4 w-4" />
             <span>{t("profile") || "Profile"}</span>
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuSeparator className="bg-white/5" />
+        <DropdownMenuSeparator className="bg-border" />
         <DropdownMenuItem
           onClick={handleSignOut}
           disabled={isPending}

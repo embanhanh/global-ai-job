@@ -44,7 +44,7 @@ export function SearchInput({
 
   return (
     <div className="relative flex-1">
-      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
+      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/50" />
       <Input
         value={value}
         onChange={(e) => setValue(e.target.value)}
@@ -53,7 +53,7 @@ export function SearchInput({
       />
       {isPending && (
         <div className="absolute right-3 top-1/2 -translate-y-1/2">
-          <div className="w-4 h-4 border-2 border-violet-500 border-t-transparent rounded-full animate-spin" />
+          <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
         </div>
       )}
     </div>

@@ -30,16 +30,16 @@ export function ProfileClient({ initialData }: ProfileClientProps) {
       {/* Left: CV Parser Area */}
       <div className="xl:col-span-4 space-y-6">
         <div className="sticky top-8">
-          <div className="p-1.5 rounded-2xl bg-linear-to-br from-violet-600/20 via-indigo-600/10 to-transparent border border-violet-500/20 mb-8">
+          <div className="p-1.5 rounded-2xl bg-linear-to-br from-primary/20 via-primary/10 to-transparent border border-primary/20 mb-8">
             <AiCvParser onParseComplete={handleParseComplete} />
           </div>
 
           {/* AI Info Card */}
-          <div className="flex items-center gap-2 text-violet-400">
+          <div className="flex items-center gap-2 text-primary">
             <Sparkles className="w-5 h-5" />
             <span className="font-bold">{t("aiInfo.title")}</span>
           </div>
-          <p className="text-sm text-white/50 leading-relaxed">
+          <p className="text-sm text-muted-foreground leading-relaxed">
             {t("aiInfo.description")}
           </p>
         </div>

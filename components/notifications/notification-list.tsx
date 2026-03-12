@@ -43,7 +43,7 @@ export function NotificationList({ locale }: NotificationListProps) {
 
   if (isLoading) {
     return (
-      <div className="p-8 text-center text-white/40 text-sm">
+      <div className="p-8 text-center text-muted-foreground text-sm">
         <Bell className="w-8 h-8 mx-auto mb-2 animate-pulse opacity-20" />
         {t("loading")}
       </div>
@@ -52,7 +52,7 @@ export function NotificationList({ locale }: NotificationListProps) {
 
   if (notifications.length === 0) {
     return (
-      <div className="p-8 text-center text-white/40 text-sm">
+      <div className="p-8 text-center text-muted-foreground text-sm">
         <Bell className="w-8 h-8 mx-auto mb-2 opacity-20" />
         {t("empty")}
       </div>
@@ -75,30 +75,30 @@ export function NotificationList({ locale }: NotificationListProps) {
           <div
             key={notification.id}
             className={cn(
-              "p-4 border-b border-white/5 hover:bg-white/5 transition-colors relative group",
-              !notification.is_read && "bg-violet-500/5",
+              "p-4 border-b border-border hover:bg-muted/50 transition-colors relative group",
+              !notification.is_read && "bg-primary/5",
             )}
           >
             <div className="flex gap-3">
               <div className="mt-1">
-                <div className="w-8 h-8 rounded-full bg-violet-500/10 flex items-center justify-center">
-                  <Briefcase className="w-4 h-4 text-violet-400" />
+                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Briefcase className="w-4 h-4 text-primary" />
                 </div>
               </div>
               <div className="flex-1 min-w-0">
-                <div className="text-sm text-white/90 leading-relaxed">
+                <div className="text-sm text-foreground/90 leading-relaxed">
                   {/* Dynamically render notification content based on type and metadata */}
                   {isJobPosted &&
                     t.rich("NEW_JOB_POSTED", {
                       company_name: jobPostedMeta.company_name,
                       job_title: jobPostedMeta.job_title,
                       company: (chunks) => (
-                        <span className="font-semibold text-white">
+                        <span className="font-semibold text-foreground">
                           {chunks}
                         </span>
                       ),
                       job: (chunks) => (
-                        <span className="text-violet-400">{chunks}</span>
+                        <span className="text-primary">{chunks}</span>
                       ),
                     })}
                   {isAppReceived &&
@@ -106,17 +106,17 @@ export function NotificationList({ locale }: NotificationListProps) {
                       candidate_name: appReceivedMeta.candidate_name,
                       job_title: appReceivedMeta.job_title,
                       candidate: (chunks) => (
-                        <span className="font-semibold text-white">
+                        <span className="font-semibold text-foreground">
                           {chunks}
                         </span>
                       ),
                       job: (chunks) => (
-                        <span className="text-violet-400">{chunks}</span>
+                        <span className="text-primary">{chunks}</span>
                       ),
                     })}
                   {!isJobPosted && !isAppReceived && t("newNotification")}
                 </div>
-                <p className="text-[11px] text-white/40 mt-1">
+                <p className="text-[11px] text-muted-foreground mt-1">
                   {formatDistanceToNow(new Date(notification.created_at), {
                     addSuffix: true,
                     locale: dateLocale,
@@ -132,7 +132,7 @@ export function NotificationList({ locale }: NotificationListProps) {
                   }}
                   className="opacity-0 group-hover:opacity-100 transition-opacity z-10 relative"
                 >
-                  <CheckCircle2 className="w-4 h-4 text-violet-500" />
+                  <CheckCircle2 className="w-4 h-4 text-primary" />
                 </button>
               )}
             </div>

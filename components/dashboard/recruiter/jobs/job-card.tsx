@@ -29,7 +29,6 @@ type TFunction = (
 ) => string;
 
 import { Job } from "@/types/jobs";
-
 interface JobCardProps {
   job: Job;
   t: TFunction;
@@ -76,17 +75,17 @@ export function JobCard({ job, t }: JobCardProps) {
   };
 
   return (
-    <Card className="bg-[#0a0a14]/60 backdrop-blur-xl border-white/5 p-5 group hover:border-violet-500/30 transition-all duration-300">
+    <Card className="bg-card/60 backdrop-blur-xl border-border p-5 group hover:border-primary/30 transition-all duration-300">
       <div className="flex items-center justify-between">
         <div className="flex items-start gap-4">
-          <div className="p-3 rounded-xl bg-violet-600/10 border border-violet-500/20">
-            <Briefcase className="w-6 h-6 text-violet-400" />
+          <div className="p-3 rounded-xl bg-primary/10 border border-primary/20">
+            <Briefcase className="w-6 h-6 text-primary" />
           </div>
           <div className="space-y-1">
             <div className="flex items-center gap-3">
               <button
                 onClick={() => router.push(`/recruiter/jobs/${job.id}`)}
-                className="font-semibold text-white group-hover:text-violet-400 transition-colors hover:underline text-left"
+                className="font-semibold text-foreground group-hover:text-primary transition-colors hover:underline text-left"
               >
                 {job.title}
               </button>
@@ -99,8 +98,8 @@ export function JobCard({ job, t }: JobCardProps) {
                 {statusMap[job.status as keyof typeof statusMap].label}
               </Badge>
             </div>
-            <div className="flex items-center gap-4 text-xs text-white/40">
-              <div className="flex items-center gap-1">
+            <div className="flex items-center gap-4 text-xs text-muted-foreground">
+              <div className="flex items-center gap-1" suppressHydrationWarning>
                 <Calendar className="w-3 h-3" />
                 {new Date(job.created_at).toLocaleDateString()}
               </div>
@@ -113,20 +112,20 @@ export function JobCard({ job, t }: JobCardProps) {
         <div className="flex items-center gap-8">
           <div className="hidden md:flex items-center gap-6">
             <div className="text-center">
-              <div className="flex items-center gap-1.5 text-white font-medium">
-                <Users className="w-4 h-4 text-violet-400" />
+              <div className="flex items-center gap-1.5 text-foreground font-medium">
+                <Users className="w-4 h-4 text-primary" />
                 {job.applicants_count || 0}
               </div>
-              <p className="text-[10px] text-white/30 uppercase tracking-tighter font-bold">
+              <p className="text-[10px] text-muted-foreground uppercase tracking-tighter font-bold">
                 {t("applicants")}
               </p>
             </div>
             <div className="text-center">
-              <div className="flex items-center gap-1.5 text-white font-medium">
+              <div className="flex items-center gap-1.5 text-foreground font-medium">
                 <Eye className="w-4 h-4 text-blue-400" />
                 {job.views_count || 0}
               </div>
-              <p className="text-[10px] text-white/30 uppercase tracking-tighter font-bold">
+              <p className="text-[10px] text-muted-foreground uppercase tracking-tighter font-bold">
                 {t("views")}
               </p>
             </div>
@@ -137,33 +136,33 @@ export function JobCard({ job, t }: JobCardProps) {
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-white/40 hover:text-white rounded-xl"
+                className="text-muted-foreground hover:text-foreground rounded-xl"
               >
                 <MoreVertical className="w-5 h-5" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
               align="end"
-              className="bg-[#0a0a14] border-white/10 text-white"
+              className="bg-popover border-border text-popover-foreground"
             >
               <DropdownMenuItem
                 onClick={() => router.push(`/recruiter/jobs/${job.id}/edit`)}
-                className="focus:bg-white/5 focus:text-white cursor-pointer"
+                className="focus:bg-accent focus:text-accent-foreground cursor-pointer"
               >
                 <Pencil className="w-4 h-4 mr-2" />
                 {t("actions.edit")}
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => router.push(`/recruiter/jobs/${job.id}`)}
-                className="focus:bg-white/5 focus:text-white cursor-pointer"
+                className="focus:bg-accent focus:text-accent-foreground cursor-pointer"
               >
                 {t("actions.viewApplicants")}
               </DropdownMenuItem>
-              <DropdownMenuSeparator className="bg-white/5" />
+              <DropdownMenuSeparator className="bg-border" />
               <DropdownMenuItem
                 onClick={handleToggleStatus}
                 disabled={isPending}
-                className="focus:bg-red-500/10 focus:text-red-400 cursor-pointer text-red-400"
+                className="focus:bg-destructive/10 focus:text-destructive cursor-pointer text-destructive"
               >
                 {isPending
                   ? t("common.loading", { defaultValue: "Đang xử lý..." })

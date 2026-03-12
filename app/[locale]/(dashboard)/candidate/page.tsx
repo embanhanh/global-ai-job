@@ -64,7 +64,7 @@ export default async function CandidateOverviewPage({
       {/* Header & Welcome */}
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-bold tracking-tight">{t("title")}</h1>
-        <p className="text-white/50">{t("welcome")}</p>
+        <p className="text-muted-foreground">{t("welcome")}</p>
       </div>
       {/* Top Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -88,7 +88,7 @@ export default async function CandidateOverviewPage({
           title={t("stats.avgMatchScore")}
           value={"--%"}
           icon={BarChart}
-          className="border-violet-500/20 bg-violet-600/5"
+          className="border-primary/20 bg-primary/5"
         />
       </div>
       {/* AI Recommendations */}
@@ -118,7 +118,7 @@ export default async function CandidateOverviewPage({
                 {[1, 2, 3].map((i) => (
                   <Skeleton
                     key={i}
-                    className="min-w-[350px] h-[200px] rounded-2xl bg-white/5"
+                    className="min-w-[350px] h-[200px] rounded-2xl bg-muted"
                   />
                 ))}
               </div>

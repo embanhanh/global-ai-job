@@ -27,7 +27,7 @@ export function LanguageSwitcher() {
         <Button
           variant="ghost"
           size="icon"
-          className="rounded-full text-white/70 hover:text-white hover:bg-white/5"
+          className="rounded-full text-foreground/70 hover:text-foreground hover:bg-accent"
         >
           <Languages className="h-5 w-5" />
           <span className="sr-only">{t("toggle")}</span>
@@ -35,20 +35,20 @@ export function LanguageSwitcher() {
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className="bg-[#0a0f1d] border-white/10 text-white"
+        className="bg-popover border-border text-foreground"
       >
         <DropdownMenuItem
           onClick={() => toggleLocale("vi")}
-          className={`focus:bg-white/5 cursor-pointer ${
-            locale === "vi" ? "text-violet-400 font-bold" : ""
+          className={`focus:bg-accent cursor-pointer ${
+            locale === "vi" ? "text-primary font-bold" : ""
           }`}
         >
           {t("vi")}
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => toggleLocale("en")}
-          className={`focus:bg-white/5 cursor-pointer ${
-            locale === "en" ? "text-violet-400 font-bold" : ""
+          className={`focus:bg-accent cursor-pointer ${
+            locale === "en" ? "text-primary font-bold" : ""
           }`}
         >
           {t("en")}

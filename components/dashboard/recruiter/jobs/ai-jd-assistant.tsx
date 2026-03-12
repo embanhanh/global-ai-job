@@ -38,12 +38,12 @@ export function AIJDAssistant({ onSuggest, currentTitle }: AIJDAssistantProps) {
   };
 
   return (
-    <Card className="bg-linear-to-br from-violet-600/10 to-indigo-600/10 border-violet-500/20 p-6 space-y-4">
+    <Card className="bg-linear-to-br from-primary/10 to-primary/5 border-primary/20 p-6 space-y-4">
       <div className="flex items-center gap-2">
-        <Sparkles className="w-5 h-5 text-violet-400" />
-        <h3 className="font-semibold text-white">{t("title")}</h3>
+        <Sparkles className="w-5 h-5 text-primary" />
+        <h3 className="font-semibold text-foreground">{t("title")}</h3>
       </div>
-      <p className="text-sm text-white/60 leading-relaxed">
+      <p className="text-sm text-muted-foreground leading-relaxed">
         {t("description")}
       </p>
 
@@ -56,13 +56,13 @@ export function AIJDAssistant({ onSuggest, currentTitle }: AIJDAssistantProps) {
             key="suggestion"
             className="space-y-4"
           >
-            <div className="p-4 rounded-xl bg-[#0a0a14]/60 border border-white/5 text-sm text-white/50 max-h-[200px] overflow-y-auto whitespace-pre-wrap">
+            <div className="p-4 rounded-xl bg-accent/50 border border-border text-sm text-muted-foreground max-h-[200px] overflow-y-auto whitespace-pre-wrap">
               {suggestion}
             </div>
             <div className="flex gap-2">
               <Button
                 onClick={() => onSuggest(suggestion)}
-                className="flex-1 bg-violet-600 hover:bg-violet-500 text-white"
+                className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground"
               >
                 <CheckCircle2 className="w-4 h-4 mr-2" />
                 {t("useThis")}
@@ -70,7 +70,7 @@ export function AIJDAssistant({ onSuggest, currentTitle }: AIJDAssistantProps) {
               <Button
                 variant="outline"
                 onClick={() => setSuggestion(null)}
-                className="border-white/10 text-white hover:bg-white/5"
+                className="border-border text-foreground hover:bg-accent"
               >
                 {t("cancel")}
               </Button>
@@ -86,10 +86,10 @@ export function AIJDAssistant({ onSuggest, currentTitle }: AIJDAssistantProps) {
             <Button
               onClick={handleGenerate}
               disabled={isGenerating}
-              className="w-full bg-white/5 hover:bg-white/10 border border-white/10 text-white group"
+              className="w-full bg-accent/50 hover:bg-accent border border-border text-foreground group"
             >
               {isGenerating ? (
-                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <div className="w-4 h-4 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
               ) : (
                 <>
                   <Wand2 className="w-4 h-4 mr-2 group-hover:animate-pulse" />

@@ -13,10 +13,10 @@ export async function CompanyAbout({
 
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-bold text-slate-900 dark:text-slate-50">
+      <h2 className="text-xl font-bold text-foreground">
         {t("about")}
       </h2>
-      <div className="prose prose-slate max-w-none text-slate-600 dark:prose-invert dark:text-slate-400">
+      <div className="prose prose-slate max-w-none text-muted-foreground dark:prose-invert">
         <p className="whitespace-pre-line leading-relaxed">{description}</p>
       </div>
     </div>

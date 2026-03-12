@@ -62,13 +62,13 @@ export function KanbanCard({ applicant, onClick }: KanbanCardProps) {
       {...attributes}
       {...listeners}
       onClick={() => onClick?.(applicant)}
-      className="bg-[#12121e] border-white/5 p-4 mb-3 hover:border-violet-500/30 transition-all cursor-grab active:cursor-grabbing group shadow-lg"
+      className="bg-card border-border p-4 mb-3 hover:border-primary/30 transition-all cursor-grab active:cursor-grabbing group shadow-md"
     >
       <div className="flex justify-between items-start mb-3">
         <div className="flex items-center gap-3">
-          <Avatar className="h-8 w-8 border border-white/10">
+          <Avatar className="h-8 w-8 border border-border">
             <AvatarImage src={applicant.avatar} alt={applicant.name} />
-            <AvatarFallback className="bg-violet-600/20 text-violet-400 text-[10px]">
+            <AvatarFallback className="bg-primary/10 text-primary text-[10px] font-bold">
               {applicant.name
                 .split(" ")
                 .map((n) => n[0])
@@ -76,25 +76,25 @@ export function KanbanCard({ applicant, onClick }: KanbanCardProps) {
             </AvatarFallback>
           </Avatar>
           <div>
-            <h4 className="text-sm font-semibold text-white group-hover:text-violet-400 transition-colors">
+            <h4 className="text-sm font-semibold group-hover:text-primary transition-colors">
               {applicant.name}
             </h4>
-            <p className="text-[10px] text-white/40">{applicant.role}</p>
+            <p className="text-[10px] text-muted-foreground">{applicant.role}</p>
           </div>
         </div>
-        <button className="text-white/30 hover:text-white transition-colors">
+        <button className="text-muted-foreground/30 hover:text-foreground transition-colors">
           <MoreHorizontal className="w-4 h-4" />
         </button>
       </div>
 
       <div className="flex items-center justify-between mt-4">
         <div className="flex items-center gap-1.5">
-          <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
-          <span className="text-xs font-bold text-white/80">
+          <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
+          <span className="text-xs font-bold text-foreground/80">
             {applicant.fitScore}%
           </span>
         </div>
-        <span className="text-[10px] text-white/30">
+        <span className="text-[10px] text-muted-foreground/50">
           {applicant.appliedDate}
         </span>
       </div>

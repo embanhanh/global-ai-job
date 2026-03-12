@@ -28,7 +28,7 @@ export function SettingsCard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay }}
-      className="p-8 rounded-3xl border border-white/5 bg-[#0a0a14]/40 flex flex-col h-full backdrop-blur-xl"
+      className="p-8 rounded-3xl border border-border bg-card/40 flex flex-col h-full backdrop-blur-xl"
     >
       <div className="flex items-start gap-4 mb-4">
         <div className={`p-3 rounded-2xl border ${color}`}>
@@ -36,7 +36,7 @@ export function SettingsCard({
         </div>
         <div className="space-y-1">
           <h3 className="text-xl font-bold">{title}</h3>
-          <p className="text-sm text-white/40">{description}</p>
+          <p className="text-sm text-muted-foreground">{description}</p>
         </div>
       </div>
       <div className="flex-1">{children}</div>

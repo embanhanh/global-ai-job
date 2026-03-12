@@ -41,19 +41,19 @@ export function JobRequirementsField({
   return (
     <div className="space-y-4">
       <div className="space-y-2">
-        <Label className="text-white/80">{t("labels.requirements")}</Label>
+        <Label className="text-foreground/80">{t("labels.requirements")}</Label>
         <div className="flex gap-2">
           <Input
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder={t("placeholders.requirements")}
-            className="bg-white/5 border-white/10 text-white h-11 focus:border-violet-500/50"
+            className="bg-accent/50 border-border text-foreground h-11 focus:border-primary/50"
           />
           <Button
             type="button"
             onClick={handleAddRequirement}
-            className="bg-white/10 hover:bg-white/20 text-white h-11 px-4"
+            className="bg-accent hover:bg-accent/80 text-foreground h-11 px-4"
           >
             <Plus className="w-4 h-4" />
           </Button>
@@ -64,13 +64,13 @@ export function JobRequirementsField({
         {fields.map((field, index) => (
           <div
             key={field.id}
-            className="flex items-center gap-2 bg-violet-500/10 border border-violet-500/20 text-violet-300 px-3 py-1.5 rounded-full text-sm group transition-all hover:bg-violet-500/20"
+            className="flex items-center gap-2 bg-primary/10 border border-primary/20 text-primary px-3 py-1.5 rounded-full text-sm group transition-all hover:bg-primary/20"
           >
             <span>{field.value}</span>
             <button
               type="button"
               onClick={() => remove(index)}
-              className="hover:text-violet-200 transition-colors"
+              className="hover:text-primary/80 transition-colors"
             >
               <X className="w-3 h-3" />
             </button>

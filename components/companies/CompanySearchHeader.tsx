@@ -26,14 +26,14 @@ export function CompanySearchHeader() {
   return (
     <div className="relative">
       <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-        <Search className="h-5 w-5 text-slate-400" />
+        <Search className="h-5 w-5 text-muted-foreground" />
       </div>
       <Input
         type="search"
         defaultValue={searchParams.get("q")?.toString()}
         placeholder={t("placeholder")}
         onChange={(e) => handleSearch(e.target.value)}
-        className="pl-10 h-12 rounded-xl bg-white shadow-sm border-slate-200 focus-visible:ring-violet-500 dark:bg-slate-900 dark:border-slate-800"
+        className="pl-10 h-12 rounded-xl bg-card shadow-sm border-border focus-visible:ring-primary"
       />
     </div>
   );

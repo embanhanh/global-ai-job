@@ -34,7 +34,7 @@ export async function Footer() {
   ];
 
   return (
-    <footer className="border-t border-white/5 bg-[#050816] pt-16 pb-8 px-6">
+    <footer className="border-t border-border bg-background pt-16 pb-8 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 mb-12">
           <div className="col-span-2">
@@ -42,29 +42,29 @@ export async function Footer() {
               <div className="w-8 h-8 rounded-lg bg-linear-to-br from-violet-500 to-indigo-600 flex items-center justify-center">
                 <Briefcase className="w-4 h-4 text-white" />
               </div>
-              <span className="font-bold text-lg tracking-tight text-white">
+              <span className="font-bold text-lg tracking-tight text-foreground">
                 {tCommon("brand")}
               </span>
             </Link>
-            <p className="text-white/40 text-sm max-w-xs leading-relaxed mb-6">
+            <p className="text-muted-foreground text-sm max-w-xs leading-relaxed mb-6">
               {t("description")}
             </p>
             <div className="flex items-center gap-4">
               <Link
                 href="#"
-                className="text-white/20 hover:text-white transition-colors"
+                className="text-muted-foreground/50 hover:text-foreground transition-colors"
               >
                 <Github className="w-5 h-5" />
               </Link>
               <Link
                 href="#"
-                className="text-white/20 hover:text-white transition-colors"
+                className="text-muted-foreground/50 hover:text-foreground transition-colors"
               >
                 <Twitter className="w-5 h-5" />
               </Link>
               <Link
                 href="#"
-                className="text-white/20 hover:text-white transition-colors"
+                className="text-muted-foreground/50 hover:text-foreground transition-colors"
               >
                 <Linkedin className="w-5 h-5" />
               </Link>
@@ -73,7 +73,7 @@ export async function Footer() {
 
           {sections.map((section) => (
             <div key={section.title}>
-              <h4 className="font-semibold text-white mb-6 uppercase tracking-wider text-xs">
+              <h4 className="font-semibold text-foreground mb-6 uppercase tracking-wider text-xs">
                 {section.title}
               </h4>
               <ul className="space-y-4">
@@ -81,7 +81,7 @@ export async function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-white/40 hover:text-white transition-colors"
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -92,8 +92,8 @@ export async function Footer() {
           ))}
         </div>
 
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/20">
+        <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-muted-foreground/50">
             © 2026 {tCommon("brandFull")}. {t("rights")}
           </p>
         </div>

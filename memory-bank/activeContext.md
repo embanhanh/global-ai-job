@@ -3,7 +3,13 @@ Dự án đã hoàn thành việc triển khai hệ thống **Follow & Push Noti
 ## Recent Changes.
 
 - **Public Job Pages**:
-  - Triển khai **Home Page** với Hero section sống động, Stats section và Featured Jobs.
+  - **Landing Page Upgrade**:
+    - **3D Hero Experience**: Triển khai `Hero3D` sử dụng `React Three Fiber` và `@react-three/drei`, tạo hiệu ứng floating distorted glass sphere sống động cho Landing Page.
+    - **Anime.js v4 Migration**: Nâng cấp toàn bộ hệ thống animation sang **Anime.js v4** (ESM patterns), sử dụng `animate`, `stagger`, và `utils.set` cho trải nghiệm mượt mà, tối ưu GPU.
+    - **Shared Animation Wrapper**: Tạo `AnimeReveal` component dùng chung để trigger entrance animations cho các section (Stats, Jobs, Employers) khi scroll vào viewport.
+  - **I18n Compliance Refactor**:
+    - Refactor 100% các chuỗi text cứng trong `page.tsx` và `top-employers.tsx` sang namespaces `Landing` (vi, en).
+    - Quốc tế hóa các con số thống kê (Stats) và hỗ trợ biến động (`{count}`) cho số lượng việc làm của công ty.
   - **Job Listing Page Refactor**:
     - Mô-đun hóa thành các component nhỏ: `JobSearchHeader`, `JobFilters`, `JobListHeader`, `JobListEmpty`.
     - Triển khai lọc, tìm kiếm và phân trang hoàn toàn qua URL `searchParams` (Server-First).
@@ -12,6 +18,9 @@ Dự án đã hoàn thành việc triển khai hệ thống **Follow & Push Noti
   - **Shared Components Refactor**:
     - `LanguageSwitcher`, `HomeHero`, `JobCard` đã được quốc tế hóa 100% (không còn hardcoded strings).
     - `JobCard` hỗ trợ format ngày tháng theo locale (`vi` / `enUS`).
+  - **Theme System Implementation**:
+    - Thay thế toàn bộ màu hardcoded (white/dark) bằng CSS variables (theme-aware) cho Hero, Top Employers, Job Card, Sidebars (Candidate & Recruiter), Notification List và Auth Pages.
+    - Cập nhật palette màu `globals.css` với bản thiết kế Violet-Indigo tinh tế cho cả chế độ Sáng và Tối (Light/Dark Mode). Thêm custom scrollbars và glassmorphism utilities để tạo UI cao cấp.
 - **Data Integration**: Thay thế mock data bằng dữ liệu thực từ Supabase trong toàn bộ luồng Public Jobs.
 
 - **Public Company Directory (New)**:
@@ -23,6 +32,7 @@ Dự án đã hoàn thành việc triển khai hệ thống **Follow & Push Noti
   - **Company Detail Page (`/companies/[id]`)**: Hiển thị chi tiết (Logo, Industry, Location, Website, Giới thiệu) và danh sách **Active Jobs** của công ty (tái sử dụng `JobCard`). Áp dụng Zero CLS qua `loading.tsx` Skeleton chuyên biệt và render JSON-LD Organization schema.
   - **Next.js 15 Compatibility Fix**: Khắc phục lỗi `invalid input syntax for type uuid: "undefined"` trên môi trường Next.js 15 bằng cách `await props.params` trước khi sử dụng ID, đồng thời thêm validation ID chặt chẽ tại tầng service (`getPublicCompanyById`, `getCompanyActiveJobs`) để chặn các query lỗi.
   - **i18n & SEO**: Dịch 100% nội dung qua namespaces `Companies` và `CompanyDetail` (vi, en); cung cấp đầy đủ thẻ `generateMetadata` và cấu trúc SEO.
+  - **Theme & UI Cleanup**: Loại bỏ 100% các class `slate` fix cứng, chuyển sang hệ thống CSS Variables (`--background`, `--card`, `--border`, v.v.). Fix lỗi Image SVG từ Dicebear bằng thuộc tính `unoptimized`.
 
 - **Candidate Dashboard & RBAC**:
   - **Full Dashboard Implementation**: Hoàn thành toàn bộ các trang: Overview, Applications, Saved Jobs, Profile, và Settings cho Ứng viên.
@@ -100,6 +110,7 @@ Dự án đã hoàn thành việc triển khai hệ thống **Follow & Push Noti
 
 - **Recruiter Job Management Extensions**:
   - **Quick Job Status Toggle**: Bổ sung Menu Items (Đóng/Mở lại tin) ngay trên `JobCard`. Sử dụng Server Actions qua `useTransition`, tích hợp `toast` (Sonner), và phản hồi i18n chuẩn mực cho hai ngôn ngữ (vi, en).
+  - **Cascading Renders Fix**: Giải quyết lỗi `setState synchronously within an effect` trong `JobCard` bằng cách loại bỏ state `mounted` và `useEffect`. Thay thế bằng pattern `suppressHydrationWarning` cho việc hiển thị ngày tháng, tuân thủ React 19 best practices.
   - **Status Filtering via URL**: Mở rộng `getRecruiterJobs` để lọc theo tham số `status` (active / draft / closed). Khai báo component `JobFilter` dựa trên shadcn `Select` có thể tự động sync filter qua searchParams (URL-driven approach).
 
 - **Natural Language Candidate Search (Semantic Matching)**:
@@ -112,7 +123,8 @@ Dự án đã hoàn thành việc triển khai hệ thống **Follow & Push Noti
 
 1.  **AI Resume Parser Internal Logic**: Hoàn thiện logic xử lý file thật (PDF to Markdown) thay vì mock.
 2.  **Job Analytics Tab**: Triển khai biểu đồ và báo cáo hiệu quả tuyển dụng cho từng job.
-3.  **Social Login**: Tích hợp Google và Github OAuth.
+3.  **Advanced 3D/AI Visuals**: Mở rộng các element 3D tương tác vào dashboard để tăng tính thẩm mỹ cao cấp.
+4.  **Social Login**: Tích hợp Google và Github OAuth.
 
 ## Decisions & Patterns
 

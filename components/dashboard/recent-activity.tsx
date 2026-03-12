@@ -30,12 +30,12 @@ export async function RecentActivity({
     });
     return (
       <div className="flex-1 flex flex-col items-center justify-center text-center space-y-4 opacity-40">
-        <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-          <TrendingUp className="w-8 h-8 text-neutral-400" />
+        <div className="w-16 h-16 rounded-full bg-accent/50 flex items-center justify-center border border-border">
+          <TrendingUp className="w-8 h-8 text-muted-foreground" />
         </div>
         <div>
-          <p className="text-white font-medium">{tRecruiter("noActivity")}</p>
-          <p className="text-sm text-white/50">
+          <p className="text-foreground font-medium">{tRecruiter("noActivity")}</p>
+          <p className="text-sm text-muted-foreground">
             {tRecruiter("noActivityDesc")}
           </p>
         </div>
@@ -46,7 +46,7 @@ export async function RecentActivity({
   return (
     <div
       className={cn(
-        "rounded-2xl border border-white/5 bg-[#0a0a14]/40 p-6 space-y-6",
+        "rounded-2xl border border-border bg-card/40 p-6 space-y-6",
         className,
       )}
     >
@@ -64,7 +64,7 @@ export async function RecentActivity({
         return (
           <div key={item.id} className="flex gap-4 relative">
             {index !== activities.length - 1 && (
-              <div className="absolute left-[11px] top-8 bottom-[-24px] w-px bg-white/5" />
+              <div className="absolute left-[11px] top-8 bottom-[-24px] w-px bg-border" />
             )}
             <div
               className={cn(
@@ -96,13 +96,13 @@ export async function RecentActivity({
               />
             </div>
             <div className="space-y-1">
-              <p className="text-sm text-white/80">
+              <p className="text-sm text-foreground/80">
                 {t(
                   item.activity_key as Parameters<typeof t>[0],
                   item.metadata as Record<string, string | number>,
                 )}
               </p>
-              <p className="text-xs text-white/30">
+              <p className="text-xs text-muted-foreground/50">
                 {formatDistanceToNow(new Date(item.created_at), {
                   addSuffix: true,
                   locale: dateLocale,

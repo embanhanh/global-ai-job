@@ -26,6 +26,12 @@
       "vi": "Tiếng Việt",
       "en": "Tiếng Anh"
     },
+    "theme": {
+      "toggle": "Thay đổi giao diện",
+      "light": "Sáng",
+      "dark": "Tối",
+      "system": "Hệ thống"
+    },
     "activity": {
       "JOB_APPLIED": "Đã ứng tuyển vị trí: {title}",
       "RECRUITER_FOLLOWED": "Đã theo dõi công ty: {company_name}",
@@ -42,6 +48,11 @@
       "unfollowSuccess": "Đã bỏ theo dõi công ty",
       "error": "Có lỗi xảy ra",
       "authRequired": "Vui lòng đăng nhập để theo dõi công ty."
+    },
+    "location": {
+      "placeholder": "Chọn địa điểm",
+      "searchPlaceholder": "Tìm kiếm tỉnh/thành...",
+      "noResults": "Không tìm thấy địa điểm nào"
     }
   },
   "Errors": {
@@ -70,9 +81,13 @@
     },
     "stats": {
       "jobs": "Công việc AI",
+      "valueJobs": "10.000+",
       "companies": "Công ty",
+      "valueCompanies": "5.000+",
       "candidates": "Ứng viên",
-      "hiredMonthly": "Được tuyển/tháng"
+      "valueCandidates": "2.000.000+",
+      "hiredMonthly": "Được tuyển/tháng",
+      "valueHiredMonthly": "1.500+"
     },
     "features": {
       "title": "Tại Sao Chọn Chúng Tôi?",
@@ -177,6 +192,20 @@
           "visitSite": "Ghé thăm"
         }
       }
+    },
+    "topEmployers": {
+      "title": "Nhà tuyển dụng",
+      "titleHighlight": "Hàng đầu",
+      "description": "Hợp tác với các tập đoàn công nghệ và AI dẫn đầu toàn cầu để mang đến cho bạn những cơ hội nghề nghiệp tốt nhất.",
+      "viewAll": "Khám phá tất cả các công ty",
+      "jobsCount": "{count} việc làm",
+      "defaultIndustry": "Công nghệ"
+    },
+    "featuredJobs": {
+      "title": "Công việc",
+      "titleHighlight": "AI Nổi bật",
+      "description": "Khám phá những cơ hội mới nhất từ các công ty AI hàng đầu trên toàn thế giới.",
+      "viewAll": "Xem tất cả việc làm"
     }
   },
   "Companies": {
@@ -492,6 +521,7 @@
         "summary": "Tóm tắt ứng viên",
         "viewCv": "Xem CV gốc",
         "details": {
+          "viewCv": "Xem CV gốc",
           "title": "Chi tiết ứng viên",
           "backToList": "Danh sách ứng viên",
           "highFit": "Phù hợp cao",

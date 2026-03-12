@@ -55,12 +55,12 @@ export default async function RecruiterDashboardPage({
       {/* Page Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-white tracking-tight">
+          <h1 className="text-3xl font-bold tracking-tight">
             {t("title")}
           </h1>
-          <p className="text-white/50 mt-1">{t("welcome")}</p>
+          <p className="text-muted-foreground mt-1">{t("welcome")}</p>
         </div>
-        <Button className="bg-violet-600 hover:bg-violet-500 text-white rounded-xl shadow-lg shadow-violet-500/20 px-6 h-12 font-medium">
+        <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl shadow-lg shadow-primary/20 px-6 h-12 font-medium">
           {t("postJob")}
         </Button>
       </div>
@@ -74,16 +74,16 @@ export default async function RecruiterDashboardPage({
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Activity Feed Placeholder */}
-        <Card className="lg:col-span-2 bg-[#0a0a14]/60 backdrop-blur-xl border-white/5 p-6 h-[400px] flex flex-col">
+        <Card className="lg:col-span-2 bg-card/60 backdrop-blur-xl border-border p-6 h-[400px] flex flex-col">
           <div className="flex items-center justify-between mb-6">
-            <h3 className="font-semibold text-white flex items-center gap-2">
-              <Clock className="w-5 h-5 text-violet-400" />
+            <h3 className="font-semibold flex items-center gap-2">
+              <Clock className="w-5 h-5 text-primary" />
               {t("activityFeed")}
             </h3>
             <Button
               variant="ghost"
               size="sm"
-              className="text-white/40 hover:text-white"
+              className="text-muted-foreground hover:text-foreground"
             >
               <MoreHorizontal className="w-5 h-5" />
             </Button>
@@ -105,19 +105,19 @@ export default async function RecruiterDashboardPage({
         </Card>
 
         {/* Quick Tips or AI Recommendations Placeholder */}
-        <Card className="bg-linear-to-br from-violet-600/20 to-indigo-600/20 backdrop-blur-xl border border-violet-500/20 p-6 flex flex-col justify-between">
+        <Card className="bg-linear-to-br from-primary/20 to-indigo-500/20 backdrop-blur-xl border border-primary/20 p-6 flex flex-col justify-between">
           <div className="space-y-4">
-            <div className="w-12 h-12 rounded-xl bg-violet-600 flex items-center justify-center shadow-lg shadow-violet-500/20">
-              <TrendingUp className="w-6 h-6 text-white" />
+            <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
+              <TrendingUp className="w-6 h-6 text-primary-foreground" />
             </div>
-            <h3 className="text-xl font-bold text-white">
+            <h3 className="text-xl font-bold">
               {t("optimizeTitle")}
             </h3>
-            <p className="text-white/70 text-sm leading-relaxed">
+            <p className="text-muted-foreground text-sm leading-relaxed">
               {t("optimizeDesc")}
             </p>
           </div>
-          <Button className="w-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white border border-white/10 rounded-xl mt-6">
+          <Button className="w-full bg-primary/10 hover:bg-primary/20 text-primary hover:text-primary transition-colors border border-primary/20 rounded-xl mt-6">
             {t("tryNow")}
           </Button>
         </Card>

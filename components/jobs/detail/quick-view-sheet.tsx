@@ -196,7 +196,11 @@ export function QuickViewSheet({
                 asChild
               >
                 <a
-                  href={application.resume_url}
+                  href={
+                    application.resume_url.startsWith("http")
+                      ? application.resume_url
+                      : `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/resumes/${application.resume_url}`
+                  }
                   target="_blank"
                   rel="noopener noreferrer"
                 >

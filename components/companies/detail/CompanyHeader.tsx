@@ -18,34 +18,35 @@ export async function CompanyHeader({
   return (
     <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
       <div className="flex flex-col gap-6 md:flex-row md:items-center">
-        <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-950">
+        <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-2xl border border-border bg-background p-4 shadow-sm">
           {company.logo_url ? (
             <Image
               src={company.logo_url}
               alt={`${company.name} logo`}
               width={80}
               height={80}
+              unoptimized
               className="h-full w-full object-contain"
             />
           ) : (
-            <Building2 className="h-12 w-12 text-slate-400" />
+            <Building2 className="h-12 w-12 text-muted-foreground" />
           )}
         </div>
 
         <div className="space-y-3">
-          <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-50">
+          <h1 className="text-3xl font-bold text-foreground">
             {company.name}
           </h1>
 
-          <div className="flex flex-wrap items-center gap-3 text-sm text-slate-600 dark:text-slate-400">
+          <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
             {company.industry && (
-              <span className="flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1 font-medium dark:bg-slate-800 dark:text-slate-300">
+              <span className="flex items-center gap-1.5 rounded-full bg-muted px-3 py-1 font-medium text-foreground">
                 <Building2 className="h-4 w-4" />
                 {company.industry}
               </span>
             )}
             {company.location && (
-              <span className="flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1 font-medium dark:bg-slate-800 dark:text-slate-300">
+              <span className="flex items-center gap-1.5 rounded-full bg-muted px-3 py-1 font-medium text-foreground">
                 <MapPin className="h-4 w-4" />
                 {company.location}
               </span>
@@ -59,7 +60,7 @@ export async function CompanyHeader({
                 }
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1 font-medium hover:bg-slate-200 transition-colors dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
+                className="flex items-center gap-1.5 rounded-full bg-muted px-3 py-1 font-medium hover:bg-primary/10 hover:text-primary transition-colors text-foreground"
               >
                 <Globe className="h-4 w-4" />
                 {t("website")}

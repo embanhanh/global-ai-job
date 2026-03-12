@@ -73,6 +73,14 @@
   - **Robust Language & Auth Sync**: Sử dụng `LanguageSync` component bọc ngoài root layout kết hợp với hook `useLanguageSync` sử dụng explicit session tracking (`session.user.id`) để tự động cập nhật topic FCM khi người dùng thay đổi ngôn ngữ, đăng nhập hoặc chuyển đổi tài khoản.
   - **Service Worker Persistence**: Sử dụng `firebase-messaging-sw.js` để xử lý thông báo nền, tích hợp đồng bộ với trạng thái đăng nhập của ứng dụng qua FCM Token.
   - **Verification Heartbeat**: Triển khai cơ chế log định kỳ (heartbeat) trong môi trường phát triển để xác nhận tính "sống" của hook đồng bộ hóa mà không cần trigger event thật.
+- **3D Experience Pattern**:
+  - **R3F Ecosystem**: Sử dụng `@react-three/fiber` để quản lý Scene Graph trong React và `@react-three/drei` cho các helpers (Center, MeshDistortMaterial).
+  - **Performance Optimization**: Bọc Canvas trong các container có kích thước cố định, sử dụng `dpr` động và `powerPreference="high-performance"` để tối ưu GPU.
+  - **Glassmorphism in 3D**: Sử dụng `MeshPhysicalMaterial` với độ truyền sáng (transmission) và độ nhám (roughness) thấp để tạo hiệu ứng kính.
+- **Advanced Animation Pattern (Anime.js v4)**:
+  - **Observer-based Triggers**: Sử dụng `IntersectionObserver` để kích hoạt hiệu ứng khi phần tử xuất hiện trong viewport.
+  - **ESM-First**: Import trực tiếp từ `animejs/lib/anime.js` (hoặc named exports trong v4) để đảm bảo tương thích với môi trường Next.js 15/16.
+  - **Staggered Entrances**: Sử dụng `stagger()` utility để tạo nhịp điệu xuất hiện cho các danh sách (Job Cards, Employer Cards).
 - **Service Environmental Separation**:
   - **Safe Client Access**: Các file trong `/services` dùng cho Client Component TUYỆT ĐỐI không được import từ `@/lib/supabase/server` (vốn chứa `next/headers`).
   - **Naming Convention**: Để tránh rò rỉ server-only code, các logic cần server client được tách ra với hậu tố `-server.service.ts` hoặc tương đương để đảm bảo tính minh bạch và an toàn môi trường.

@@ -35,7 +35,7 @@ export function SettingsForm({ initialSettings, role }: SettingsFormProps) {
           title={t("account.title")}
           description={t("account.description")}
           icon={Lock}
-          color="bg-violet-500/10 border-violet-500/20 text-violet-400"
+          color="bg-primary/10 border-primary/20 text-primary"
         >
           <div className="space-y-4 pt-4">
             {[
@@ -45,7 +45,7 @@ export function SettingsForm({ initialSettings, role }: SettingsFormProps) {
               <Button
                 key={i}
                 variant="outline"
-                className="w-full justify-start gap-3 border-white/5 bg-white/5 hover:bg-white/10"
+                className="w-full justify-start gap-3 border-border bg-accent/50 hover:bg-accent"
               >
                 <item.icon className="w-4 h-4" /> {item.label}
               </Button>
@@ -58,7 +58,7 @@ export function SettingsForm({ initialSettings, role }: SettingsFormProps) {
           title={t("notifications.title")}
           description={t("notifications.description")}
           icon={Bell}
-          color="bg-blue-500/10 border-blue-500/20 text-blue-400"
+          color="bg-primary/10 border-primary/20 text-primary"
           delay={0.1}
         >
           <div className="space-y-4 pt-4">
@@ -68,7 +68,7 @@ export function SettingsForm({ initialSettings, role }: SettingsFormProps) {
             ].map((item) => (
               <div
                 key={item.key}
-                className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5"
+                className="flex items-center justify-between p-4 rounded-xl bg-accent/50 border border-border"
               >
                 <span className="text-sm">{item.label}</span>
                 <Switch
@@ -91,7 +91,7 @@ export function SettingsForm({ initialSettings, role }: SettingsFormProps) {
           title={t("privacy.title")}
           description={t("privacy.description")}
           icon={Shield}
-          color="bg-emerald-500/10 border-emerald-500/20 text-emerald-400"
+          color="bg-emerald-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400"
           delay={0.2}
         >
           <div className="space-y-4 pt-4">
@@ -108,7 +108,7 @@ export function SettingsForm({ initialSettings, role }: SettingsFormProps) {
             ].map((item) => (
               <div
                 key={item.key}
-                className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5"
+                className="flex items-center justify-between p-4 rounded-xl bg-accent/50 border border-border"
               >
                 <span className="text-sm">{item.label}</span>
                 <Switch

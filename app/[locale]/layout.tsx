@@ -6,7 +6,9 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { Toaster } from "sonner";
 import { LanguageSync } from "@/components/shared/language-sync";
+import { ThemeProvider } from "@/components/theme-provider";
 import "../globals.css";
+
 
 const inter = Inter({
   subsets: ["latin", "vietnamese"],
@@ -59,15 +61,22 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className="dark" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={`${inter.variable} font-sans antialiased bg-background text-foreground`}
       >
-        <NextIntlClientProvider messages={messages}>
-          <LanguageSync />
-          {children}
-          <Toaster position="top-right" richColors />
-        </NextIntlClientProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <NextIntlClientProvider messages={messages}>
+            <LanguageSync />
+            {children}
+            <Toaster position="top-right" richColors />
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

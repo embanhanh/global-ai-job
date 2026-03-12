@@ -44,14 +44,14 @@ export default async function JobsPage({
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-white tracking-tight">
+          <h1 className="text-3xl font-bold text-foreground tracking-tight">
             {t("title")}
           </h1>
-          <p className="text-white/50 mt-1">{t("description")}</p>
+          <p className="text-muted-foreground mt-1">{t("description")}</p>
         </div>
         <Button
           asChild
-          className="bg-violet-600 hover:bg-violet-500 text-white rounded-xl shadow-lg shadow-violet-500/20 px-6 h-12"
+          className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl shadow-lg shadow-primary/20 px-6 h-12"
         >
           <Link href="/recruiter/jobs/new">
             <Plus className="w-5 h-5 mr-2" />
@@ -64,7 +64,7 @@ export default async function JobsPage({
         <SearchInput
           placeholder={t("searchPlaceholder")}
           defaultValue={query}
-          className="pl-10 bg-white/5 border-white/10 text-white h-11 focus:border-violet-500/50"
+          className="pl-10 bg-accent/50 border-sidebar-border text-foreground h-11 focus:border-primary/50"
         />
         <JobFilter value={status} />
       </div>
@@ -82,8 +82,8 @@ export default async function JobsPage({
           )}
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center p-12 border border-dashed border-white/10 rounded-2xl bg-white/5 text-center">
-          <p className="text-white/50 mb-4">
+        <div className="flex flex-col items-center justify-center p-12 border border-dashed border-border rounded-2xl bg-accent/50 text-center">
+          <p className="text-muted-foreground mb-4">
             {query
               ? t("noResults") || "No jobs found matching your search."
               : t("noJobs")}

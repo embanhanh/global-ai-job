@@ -17,7 +17,7 @@ export function JobDescriptionField({
 }: JobDescriptionFieldProps) {
   return (
     <div className="space-y-2">
-      <Label htmlFor="description" className="text-white/80">
+      <Label htmlFor="description" className="text-foreground/80">
         {t("labels.description")}
       </Label>
       <Textarea
@@ -25,12 +25,12 @@ export function JobDescriptionField({
         placeholder={t("placeholders.description")}
         {...register("description")}
         className={cn(
-          "min-h-[300px] bg-white/5 border-white/10 text-white focus:border-violet-500/50 resize-none",
-          errors.description && "border-red-500/50 focus:border-red-500/50",
+          "min-h-[300px] bg-accent/50 border-border text-foreground focus:border-primary/50 resize-none",
+          errors.description && "border-destructive/50 focus:border-destructive/50",
         )}
       />
       {errors.description && (
-        <p className="text-xs text-red-400">
+        <p className="text-xs text-destructive">
           {errors.description.message as string}
         </p>
       )}
